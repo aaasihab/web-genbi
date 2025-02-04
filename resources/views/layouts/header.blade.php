@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <a href="{{ route('download') }}" class="hover:text-blue-500">Download</a>
+            <a href="{{ route('download.index') }}" class="hover:text-blue-500">Download</a>
         </nav>
 
         <!-- Button -->
@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            <a href="" class="py-2 pb-5 hover:text-blue-500">Download</a>
+            <a href="{{ route('download.index') }}" class="py-2 pb-5 hover:text-blue-500">Download</a>
 
             <a href="#hubungi-kami" class="py-2 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
                 Hubungi Kami

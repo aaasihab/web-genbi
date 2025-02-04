@@ -10,7 +10,10 @@ class KegiatanController extends Controller
 {
     public function index()
     {
-        $kegiatan = Kegiatan::orderBy('tanggal', 'desc')->paginate(6);
+        $kegiatan = Kegiatan::where('status', 'published')
+            ->orderBy('tanggal_kegiatan', 'desc')
+            ->get();
+
         return view('kegiatan.index', compact('kegiatan'));
     }
     // Menampilkan form tambah anggota
@@ -32,21 +35,24 @@ class KegiatanController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'tanggal' => 'required|date',
+            'tanggal_kegiatan' => 'nullable|date', // Biarkan nullable agar bisa diisi otomatis
+            'tanggal_posts' => 'date',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required|in:published,nonaktif'
         ]);
 
-        // Jika ada gambar yang diunggah, simpan ke storage
+        // Set tanggal_kegiatan ke hari ini
+        $validated['tanggal_kegiatan'] = now();
+
         if ($request->hasFile('gambar')) {
             $validated['gambar'] = $request->file('gambar')->store('gambar_kegiatan', 'public');
         }
 
-        // Simpan ke database
         Kegiatan::create($validated);
 
-        // Redirect dengan pesan sukses
         return redirect()->route('kegiatan.show')->with('success', 'Kegiatan berhasil ditambahkan');
     }
+
 
     public function edit(string $id)
     {
@@ -59,13 +65,14 @@ class KegiatanController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'tanggal' => 'required|date',
+            'tanggal_kegiatan' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required|in:published,nonaktif'
         ]);
 
+        // Set tanggal_kegiatan ke hari ini
         $kegiatan = Kegiatan::findOrFail($id);
 
-        // Jika ada gambar baru, hapus gambar lama dan simpan yang baru
         if ($request->hasFile('gambar')) {
             if ($kegiatan->gambar) {
                 Storage::disk('public')->delete($kegiatan->gambar);
@@ -75,10 +82,9 @@ class KegiatanController extends Controller
             $validated['gambar'] = $kegiatan->gambar;
         }
 
-        // Update data ke database
+        $validated['tanggal_post'] = now()->toDateString();
         $kegiatan->update($validated);
 
-        // Redirect dengan pesan sukses
         return redirect()->route('kegiatan.show')->with('success', 'Kegiatan berhasil diperbarui');
     }
 
@@ -86,15 +92,12 @@ class KegiatanController extends Controller
     {
         $kegiatan = Kegiatan::findOrFail($id);
 
-        // Hapus gambar dari storage jika ada
         if ($kegiatan->gambar) {
             Storage::disk('public')->delete($kegiatan->gambar);
         }
 
-        // Hapus data dari database
         $kegiatan->delete();
 
-        // Redirect dengan pesan sukses
         return redirect()->route('kegiatan.show')->with('success', 'Kegiatan berhasil dihapus');
     }
 

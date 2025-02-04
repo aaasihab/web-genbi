@@ -52,4 +52,13 @@ Route::get('/beasiswaBI/persyaratan', [PersyaratanController::class, 'index'])->
 Route::get('/beasiswaBI/tentangBI', [TentangBiController::class, 'index'])->name('tentangBi');
 
 // halaman download
-Route::get('/download', [DownloadController::class, 'index'])->name('download');
+Route::prefix('download')->name('download.')->group(function () {
+    Route::get('/', [DownloadController::class, 'index'])->name('index'); // Menampilkan daftar file yang bisa didownload
+    Route::get('/show', [DownloadController::class, 'show'])->name('show');
+    Route::get('/create', [DownloadController::class, 'create'])->name('create'); // Form tambah file download
+    Route::post('/', [DownloadController::class, 'store'])->name('store'); // Simpan file download
+    Route::get('/{file}', [DownloadController::class, 'downloadFile'])->name('downloadFile');
+    Route::get('/edit/{file}', [DownloadController::class, 'edit'])->name('edit'); // Form edit file download
+    Route::put('/{file}', [DownloadController::class, 'update'])->name('update'); // Update file download
+    Route::delete('/{file}', [DownloadController::class, 'destroy'])->name('destroy'); // Hapus file download
+});

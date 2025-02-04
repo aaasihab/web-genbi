@@ -23,72 +23,29 @@
         </div>
     </section>
 
-    <!-- Dpwnload -->
+    <!-- Halaman Download -->
     <section id="download" class="bg-gray-50 py-16 md:mx-10 mx-3">
         <div class="container mx-auto px-4 text-center">
             <div class="text-center">
                 <button
-                    class="bg-blue-500 text-white px-6 py-2 rounded-md shadow-lg mb-6 hover:bg-blue-600 transition duration-300 ease-in-out animate-hidden">
+                    class="bg-blue-500 text-white px-6 py-2 rounded-md shadow-lg mb-6 hover:bg-blue-600 transition duration-300 ease-in-out">
                     Download
                 </button>
             </div>
-            <h1 class="md:text-4xl text-3xl font-bold text-gray-800 mb-8 animate-hidden">Download Logo Resmi</h1>
+            <h1 class="md:text-4xl text-3xl font-bold text-gray-800 mb-8">Download Logo Resmi</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Logo BI -->
-                <div
-                    class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center animate-hidden animate-from-bottom">
-                    <img src="{{ asset('templates/img/gedung_BI.JPG') }}" alt="Logo Bank Indonesia" class="w-24 h-24 mb-4">
-                    <h2 class="text-lg font-bold text-gray-800">Logo Bank Indonesia</h2>
-                    <a href="../../downloads/logo_BI.png" download
-                        class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Download
-                    </a>
-                </div>
-
-                <!-- Logo GenBI Malang -->
-                <div
-                    class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center animate-hidden animate-from-bottom">
-                    <img src="{{ asset('templates/img/gedung_BI.JPG') }}" alt="Logo GenBI Malang" class="w-24 h-24 mb-4">
-                    <h2 class="text-lg font-bold text-gray-800">Logo GenBI Malang</h2>
-                    <a href="../../downloads/logo_GenBI.png" download
-                        class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Download
-                    </a>
-                </div>
-
-                <!-- Logo CBP -->
-                <div
-                    class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center animate-hidden animate-from-bottom">
-                    <img src="{{ asset('templates/img/gedung_BI.JPG') }}" alt="Logo CBP" class="w-24 h-24 mb-4">
-                    <h2 class="text-lg font-bold text-gray-800">Logo CBP</h2>
-                    <a href="../../downloads/logo_CBP.png" download
-                        class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Download
-                    </a>
-                </div>
-
-                <!-- Logo QRIS -->
-                <div
-                    class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center animate-hidden animate-from-bottom">
-                    <img src="{{ asset('templates/img/gedung_BI.JPG') }}" alt="Logo QRIS" class="w-24 h-24 mb-4">
-                    <h2 class="text-lg font-bold text-gray-800">Logo QRIS</h2>
-                    <a href="../../downloads/logo_QRIS.png" download
-                        class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Download
-                    </a>
-                </div>
-
-                <!-- Logo 5J -->
-                <div
-                    class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center animate-hidden animate-from-bottom">
-                    <img src="{{ asset('templates/img/gedung_BI.JPG') }}" alt="Logo 5J" class="w-24 h-24 mb-4">
-                    <h2 class="text-lg font-bold text-gray-800">Logo 5J</h2>
-                    <a href="../../downloads/logo_5J.png" download
-                        class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Download
-                    </a>
-                </div>
+                @foreach ($downloads as $file)
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                        <img src="{{ Storage::url($file->file) }}" alt="{{ $file->nama_file }}"
+                            class="w-24 h-24 mb-4">
+                        <h2 class="text-lg font-bold text-gray-800">{{ $file->nama_file }}</h2>
+                        <a href="{{ route('download.downloadFile', $file->id) }}"
+                            class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Download
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

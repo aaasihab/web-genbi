@@ -45,9 +45,16 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="tanggal" class="block text-gray-700 font-semibold">Tanggal</label>
-                    <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $kegiatan->tanggal) }}"
-                        required
+                    <label for="tanggal_kegiatan" class="block text-gray-700 font-semibold">Tanggal Kegiatan</label>
+                    <input type="date" name="tanggal_kegiatan" id="tanggal_kegiatan"
+                        value="{{ old('tanggal_kegiatan', $kegiatan->tanggal_kegiatan ?? now()->toDateString()) }}" required
+                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="tanggal_posts" class="block text-gray-700 font-semibold">Tanggal Posting</label>
+                    <input type="date" name="tanggal_posts" id="tanggal_posts"
+                        value="{{ old('tanggal_posts', $kegiatan->tanggal_posts) }}"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
@@ -64,6 +71,17 @@
                                 class="w-40 rounded-md border">
                         </div>
                     @endif
+                </div>
+
+                <div class="mb-4">
+                    <label for="status" class="block text-gray-700 font-semibold">Status</label>
+                    <select name="status" id="status"
+                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="published" {{ old('status', $kegiatan->status) == 'published' ? 'selected' : '' }}>
+                            Published</option>
+                        <option value="nonaktif" {{ old('status', $kegiatan->status) == 'nonaktif' ? 'selected' : '' }}>
+                            Nonaktif</option>
+                    </select>
                 </div>
 
                 <div class="flex justify-between">

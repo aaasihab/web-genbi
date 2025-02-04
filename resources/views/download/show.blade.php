@@ -8,7 +8,7 @@
     <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
+            style="background-image: url('{{ asset('templates/img/download-banner.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
             style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
         </div>
@@ -19,18 +19,18 @@
 
         <!-- Content -->
         <div class="relative z-10 text-center space-y-4">
-            <h1 class="text-4xl md:text-5xl font-bold">Daftar Kegiatan</h1>
+            <h1 class="text-4xl md:text-5xl font-bold">Daftar Download</h1>
         </div>
     </section>
 
-    <!-- Content Daftar Kegiatan -->
-    <section id="daftar-kegiatan" class="bg-gray-50 py-12 mt-14">
+    <!-- Content Daftar File Download -->
+    <section id="daftar-download" class="bg-gray-50 py-12 mt-14">
         <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Data Kegiatan</h2>
-                <a href="{{ route('kegiatan.create') }}"
+                <h2 class="text-2xl font-bold text-gray-800">Data File Download</h2>
+                <a href="{{ route('download.create') }}" {{-- <a href="{{ route('download.create') }}" --}}
                     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition">
-                    + Tambah Kegiatan
+                    + Tambah File
                 </a>
             </div>
 
@@ -47,51 +47,51 @@
                     <thead>
                         <tr class="bg-gray-800 text-white">
                             <th class="p-3">No</th>
-                            <th class="p-3">Nama</th>
-                            <th class="p-3">Deskripsi</th>
-                            <th class="p-3">Tanggal Kegiatan</th>
-                            <th class="p-3">Tanggal Posting</th>
-                            <th class="p-3">Terakhir Diubah</th>
+                            <th class="p-3">Nama File</th>
+                            <th class="p-3">File</th>
                             <th class="p-3">Status</th>
-                            <th class="p-3">Gambar</th>
+                            <th class="p-3">Tanggal Upload</th>
+                            <th class="p-3">Terakhir Diubah</th>
                             <th class="p-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        @forelse ($kegiatan as $key => $item)
+                        @forelse ($files as $key => $file)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="p-3 text-center">{{ $key + 1 }}</td>
-                                <td class="p-3">{{ $item->nama }}</td>
-                                <td class="p-3">{{ $item->deskripsi }}</td>
-                                <td class="p-3 text-center">
-                                    {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
-                                </td>
-                                <td class="p-3 text-center">
-                                    {{ $item->created_at->format('d M Y') }}
-                                </td>
-                                <td>
-                                    {{ $item->updated_at->diffForHumans() }}
-                                </td>
-                                <td class="p-3 text-center">
-                                    <span
-                                        class="px-2 py-1 rounded-lg text-white text-sm font-semibold {{ $item->status === 'published' ? 'bg-green-500' : 'bg-red-500' }}">
-                                        {{ ucfirst($item->status) }}
-                                    </span>
-                                </td>
-                                <td class="p-3 text-center">
-                                    @if ($item->gambar)
-                                        <img src="{{ asset('storage/' . $item->gambar) }}"
-                                            class="w-24 rounded-md shadow-md" alt="Gambar Kegiatan">
+                                <td class="p-3">{{ $file->nama_file }}</td>
+                                <td class="p-3">
+                                    @if ($file->file)
+                                        <img src="{{ asset('storage/' . $file->file) }}" class="w-24 rounded-md shadow-md"
+                                            alt="file download">
                                     @else
                                         <span class="text-gray-500 italic">Tidak ada gambar</span>
                                     @endif
                                 </td>
                                 <td class="p-3 text-center">
-                                    <a href="{{ route('kegiatan.edit', $item->id) }}"
+                                    <span
+                                        class="px-2 py-1 rounded-lg text-white text-sm font-semibold {{ $file->status === 'published' ? 'bg-green-500' : 'bg-red-500' }}">
+                                        {{ ucfirst($file->status) }}
+                                    </span>
+                                </td>
+                                <td class="p-3 text-center">
+                                    {{ $file->created_at->format('d M Y') }}
+                                </td>
+                                <td class="p-3 text-center">
+                                    {{ $file->updated_at->diffForHumans() }}
+                                </td>
+                                <td class="p-3 text-center">
+                                    <a href="{{ route('download.downloadFile', $file->id) }}"
+                                        class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded shadow-md transition">
+                                        Download
+                                    </a>
+
+                                    <a href="{{ route('download.edit', $file->id) }}"
                                         class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold rounded shadow-md transition">
                                         Edit
                                     </a>
-                                    <form action="{{ route('kegiatan.destroy', $item->id) }}" method="POST"
+
+                                    <form action="{{ route('download.destroy', $file->id) }}" method="POST" method="POST"
                                         class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?')">
                                         @csrf
                                         @method('DELETE')
@@ -104,7 +104,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="p-6 text-center text-gray-500">Tidak ada data kegiatan</td>
+                                <td colspan="6" class="p-6 text-center text-gray-500">Tidak ada data file</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -115,4 +115,25 @@
 @endsection
 
 @section('this-page-scripts')
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                title: "Berhasil!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+
+        // Tampilkan SweetAlert untuk pesan error
+        @if (session('error'))
+            Swal.fire({
+                title: "Gagal!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        @endif
+    </script>
 @endsection

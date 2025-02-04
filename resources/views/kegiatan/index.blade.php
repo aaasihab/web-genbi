@@ -54,7 +54,7 @@
                         <img src="{{ asset('storage/' . $item->gambar) }}" alt="Foto Kegiatan"
                             class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($item->tanggal)->format('d F Y') }}
+                            <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d F Y') }}
                             </p>
                             <h3 class="text-lg font-semibold text-gray-800 mt-2">{{ $item->nama }}</h3>
                             <p class="text-gray-600 mt-2">
