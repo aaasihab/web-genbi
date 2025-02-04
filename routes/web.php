@@ -46,8 +46,18 @@ Route::get('/tentang/point', [GenbiPointController::class, 'index'])->name('genb
 Route::get('/tentang/genbi', [TentangGenbiController::class, 'index'])->name('tentangGenbi');
 Route::get('/tentang/struktur', [StrukturController::class, 'index'])->name('struktur');
 
-// halaman beasiswa_bi
-Route::get('/beasiswaBI/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
+
+Route::prefix('pengumuman')->name('pengumuman.')->group(function () {
+    Route::get('/', [PengumumanController::class, 'index'])->name('index'); // Menampilkan semua pengumuman
+    Route::get('/create', [PengumumanController::class, 'create'])->name('create'); // Form tambah pengumuman
+    Route::post('/', [PengumumanController::class, 'store'])->name('store'); // Simpan pengumuman baru
+    Route::get('/show', [PengumumanController::class, 'show'])->name('show'); // Menampilkan satu pengumuman
+    Route::get('/edit/{pengumuman}', [PengumumanController::class, 'edit'])->name('edit'); // Form edit pengumuman
+    Route::put('/{pengumuman}', [PengumumanController::class, 'update'])->name('update'); // Update pengumuman
+    Route::delete('/{pengumuman}', [PengumumanController::class, 'destroy'])->name('destroy'); // Hapus pengumuman
+});
+
+
 Route::get('/beasiswaBI/persyaratan', [PersyaratanController::class, 'index'])->name('persyaratan');
 Route::get('/beasiswaBI/tentangBI', [TentangBiController::class, 'index'])->name('tentangBi');
 

@@ -37,7 +37,7 @@ class KegiatanController extends Controller
             'deskripsi' => 'required|string',
             'tanggal_kegiatan' => 'nullable|date', // Biarkan nullable agar bisa diisi otomatis
             'tanggal_posts' => 'date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'status' => 'required|in:published,nonaktif'
         ]);
 
@@ -64,9 +64,9 @@ class KegiatanController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            'deskripsi' => 'required|string',
             'tanggal_kegiatan' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'status' => 'required|in:published,nonaktif'
         ]);
 

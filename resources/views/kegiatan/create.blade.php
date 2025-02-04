@@ -28,50 +28,62 @@
         <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Form Tambah Kegiatan</h2>
 
-            <!-- Error Messages -->
-            @if ($errors->any())
-                <div class="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
-                    <ul class="list-disc list-inside">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <form action="{{ route('kegiatan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
+
                 <div>
                     <label for="nama" class="block font-medium text-gray-700">Nama Kegiatan</label>
-                    <input type="text" id="nama" name="nama" required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" id="nama" name="nama" @error('nama') is-invalid @enderror required
+                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        value="{{ old('nama') }}">
+                    @error('nama')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div>
                     <label for="deskripsi" class="block font-medium text-gray-700">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="3" required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    <textarea id="deskripsi" name="deskripsi" rows="3" @error('deskripsi') is-invalid @enderror required
+                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">{{ old('deskripsi') }}</textarea>
+                    @error('deskripsi')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div>
                     <label for="tanggal_kegiatan" class="block font-medium text-gray-700">Tanggal Kegiatan</label>
-                    <input type="date" id="tanggal_kegiatan" name="tanggal_kegiatan" required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    <input type="date" id="tanggal_kegiatan" name="tanggal_kegiatan" @error('tanggal_kegiatan') is-invalid @enderror required
+                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        value="{{ old('tanggal_kegiatan') }}">
+                    @error('tanggal_kegiatan')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div>
                     <label for="status" class="block font-medium text-gray-700">Status</label>
                     <select id="status" name="status" required
                         class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        <option value="published">Published</option>
-                        <option value="nonaktif">Nonaktif</option>
+                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
                     </select>
                 </div>
 
                 <div>
                     <label for="gambar" class="block font-medium text-gray-700">Gambar (Opsional)</label>
-                    <input type="file" id="gambar" name="gambar" accept="image/*"
+                    <input type="file" id="gambar" name="gambar" @error('gambar') is-invalid @enderror accept="image/*"
                         class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md">
+                    @error('gambar')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Buttons -->
@@ -88,7 +100,6 @@
             </form>
         </div>
     </section>
-
 @endsection
 
 @section('this-page-scripts')

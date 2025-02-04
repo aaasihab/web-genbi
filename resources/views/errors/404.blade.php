@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,4 +28,4 @@
     <h1>404 | Page Not Found</h1>
     <p>Maaf, Halaman yang anda cari tidak ditemukan.</p>
 </body>
-</html> --}}
+</html>

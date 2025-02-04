@@ -19,7 +19,7 @@
 
         <!-- Content -->
         <div class="relative z-10 text-center space-y-4">
-            <h1 class="text-4xl md:text-5xl font-bold">Daftar Kegiatan</h1>
+            <h1 class="text-4xl md:text-5xl font-bold">Data Kegiatan</h1>
         </div>
     </section>
 
@@ -33,13 +33,6 @@
                     + Tambah Kegiatan
                 </a>
             </div>
-
-            <!-- Success Message -->
-            @if (session('success'))
-                <div class="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
-                    {{ session('success') }}
-                </div>
-            @endif
 
             <!-- Responsive Table -->
             <div class="overflow-x-auto">
@@ -115,4 +108,26 @@
 @endsection
 
 @section('this-page-scripts')
+    <script>
+        // Tampilkan SweetAlert untuk pesan sukses
+        @if (session('success'))
+            Swal.fire({
+                title: "Berhasil!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+
+        // Tampilkan SweetAlert untuk pesan error
+        @if (session('error'))
+            Swal.fire({
+                title: "Gagal!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                confirmButtonText: "OK",
+            });
+        @endif
+    </script>
 @endsection

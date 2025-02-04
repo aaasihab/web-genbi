@@ -19,7 +19,7 @@
                 <div class="dropdown-card-dekstop">
                     <a href="{{ route('tentangBi') }}"><i class="fas fa-info-circle"></i>Tentang BI</a>
                     <a href="{{ route('persyaratan') }}"><i class="fas fa-file-alt"></i>Persyaratan</a>
-                    <a href="{{ route('pengumuman') }}"><i class="fas fa-bullhorn"></i>Pengumuman</a>
+                    <a href="{{ route('pengumuman.index') }}"><i class="fas fa-bullhorn"></i>Pengumuman</a>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                 <div class="dropdown-card-mobile hidden flex-col">
                     <a href="{{ route('tentangBi') }}" class="py-2 px-6 hover:bg-gray-100">Tentang BI</a>
                     <a href="{{ route('persyaratan') }}" class="py-2 px-6 hover:bg-gray-100">Persyaratan</a>
-                    <a href="{{ route('pengumuman') }}" class="py-2 px-6 hover:bg-gray-100">Pengumuman</a>
+                    <a href="{{ route('pengumuman.index') }}" class="py-2 px-6 hover:bg-gray-100">Pengumuman</a>
                 </div>
             </div>
 
