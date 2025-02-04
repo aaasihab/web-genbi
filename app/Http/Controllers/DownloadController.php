@@ -10,7 +10,9 @@ class DownloadController extends Controller
 {
     public function index()
     {
-        $downloads = Download::all(); // Ambil semua data dari tabel downloads
+        $downloads = Download::where('status', 'published')
+            ->orderBy('created_at', 'asc') // Mengurutkan dari yang terlama dibuat
+            ->get();
         return view('download.index', compact('downloads'));
     }
 
@@ -90,7 +92,7 @@ class DownloadController extends Controller
             'file' => 'nullable|mimes:pdf,doc,docx,xlsx,xls,ppt,pptx,jpg,jpeg,png|max:5120',
             'status' => 'required|in:published,nonaktif'
         ]);
-        
+
         $download = Download::findOrFail($id);
 
         if ($request->hasFile('file')) {
