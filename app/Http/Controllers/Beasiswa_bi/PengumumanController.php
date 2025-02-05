@@ -24,6 +24,30 @@ class PengumumanController extends Controller
         return view('beasiswa_bi.pengumuman.show', compact('pengumuman'));
     }
 
+    public function downloadFile($id)
+    {
+        $file = Pengumuman::findOrFail($id);
+
+        if (!$file->file) {
+            return redirect()->back()->with('error', 'File tidak ditemukan.');
+        }
+
+        // Path file dalam storage
+        $filePath = 'public/' . $file->file;
+
+        // Pastikan file ada dalam storage
+        if (!Storage::disk('local')->exists($filePath)) {
+            return redirect()->back()->with('error', 'File tidak ditemukan di penyimpanan.');
+        }
+
+        // Ambil nama asli file beserta ekstensinya
+        $originalFileName = pathinfo($file->file, PATHINFO_FILENAME);
+        $extension = pathinfo($file->file, PATHINFO_EXTENSION);
+        $downloadFileName = ($file->nama_file ?? $originalFileName) . '.' . $extension;
+
+        // Menggunakan streamDownload agar lebih efisien dalam membaca file
+        return Storage::disk('local')->download($filePath, $downloadFileName);
+    }
     public function create()
     {
         return view('beasiswa_bi.pengumuman.create');
@@ -35,7 +59,9 @@ class PengumumanController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:5120'
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'file_download' => 'required|mimes:pdf,doc,docx,xlsx,xls,ppt,pptx|max:10240', // Batas ukuran 10MB
+            'status' => 'required|in:published,nonaktif',
         ]);
 
         // Cek apakah ada file gambar yang diunggah
@@ -61,6 +87,7 @@ class PengumumanController extends Controller
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'gambar' => 'nullable|mimes:jpg,jpeg,png|max:5120',
+            'file_download' => 'required|mimes:pdf,doc,docx,xlsx,xls,ppt,pptx|max:10240', // Batas ukuran 10MB
             'status' => 'required|in:published,nonaktif'
         ]);
 

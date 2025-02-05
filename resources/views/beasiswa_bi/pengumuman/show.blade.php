@@ -49,6 +49,7 @@
                             <th class="p-3">Tanggal Posting</th>
                             <th class="p-3">Terakhir Diubah</th>
                             <th class="p-3">Gambar</th>
+                            <th class="p-3">File Download</th>
                             <th class="p-3">Status</th>
                             <th class="p-3">Aksi</th>
                         </tr>
@@ -73,6 +74,17 @@
                                         <span class="text-gray-500 italic">Tidak ada gambar</span>
                                     @endif
                                 </td>
+                                <td class="p-3 text-center">
+                                    @if ($item->file_download)
+                                        <a href="{{ route('pengumuman.downloadFile', $item->file_download) }}"
+                                            class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded shadow-md transition">
+                                            Download
+                                        </a>
+                                    @else
+                                        <span class="text-gray-500 italic">Tidak ada File</span>
+                                    @endif
+                                </td>
+
                                 <td class="p-3 text-center">
                                     <span
                                         class="px-2 py-1 rounded-lg text-white text-sm font-semibold {{ $item->status === 'published' ? 'bg-green-500' : 'bg-red-500' }}">

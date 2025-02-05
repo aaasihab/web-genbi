@@ -53,14 +53,37 @@
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="p-3 text-center">{{ $key + 1 }}</td>
                                 <td class="p-3">{{ $file->nama_file }}</td>
-                                <td class="p-3">
+                                <td class="p-3 text-center">
                                     @if ($file->file)
-                                        <img src="{{ asset('storage/' . $file->file) }}" class="w-24 rounded-md shadow-md"
-                                            alt="file download">
+                                        @php
+                                            $extension = pathinfo($file->file, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                            <img src="{{ asset('storage/' . $file->file) }}"
+                                                class="w-24 rounded-md shadow-md" alt="File Download">
+                                        @else
+                                            <div class="flex items-center justify-center space-x-2">
+                                                @if ($extension === 'pdf')
+                                                    <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+                                                @elseif (in_array($extension, ['doc', 'docx']))
+                                                    <i class="fas fa-file-word text-blue-500 text-xl"></i>
+                                                @elseif (in_array($extension, ['xls', 'xlsx']))
+                                                    <i class="fas fa-file-excel text-green-500 text-xl"></i>
+                                                @elseif (in_array($extension, ['ppt', 'pptx']))
+                                                    <i class="fas fa-file-powerpoint text-orange-500 text-xl"></i>
+                                                @else
+                                                    <i class="fas fa-file text-gray-500 text-xl"></i>
+                                                @endif
+                                                <span class="text-gray-700">{{ $file->nama_file }}</span>
+                                            </div>
+                                        @endif
                                     @else
-                                        <span class="text-gray-500 italic">Tidak ada gambar</span>
+                                        <span class="text-gray-500 italic">Tidak ada file</span>
                                     @endif
                                 </td>
+
+
                                 <td class="p-3 text-center">
                                     <span
                                         class="px-2 py-1 rounded-lg text-white text-sm font-semibold {{ $file->status === 'published' ? 'bg-green-500' : 'bg-red-500' }}">

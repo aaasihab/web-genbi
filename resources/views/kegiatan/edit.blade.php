@@ -34,7 +34,7 @@
 
                 <div class="mb-4">
                     <label for="nama" class="block text-gray-700 font-semibold">Nama Kegiatan</label>
-                    <input type="text" name="nama" id="nama" @error('nama') is-invalid @enderror
+                    <input type="text" name="nama" id="nama" @error('nama') is-invalid @enderror required
                         value="{{ old('nama', $kegiatan->nama) }}" 
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('nama')
@@ -46,7 +46,7 @@
 
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-gray-700 font-semibold">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" @error('deskripsi') is-invalid @enderror rows="4"
+                    <textarea name="deskripsi" id="deskripsi" @error('deskripsi') is-invalid @enderror rows="4" required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('deskripsi', $kegiatan->deskripsi) }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">
@@ -57,7 +57,7 @@
 
                 <div class="mb-4">
                     <label for="tanggal_kegiatan" class="block text-gray-700 font-semibold">Tanggal Kegiatan</label>
-                    <input type="date" name="tanggal_kegiatan" id="tanggal_kegiatan"  @error('tanggal_kegiatan') is-invalid @enderror
+                    <input type="date" name="tanggal_kegiatan" id="tanggal_kegiatan"  @error('tanggal_kegiatan') is-invalid @enderror required
                         value="{{ old('tanggal_kegiatan', $kegiatan->tanggal_kegiatan ?? now()->toDateString()) }}" 
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('tanggal_kegiatan')
@@ -69,7 +69,7 @@
 
                 <div class="mb-4">
                     <label for="gambar" class="block text-gray-700 font-semibold">Gambar</label>
-                    <input type="file" name="gambar" id="gambar"  @error('gambar') is-invalid @enderror accept="image/*"
+                    <input type="file" name="gambar" id="gambar"  @error('gambar') is-invalid @enderror accept="image/*" required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('gambar')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">

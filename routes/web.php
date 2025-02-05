@@ -55,6 +55,7 @@ Route::prefix('pengumuman')->name('pengumuman.')->group(function () {
     Route::get('/edit/{pengumuman}', [PengumumanController::class, 'edit'])->name('edit'); // Form edit pengumuman
     Route::put('/{pengumuman}', [PengumumanController::class, 'update'])->name('update'); // Update pengumuman
     Route::delete('/{pengumuman}', [PengumumanController::class, 'destroy'])->name('destroy'); // Hapus pengumuman
+    Route::get('/{pengumuman}', [PengumumanController::class, 'downloadFile'])->name('downloadFile');
 });
 
 

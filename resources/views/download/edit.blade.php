@@ -36,7 +36,7 @@
                     <label for="nama_file" class="block text-gray-700 font-semibold">Nama File</label>
                     <input type="text" name="nama_file" id="nama_file" @error('nama_file') is-invalid @enderror
                         value="{{ old('nama_file', $download->nama_file) }}" required
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 @error('nama_file') is-invalid @enderror">
+                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('nama_file')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">
                             {{ $message }}
@@ -46,9 +46,9 @@
 
                 <div class="mb-4">
                     <label for="file" class="block text-gray-700 font-semibold">File</label>
-                    <input type="file" name="file" id="file" @error('file') is-invalid @enderror
+                    <input type="file" name="file" id="file" @error('file') is-invalid @enderror required
                         accept=".pdf,.doc,.docx,.xlsx,.xls,.ppt,.pptx,.jpg,.png,.jpeg"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 @error('file') is-invalid @enderror">
+                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('file')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">
                             {{ $message }}
@@ -80,8 +80,8 @@
 
                 <div class="mb-4">
                     <label for="status" class="block text-gray-700 font-semibold">Status</label>
-                    <select name="status" id="status"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 @error('status') is-invalid @enderror">
+                    <select name="status" id="status" required
+                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="published" {{ old('status', $download->status) == 'published' ? 'selected' : '' }}>
                             Published</option>
                         <option value="nonaktif" {{ old('status', $download->status) == 'nonaktif' ? 'selected' : '' }}>

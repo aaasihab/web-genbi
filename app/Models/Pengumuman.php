@@ -14,6 +14,7 @@ class Pengumuman extends Model
         'judul',
         'deskripsi',
         'gambar',
+        'file_download',
         'status'
     ];
 

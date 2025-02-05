@@ -36,14 +36,26 @@
 
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-gray-700 font-semibold">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" rows="4"
+                    <textarea name="deskripsi" id="deskripsi" rows="4" required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('deskripsi') }}</textarea>
                 </div>
 
                 <div class="mb-4">
                     <label for="gambar" class="block text-gray-700 font-semibold">Upload Gambar</label>
-                    <input type="file" name="gambar" id="gambar" accept="image/*"
+                    <input type="file" name="gambar" id="gambar" accept="image/*" required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="file_download" class="block text-gray-700 font-semibold">Uploud File</label>
+                    <input type="file" id="file_download" name="file_download"
+                        @error('file_download') is-invalid @enderror required accept=".pdf,.doc,.docx,.xlsx,.xls,.ppt,.pptx"
+                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    @error('file_download')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="mb-4">

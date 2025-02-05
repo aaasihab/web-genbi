@@ -55,25 +55,17 @@ class DownloadController extends Controller
     public function store(Request $request)
     {
         // Validasi input
-        $request->validate([
+        $validated = $request->validate([
             'nama_file' => 'required|string|max:255',
-            'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,ppt,pptx,jpg,jpeg,png|max:5120', // Batas ukuran 2MB
+            'file' => 'required|mimes:pdf,doc,docx,xlsx,xls,ppt,pptx,jpg,jpeg,png|max:5120',
             'status' => 'required|in:published,nonaktif',
         ]);
 
         // Upload file
-        if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('downloads', 'public');
-        } else {
-            return back()->with('error', 'File gagal diunggah.');
-        }
+        $validated['file'] = $request->file('file')->store('file', 'public');
 
         // Simpan ke database
-        Download::create([
-            'nama_file' => $request->nama_file,
-            'file' => $filePath,
-            'status' => $request->status,
-        ]);
+        Download::create($validated);
 
         // Redirect dengan pesan sukses
         return redirect()->route('download.show')->with('success', 'File berhasil ditambahkan.');
