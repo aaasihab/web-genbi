@@ -55,7 +55,7 @@
     <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
+            style="background-image: url('../../img/visi-misi.jpg');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
             style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
         </div>
@@ -67,6 +67,9 @@
         <!-- Content -->
         <div class="relative z-10 text-center space-y-4">
             <h1 class="text-4xl md:text-5xl font-bold">Struktur GenBI UNUJA</h1>
+            <!-- <h2 class="text-xl md:text-3xl">
+                Home / <span class="text-gray-300 underline underline-offset-[10px]">GenBI Point</span>
+              </h2> -->
         </div>
     </section>
 
@@ -79,8 +82,7 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Ketua Komis</h2>
             <div class="flex justify-center">
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-xs">
-                    <img src="{{ asset('templates/img/ibu_febrina.jpg') }}" alt="Ketua Komis"
-                        class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                    <img src="../../img/ketua.jpg" alt="Ketua Komis" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
                     <h3 class="text-2xl font-bold text-gray-800">Nama Ketua</h3>
                     <p class="text-blue-600 font-semibold">Jabatan</p>
                 </div>
@@ -90,14 +92,12 @@
         <!-- Sekretaris & Bendahara -->
         <div class="flex flex-wrap justify-center gap-8 text-center mb-12">
             <div class="bg-white p-6 rounded-lg shadow-lg w-64">
-                <img src="{{ asset('templates/img/ibu_febrina.jpg') }}" alt="Sekretaris"
-                    class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                <img src="../../img/sekretaris.jpg" alt="Sekretaris" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
                 <h3 class="text-2xl font-bold text-gray-800">Nama Sekretaris</h3>
                 <p class="text-blue-600 font-semibold">Sekretaris</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg w-64">
-                <img src="{{ asset('templates/img/ibu_febrina.jpg') }}" alt="Bendahara"
-                    class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                <img src="../../img/bendahara.jpg" alt="Bendahara" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
                 <h3 class="text-2xl font-bold text-gray-800">Nama Bendahara</h3>
                 <p class="text-blue-600 font-semibold">Bendahara</p>
             </div>
@@ -106,6 +106,53 @@
         <!-- Struktur Divisi -->
         <div id="struktur-divisi"></div>
     </section>
+
+
+    {{-- <section class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Struktur Organisasi</h1>
+
+        @foreach ($struktur as $divisi)
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ $divisi->judul }}</h2>
+
+                <div class="flex justify-center">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-xs">
+                        <img src="{{ asset('storage/' . $divisi->ketua_foto) }}" alt="{{ $divisi->ketua_nama }}"
+                            class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-gray-800">{{ $divisi->ketua_nama }}</h3>
+                        <p class="text-blue-600 font-semibold">Ketua</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-8 text-center mb-12">
+                    <div class="bg-white p-6 rounded-lg shadow-lg w-64">
+                        <img src="{{ asset('storage/' . $divisi->wakil_foto) }}" alt="{{ $divisi->wakil_nama }}"
+                            class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-gray-800">{{ $divisi->wakil_nama }}</h3>
+                        <p class="text-blue-600 font-semibold">Wakil Ketua</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-gray-800 text-center my-10">Anggota {{ $divisi->judul }}</h3>
+                <div class="swiper-container overflow-hidden">
+                    <div class="swiper-wrapper flex">
+                        @foreach ($divisi->members as $anggota)
+                            <div class="swiper-slide w-64">
+                                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                                    <img src="{{ asset('storage/' . $anggota->foto) }}" alt="{{ $anggota->nama }}"
+                                        class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                                    <h3 class="text-2xl font-bold text-gray-800">{{ $anggota->nama }}</h3>
+                                    <p class="text-blue-600 font-semibold">{{ $divisi->judul }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        @endforeach
+    </section> --}}
 @endsection
 
 @section('this-page-scripts')

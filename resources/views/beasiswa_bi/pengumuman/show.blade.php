@@ -76,14 +76,34 @@
                                 </td>
                                 <td class="p-3 text-center">
                                     @if ($item->file_download)
-                                        <a href="{{ route('pengumuman.downloadFile', $item->file_download) }}"
-                                            class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded shadow-md transition">
-                                            Download
-                                        </a>
+                                        @php
+                                            $extension = pathinfo($item->file_download, PATHINFO_EXTENSION);
+                                            $fileUrl = asset('storage/' . $item->file_download);
+                                        @endphp
+
+                                        <div class="flex items-center justify-center space-x-2">
+                                            @if ($extension === 'pdf')
+                                                <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+                                            @elseif (in_array($extension, ['doc', 'docx']))
+                                                <i class="fas fa-file-word text-blue-500 text-xl"></i>
+                                            @elseif (in_array($extension, ['xls', 'xlsx']))
+                                                <i class="fas fa-file-excel text-green-500 text-xl"></i>
+                                            @elseif (in_array($extension, ['ppt', 'pptx']))
+                                                <i class="fas fa-file-powerpoint text-orange-500 text-xl"></i>
+                                            @else
+                                                <i class="fas fa-file text-gray-500 text-xl"></i>
+                                            @endif
+                                            <a href="{{ $fileUrl }}" target="_blank"
+                                                class="text-blue-600 hover:underline">
+                                                {{ $item->judul }}
+                                            </a>
+                                        </div>
                                     @else
-                                        <span class="text-gray-500 italic">Tidak ada File</span>
+                                        <span class="text-gray-500 italic">Tidak ada file</span>
                                     @endif
                                 </td>
+
+
 
                                 <td class="p-3 text-center">
                                     <span
@@ -92,6 +112,10 @@
                                     </span>
                                 </td>
                                 <td class="p-3 text-center">
+                                    <a href="{{ route('pengumuman.downloadFile', $item->id) }}"
+                                        class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded shadow-md transition">
+                                        Download
+                                    </a>
                                     <a href="{{ route('pengumuman.edit', $item->id) }}"
                                         class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold rounded shadow-md transition">
                                         Edit

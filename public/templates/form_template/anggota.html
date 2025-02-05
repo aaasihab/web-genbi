@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Struktur Organisasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        input, select, button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .divider {
+            border-bottom: 2px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Form Anggota</h2>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Nama Anggota:</label>
+                <input type="text" name="nama_anggota" required>
+            </div>
+            <div class="form-group">
+                <label>Divisi:</label>
+                <select name="divisi" id="divisi">
+                    <option value="pendidikan">pendidikan</option>
+                    <option value="pendidikan">pendidikan</option>
+                    <option value="pendidikan">pendidikan</option>
+                    <option value="pendidikan">pendidikan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Foto:</label>
+                <input type="file" name="foto_anggota">
+            </div>
+            <button type="submit">Simpan</button>
+        </form>
+    </div>
+    
+
+</body>
+</html>

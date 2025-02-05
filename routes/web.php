@@ -5,10 +5,15 @@ use App\Http\Controllers\Beasiswa_bi\PersyaratanController;
 use App\Http\Controllers\Beasiswa_bi\TentangBiController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\Tentang\GenbiPointController;
+use App\Http\Controllers\Tentang\Struktur\DivisiController;
+use App\Http\Controllers\Tentang\Struktur\OrganisasiController;
+use App\Http\Controllers\Tentang\Struktur\PengurusHarianController;
 use App\Http\Controllers\Tentang\StrukturController;
 use App\Http\Controllers\Tentang\TentangGenbiController;
+use App\Models\Struktur\Organisasi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +31,17 @@ Route::get('/notFound', function () {
     return view('errors.404'); // Sesuaikan dengan nama file view yang digunakan
 })->name('notFound');
 
+Route::prefix('home')->name('home.')->group(function () {
+    Route::get('/', [HomeController::class, 'beranda'])->name('beranda');
+    Route::get('/kegiatan', [HomeController::class, 'kegiatan'])->name('kegiatan');
+    Route::get('/download', [HomeController::class, 'download'])->name('download');
+    Route::get('/persyaratan', [HomeController::class, 'persyaratan'])->name('persyaratan');
+    Route::get('/pengumuman', [HomeController::class, 'pengumuman'])->name('pengumuman');
+    Route::get('/tentang-BI', [HomeController::class, 'tentangBi'])->name('tentangBi');
+    Route::get('/genbi-point', [HomeController::class, 'genbiPoint'])->name('genbiPoint');
+    Route::get('/tentang-genbi', [HomeController::class, 'tentangGenbi'])->name('tentangGenbi');
+    Route::get('/struktur-organisasi', [HomeController::class, 'strukturOrganisasi'])->name('strukturOrganisasi');
+});
 
 // halaman beranda
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
@@ -44,20 +60,23 @@ Route::prefix('kegiatan')->name('kegiatan.')->group(function () {
 // halaman tentang
 Route::get('/tentang/point', [GenbiPointController::class, 'index'])->name('genbiPoint');
 Route::get('/tentang/genbi', [TentangGenbiController::class, 'index'])->name('tentangGenbi');
-Route::get('/tentang/struktur', [StrukturController::class, 'index'])->name('struktur');
 
+Route::resource('organisasi', OrganisasiController::class);
+Route::resource('divisi', DivisiController::class);
+Route::resource('pengurus_harian', PengurusHarianController::class);
+
+// });
 
 Route::prefix('pengumuman')->name('pengumuman.')->group(function () {
     Route::get('/', [PengumumanController::class, 'index'])->name('index'); // Menampilkan semua pengumuman
     Route::get('/create', [PengumumanController::class, 'create'])->name('create'); // Form tambah pengumuman
     Route::post('/', [PengumumanController::class, 'store'])->name('store'); // Simpan pengumuman baru
     Route::get('/show', [PengumumanController::class, 'show'])->name('show'); // Menampilkan satu pengumuman
+    Route::get('/downloadFile/{pengumuman}', [PengumumanController::class, 'downloadFile'])->name('downloadFile');
     Route::get('/edit/{pengumuman}', [PengumumanController::class, 'edit'])->name('edit'); // Form edit pengumuman
     Route::put('/{pengumuman}', [PengumumanController::class, 'update'])->name('update'); // Update pengumuman
     Route::delete('/{pengumuman}', [PengumumanController::class, 'destroy'])->name('destroy'); // Hapus pengumuman
-    Route::get('/{pengumuman}', [PengumumanController::class, 'downloadFile'])->name('downloadFile');
 });
-
 
 Route::get('/beasiswaBI/persyaratan', [PersyaratanController::class, 'index'])->name('persyaratan');
 Route::get('/beasiswaBI/tentangBI', [TentangBiController::class, 'index'])->name('tentangBi');
@@ -68,7 +87,7 @@ Route::prefix('download')->name('download.')->group(function () {
     Route::get('/show', [DownloadController::class, 'show'])->name('show');
     Route::get('/create', [DownloadController::class, 'create'])->name('create'); // Form tambah file download
     Route::post('/', [DownloadController::class, 'store'])->name('store'); // Simpan file download
-    Route::get('/{file}', [DownloadController::class, 'downloadFile'])->name('downloadFile');
+    Route::get('/downlaodFile/{file}', [DownloadController::class, 'downloadFile'])->name('downloadFile');
     Route::get('/edit/{file}', [DownloadController::class, 'edit'])->name('edit'); // Form edit file download
     Route::put('/{file}', [DownloadController::class, 'update'])->name('update'); // Update file download
     Route::delete('/{file}', [DownloadController::class, 'destroy'])->name('destroy'); // Hapus file download

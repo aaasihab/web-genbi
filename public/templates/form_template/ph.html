@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Struktur Organisasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        input, select, button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .divider {
+            border-bottom: 2px solid #ccc;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Form Pengurus Harian</h2>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Nama Pengurus:</label>
+                <input type="text" name="nama_pengurus" required>
+            </div>
+            <div class="form-group">
+                <label>Jabatan:</label>
+                <select name="jabatan" required>
+                    <option value="ketua">Ketua</option>
+                    <option value="sekretaris">Sekretaris</option>
+                    <option value="bendahara">Bendahara</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Foto:</label>
+                <input type="file" name="foto">
+            </div>
+            <button type="submit">Simpan</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -7,8 +7,5 @@ use Illuminate\Http\Request;
 
 class TentangBiController extends Controller
 {
-    public function index()
-    {
-        return view('beasiswa_bi.tentangBi');
-    }
+
 }

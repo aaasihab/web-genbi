@@ -30,20 +30,36 @@
 
                 <div class="mb-4">
                     <label for="judul" class="block text-gray-700 font-semibold">Judul Pengumuman</label>
-                    <input type="text" name="judul" id="judul" value="{{ old('judul') }}" required
+                    <input type="text" name="judul" id="judul" value="{{ old('judul') }}" @error('judul') is-invalid @enderror required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    @error('judul')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-gray-700 font-semibold">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi" rows="4" required
+                    <textarea name="deskripsi" id="deskripsi" rows="4" @error('deskripsi') is-invalid @enderror required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('deskripsi') }}</textarea>
+                    @error('deskripsi')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="mb-4">
                     <label for="gambar" class="block text-gray-700 font-semibold">Upload Gambar</label>
-                    <input type="file" name="gambar" id="gambar" accept="image/*" required
+                    <input type="file" name="gambar" id="gambar" accept=".jpg,.png,.jpeg"
+                        @error('gambar') is-invalid @enderror required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    @error('gambar')
+                        <div class="invalid-feedback text-red-500 text-sm mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="mb-4">

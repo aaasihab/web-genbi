@@ -84,12 +84,11 @@
                         </div>
                     @enderror
 
-
                     <!-- Tampilkan gambar lama jika ada -->
                     @if (!empty($pengumuman->file_download))
                         <div class="mt-2">
                             <p class="text-gray-600 text-sm">File saat ini:</p>
-                            <a href="{{ asset('storage/' . $download->file) }}" target="_blank"
+                            <a href="{{ asset('storage/' . $pengumuman->file_download) }}" target="_blank"
                                 class="text-blue-600 underline">Lihat File</a>
                         </div>
                     @endif
