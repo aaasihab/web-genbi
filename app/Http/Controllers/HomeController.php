@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Download;
 use App\Models\Kegiatan;
 use App\Models\Pengumuman;
+use App\Models\Struktur\Divisi;
+use App\Models\Struktur\Organisasi;
+use App\Models\Struktur\PengurusHarian;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -58,8 +61,18 @@ class HomeController extends Controller
 
     public function strukturOrganisasi()
     {
-        return view('home.tentang.strukturOrganisasi');
+        $organisasi = Organisasi::with([
+            'divisi.pengurusDivisi',
+            'divisi.anggota',
+            'pengurusHarian'
+        ])->first(); // Ambil satu data organisasi jika hanya ada satu
+
+        return view('home.tentang.strukturOrganisasi', [
+            'organisasi' => $organisasi
+        ]);
     }
+
+
 
     public function tentangGenbi()
     {

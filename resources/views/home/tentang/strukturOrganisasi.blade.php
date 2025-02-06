@@ -55,7 +55,7 @@
     <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('../../img/visi-misi.jpg');"></div>
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
             style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
         </div>
@@ -67,9 +67,6 @@
         <!-- Content -->
         <div class="relative z-10 text-center space-y-4">
             <h1 class="text-4xl md:text-5xl font-bold">Struktur GenBI UNUJA</h1>
-            <!-- <h2 class="text-xl md:text-3xl">
-                Home / <span class="text-gray-300 underline underline-offset-[10px]">GenBI Point</span>
-              </h2> -->
         </div>
     </section>
 
@@ -82,411 +79,102 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Ketua Komis</h2>
             <div class="flex justify-center">
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-xs">
-                    <img src="../../img/ketua.jpg" alt="Ketua Komis" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                    <h3 class="text-2xl font-bold text-gray-800">Nama Ketua</h3>
-                    <p class="text-blue-600 font-semibold">Jabatan</p>
+                    <img src="{{ asset('storage/' . ($organisasi->pengurusHarian->where('jabatan', 'Ketua')->first()->foto ?? 'default.jpg')) }}"
+                        alt="Ketua Komis" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        {{ $organisasi->pengurusHarian->where('jabatan', 'Ketua')->first()->nama ?? 'Tidak Ada Data' }}
+                    </h3>
+                    <p class="text-blue-600 font-semibold">Ketua</p>
                 </div>
             </div>
         </div>
 
         <!-- Sekretaris & Bendahara -->
         <div class="flex flex-wrap justify-center gap-8 text-center mb-12">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-64">
-                <img src="../../img/sekretaris.jpg" alt="Sekretaris" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                <h3 class="text-2xl font-bold text-gray-800">Nama Sekretaris</h3>
-                <p class="text-blue-600 font-semibold">Sekretaris</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg w-64">
-                <img src="../../img/bendahara.jpg" alt="Bendahara" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                <h3 class="text-2xl font-bold text-gray-800">Nama Bendahara</h3>
-                <p class="text-blue-600 font-semibold">Bendahara</p>
-            </div>
+            @foreach (['Sekretaris', 'Bendahara'] as $jabatan)
+                <div class="bg-white p-6 rounded-lg shadow-lg w-64">
+                    <img src="{{ asset('storage/' . ($organisasi->pengurusHarian->where('jabatan', $jabatan)->first()->foto ?? 'default.jpg')) }}"
+                        alt="{{ $jabatan }}" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        {{ $organisasi->pengurusHarian->where('jabatan', $jabatan)->first()->nama ?? 'Tidak Ada Data' }}
+                    </h3>
+                    <p class="text-blue-600 font-semibold">{{ $jabatan }}</p>
+                </div>
+            @endforeach
         </div>
 
         <!-- Struktur Divisi -->
-        <div id="struktur-divisi"></div>
-    </section>
-
-
-    {{-- <section class="container mx-auto px-4 py-16">
-        <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Struktur Organisasi</h1>
-
-        @foreach ($struktur as $divisi)
-            <div class="text-center mb-12">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ $divisi->judul }}</h2>
-
-                <div class="flex justify-center">
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-xs">
-                        <img src="{{ asset('storage/' . $divisi->ketua_foto) }}" alt="{{ $divisi->ketua_nama }}"
-                            class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-gray-800">{{ $divisi->ketua_nama }}</h3>
-                        <p class="text-blue-600 font-semibold">Ketua</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-8 text-center mb-12">
-                    <div class="bg-white p-6 rounded-lg shadow-lg w-64">
-                        <img src="{{ asset('storage/' . $divisi->wakil_foto) }}" alt="{{ $divisi->wakil_nama }}"
-                            class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-gray-800">{{ $divisi->wakil_nama }}</h3>
-                        <p class="text-blue-600 font-semibold">Wakil Ketua</p>
-                    </div>
-                </div>
-
-                <h3 class="text-xl font-bold text-gray-800 text-center my-10">Anggota {{ $divisi->judul }}</h3>
-                <div class="swiper-container overflow-hidden">
-                    <div class="swiper-wrapper flex">
-                        @foreach ($divisi->members as $anggota)
-                            <div class="swiper-slide w-64">
-                                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                                    <img src="{{ asset('storage/' . $anggota->foto) }}" alt="{{ $anggota->nama }}"
-                                        class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                                    <h3 class="text-2xl font-bold text-gray-800">{{ $anggota->nama }}</h3>
-                                    <p class="text-blue-600 font-semibold">{{ $divisi->judul }}</p>
-                                </div>
+        <div id="struktur-divisi">
+            @foreach ($organisasi->divisi as $div)
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 text-center my-10">{{ $div->nama }}</h2>
+                    <div class="flex flex-wrap justify-center mb-8 gap-10">
+                        @foreach (['CO', 'SekCO'] as $role)
+                            @php
+                                $pengurus =
+                                    $div->pengurusDivisi->where('jabatan', $role)->first() ??
+                                    (object) ['foto' => 'default.jpg', 'nama' => 'Belum Ada'];
+                            @endphp
+                            <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64">
+                                <img src="{{ asset('storage/' . $pengurus->foto) }}" alt="{{ $pengurus->nama }}"
+                                    class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                                <h3 class="text-2xl font-bold text-gray-800">{{ $pengurus->nama }}</h3>
+                                <p class="text-blue-600 font-semibold">{{ $role }} {{ $div->nama }}</p>
                             </div>
                         @endforeach
                     </div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+
+                    <!-- Anggota -->
+                    <h3 class="text-xl font-bold text-gray-800 text-center my-10">Anggota {{ $div->nama }}</h3>
+                    <div class="swiper-container overflow-hidden" id="swiper-{{ $loop->index }}">
+                        <div class="swiper-wrapper flex">
+                            @foreach ($div->anggota as $anggota)
+                                <div class="swiper-slide w-64">
+                                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                                        <img src="{{ asset('storage/' . $anggota->foto) }}" alt="{{ $anggota->nama }}"
+                                            class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                                        <h3 class="text-2xl font-bold text-gray-800">{{ $anggota->nama }}</h3>
+                                        <p class="text-blue-600 font-semibold">{{ $div->nama }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    </section> --}}
+            @endforeach
+        </div>
+    </section>
 @endsection
 
 @section('this-page-scripts')
     <script>
-        // struktur organisasi
         document.addEventListener("DOMContentLoaded", function() {
-            const divisi = [{
-                    judul: "Media Kreatif",
-                    nama: "Media Kreatif",
-                    ketua: {
-                        foto: "ketua_media.jpg",
-                        nama: "Nama Ketua Media"
-                    },
-                    wakil: {
-                        foto: "wakil_media.jpg",
-                        nama: "Nama Wakil Media"
-                    },
-                    anggota: [{
-                            foto: "media_1.jpg",
-                            nama: "Nama Anggota 1"
-                        },
-                        {
-                            foto: "media_2.jpg",
-                            nama: "Nama Anggota 2"
-                        },
-                        {
-                            foto: "media_3.jpg",
-                            nama: "Nama Anggota 3"
-                        },
-                        {
-                            foto: "media_4.jpg",
-                            nama: "Nama Anggota 4"
-                        },
-                        {
-                            foto: "media_5.jpg",
-                            nama: "Nama Anggota 5"
-                        },
-                        {
-                            foto: "media_6.jpg",
-                            nama: "Nama Anggota 6"
-                        },
-                        {
-                            foto: "media_7.jpg",
-                            nama: "Nama Anggota 7"
-                        },
-                        {
-                            foto: "media_8.jpg",
-                            nama: "Nama Anggota 8"
-                        },
-                        {
-                            foto: "media_9.jpg",
-                            nama: "Nama Anggota 9"
-                        },
-                        {
-                            foto: "media_10.jpg",
-                            nama: "Nama Anggota 10"
-                        },
-                    ]
-                },
-                {
-                    judul: "Pendidikan",
-                    nama: "Pendidikan",
-                    ketua: {
-                        foto: "ketua_pendidikan.jpg",
-                        nama: "Nama Ketua Pendidikan"
-                    },
-                    wakil: {
-                        foto: "wakil_pendidikan.jpg",
-                        nama: "Nama Wakil Pendidikan"
-                    },
-                    anggota: [{
-                            foto: "pendidikan_1.jpg",
-                            nama: "Nama Anggota 1"
-                        },
-                        {
-                            foto: "pendidikan_2.jpg",
-                            nama: "Nama Anggota 2"
-                        },
-                        {
-                            foto: "pendidikan_3.jpg",
-                            nama: "Nama Anggota 3"
-                        },
-                        {
-                            foto: "pendidikan_4.jpg",
-                            nama: "Nama Anggota 4"
-                        },
-                        {
-                            foto: "pendidikan_5.jpg",
-                            nama: "Nama Anggota 5"
-                        },
-                        {
-                            foto: "pendidikan_6.jpg",
-                            nama: "Nama Anggota 6"
-                        },
-                        {
-                            foto: "pendidikan_7.jpg",
-                            nama: "Nama Anggota 7"
-                        },
-                        {
-                            foto: "pendidikan_8.jpg",
-                            nama: "Nama Anggota 8"
-                        },
-                        {
-                            foto: "pendidikan_9.jpg",
-                            nama: "Nama Anggota 9"
-                        },
-                        {
-                            foto: "pendidikan_10.jpg",
-                            nama: "Nama Anggota 10"
-                        },
-                    ]
-                },
-                {
-                    judul: "Kewirausahaan",
-                    nama: "Kewirausahaan",
-                    ketua: {
-                        foto: "ketua_kewirausahaan.jpg",
-                        nama: "Nama Ketua Kewirausahaan"
-                    },
-                    wakil: {
-                        foto: "wakil_kewirausahaan.jpg",
-                        nama: "Nama Wakil Kewirausahaan"
-                    },
-                    anggota: [{
-                            foto: "kewirusahaan_1.jpg",
-                            nama: "Nama Anggota 1"
-                        },
-                        {
-                            foto: "kewirusahaan_2.jpg",
-                            nama: "Nama Anggota 2"
-                        },
-                        {
-                            foto: "kewirusahaan_3.jpg",
-                            nama: "Nama Anggota 3"
-                        },
-                        {
-                            foto: "kewirusahaan_4.jpg",
-                            nama: "Nama Anggota 4"
-                        },
-                        {
-                            foto: "kewirusahaan_5.jpg",
-                            nama: "Nama Anggota 5"
-                        },
-                        {
-                            foto: "kewirusahaan_6.jpg",
-                            nama: "Nama Anggota 6"
-                        },
-                        {
-                            foto: "kewirusahaan_7.jpg",
-                            nama: "Nama Anggota 7"
-                        },
-                        {
-                            foto: "kewirusahaan_8.jpg",
-                            nama: "Nama Anggota 8"
-                        },
-                        {
-                            foto: "kewirusahaan_9.jpg",
-                            nama: "Nama Anggota 9"
-                        },
-                        {
-                            foto: "kewirusahaan_10.jpg",
-                            nama: "Nama Anggota 10"
-                        },
-                    ]
-                },
-                {
-                    judul: "Lingkungan Hidup",
-                    nama: "Lingkungan Hidup",
-                    ketua: {
-                        foto: "ketua_Lingkungan Hidup.jpg",
-                        nama: "Nama Ketua Lingkungan Hidup"
-                    },
-                    wakil: {
-                        foto: "wakil_Lingkungan Hidup.jpg",
-                        nama: "Nama Wakil Lingkungan Hidup"
-                    },
-                    anggota: [{
-                            foto: "LH_1.jpg",
-                            nama: "Nama Anggota 1"
-                        },
-                        {
-                            foto: "LH_2.jpg",
-                            nama: "Nama Anggota 2"
-                        },
-                        {
-                            foto: "LH_3.jpg",
-                            nama: "Nama Anggota 3"
-                        },
-                        {
-                            foto: "LH_4.jpg",
-                            nama: "Nama Anggota 4"
-                        },
-                        {
-                            foto: "LH_5.jpg",
-                            nama: "Nama Anggota 5"
-                        },
-                        {
-                            foto: "LH_6.jpg",
-                            nama: "Nama Anggota 6"
-                        },
-                        {
-                            foto: "LH_7.jpg",
-                            nama: "Nama Anggota 7"
-                        },
-                        {
-                            foto: "LH_8.jpg",
-                            nama: "Nama Anggota 8"
-                        },
-                        {
-                            foto: "LH_9.jpg",
-                            nama: "Nama Anggota 9"
-                        },
-                        {
-                            foto: "LH_10.jpg",
-                            nama: "Nama Anggota 10"
-                        },
-                    ]
-                },
-                {
-                    judul: "Pengabdian Masyarakat",
-                    nama: "Pengabdian Masyarakat",
-                    ketua: {
-                        foto: "ketua_Pengabdian Masyarakat.jpg",
-                        nama: "Nama Ketua Pengmas"
-                    },
-                    wakil: {
-                        foto: "wakil_Pengabdian Masyarakat.jpg",
-                        nama: "Nama Wakil Pengmas"
-                    },
-                    anggota: [{
-                            foto: "Pengmas_1.jpg",
-                            nama: "Nama Anggota 1"
-                        },
-                        {
-                            foto: "Pengmas_2.jpg",
-                            nama: "Nama Anggota 2"
-                        },
-                        {
-                            foto: "Pengmas_3.jpg",
-                            nama: "Nama Anggota 3"
-                        },
-                        {
-                            foto: "Pengmas_4.jpg",
-                            nama: "Nama Anggota 4"
-                        },
-                        {
-                            foto: "Pengmas_5.jpg",
-                            nama: "Nama Anggota 5"
-                        },
-                        {
-                            foto: "Pengmas_6.jpg",
-                            nama: "Nama Anggota 6"
-                        },
-                        {
-                            foto: "Pengmas_7.jpg",
-                            nama: "Nama Anggota 7"
-                        },
-                        {
-                            foto: "Pengmas_8.jpg",
-                            nama: "Nama Anggota 8"
-                        },
-                        {
-                            foto: "Pengmas_9.jpg",
-                            nama: "Nama Anggota 9"
-                        },
-                        {
-                            foto: "Pengmas_10.jpg",
-                            nama: "Nama Anggota 10"
-                        },
-                    ]
-                },
-            ];
-
-            const container = document.getElementById("struktur-divisi");
-            let content = "";
-
-            divisi.forEach((div, index) => {
-                let anggotaHtml = div.anggota.map(anggota => `
-            <div class="swiper-slide w-64">
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <img src="../../img/${anggota.foto}" alt="${anggota.nama}" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                    <h3 class="text-2xl font-bold text-gray-800">${anggota.nama}</h3>
-                    <p class="text-blue-600 font-semibold">${div.nama}</p>
-                </div>
-            </div>
-        `).join("");
-
-                content += `
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800 text-center my-10">${div.judul}</h2>
-                <div class="flex flex-wrap justify-center mb-8 gap-10">
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64">
-                        <img src="../../img/${div.ketua.foto}" alt="${div.ketua.nama}" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-gray-800">${div.ketua.nama}</h3>
-                        <p class="text-blue-600 font-semibold">CO ${div.nama}</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64">
-                        <img src="../../img/${div.wakil.foto}" alt="${div.wakil.nama}" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                        <h3 class="text-2xl font-bold text-gray-800">${div.wakil.nama}</h3>
-                        <p class="text-blue-600 font-semibold">SekCO ${div.nama}</p>
-                    </div>
-                </div>
-
-                <h3 class="text-xl font-bold text-gray-800 text-center my-10">Anggota ${div.judul}</h3>
-                <div class="swiper-container overflow-hidden" id="swiper-${index}">
-                    <div class="swiper-wrapper flex">
-                        ${anggotaHtml}
-                    </div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
-            </div>
-        `;
-            });
-
-            container.innerHTML = content;
-
-            // Inisialisasi SwiperJS untuk setiap container
-            divisi.forEach((_, index) => {
-                new Swiper(`#swiper-${index}`, {
-                    slidesPerView: "auto",
+            @foreach ($organisasi->divisi as $index => $div)
+                new Swiper("#swiper-{{ $index }}", {
+                    slidesPerView: 1.5,
                     spaceBetween: 20,
                     navigation: {
-                        nextEl: `#swiper-${index} .swiper-button-next`,
-                        prevEl: `#swiper-${index} .swiper-button-prev`,
+                        nextEl: "#swiper-{{ $index }} .swiper-button-next",
+                        prevEl: "#swiper-{{ $index }} .swiper-button-prev",
                     },
                     scrollbar: {
-                        el: `#swiper-${index} .swiper-scrollbar`,
+                        el: `#swiper-{{ $index }} .swiper-scrollbar`,
                         draggable: true,
                     },
                     mousewheel: true,
                     grabCursor: true,
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 2.5
+                        },
+                        1024: {
+                            slidesPerView: 3.5
+                        }
+                    }
                 });
-            });
+            @endforeach
         });
     </script>
 @endsection
