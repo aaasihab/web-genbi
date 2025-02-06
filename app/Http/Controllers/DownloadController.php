@@ -65,7 +65,7 @@ class DownloadController extends Controller
         Download::create($validated);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('download.show')->with('success', 'File berhasil ditambahkan.');
+        return redirect()->route('download.index')->with('success', 'File berhasil ditambahkan.');
     }
 
     public function edit(string $id)
@@ -95,7 +95,7 @@ class DownloadController extends Controller
 
         $download->update($validated);
 
-        return redirect()->route('download.show')->with('success', 'File berhasil diperbarui');
+        return redirect()->route('download.index')->with('success', 'File berhasil diperbarui');
     }
 
 
@@ -111,7 +111,7 @@ class DownloadController extends Controller
         // Hapus data dari database
         $file->delete();
 
-        return redirect()->route('download.show')->with('success', 'File berhasil dihapus.');
+        return redirect()->route('download.index')->with('success', 'File berhasil dihapus.');
     }
 
 

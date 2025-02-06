@@ -10,7 +10,10 @@ class GenbiPointController extends Controller
 {
     public function index()
     {
-        $genbiPoints = GenbiPoint::all();
+        $genbiPoints = GenbiPoint::orderByRaw("
+            FIELD(bulan, 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember')
+        ")->get();
+
         return view('tentang.genbi_point.index', compact('genbiPoints'));
     }
 

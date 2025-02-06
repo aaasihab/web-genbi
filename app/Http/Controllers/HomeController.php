@@ -57,9 +57,13 @@ class HomeController extends Controller
     // tentang
     public function genbiPoint()
     {
-        $genbiPoints = GenbiPoint::where('status', 'published')->get();
+        $genbiPoints = GenbiPoint::where('status', 'published')
+            ->orderByRaw("FIELD(bulan, 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember')")
+            ->get();
+
         return view('home.tentang.genbiPoint', compact('genbiPoints'));
     }
+
 
     public function strukturOrganisasi()
     {

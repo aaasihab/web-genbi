@@ -88,7 +88,7 @@
 
                 <!-- Buttons -->
                 <div class="flex justify-between mt-6">
-                    <a href="{{ route('kegiatan.show') }}"
+                    <a href="{{ route('kegiatan.index') }}"
                         class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg shadow-md transition">
                         Kembali
                     </a>

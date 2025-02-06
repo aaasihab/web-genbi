@@ -46,7 +46,7 @@ class KegiatanController extends Controller
 
         Kegiatan::create($validated);
 
-        return redirect()->route('kegiatan.show')->with('success', 'Kegiatan berhasil ditambahkan');
+        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan');
     }
 
 
@@ -81,7 +81,7 @@ class KegiatanController extends Controller
         $validated['tanggal_post'] = now()->toDateString();
         $kegiatan->update($validated);
 
-        return redirect()->route('kegiatan.show')->with('success', 'Kegiatan berhasil diperbarui');
+        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -94,7 +94,7 @@ class KegiatanController extends Controller
 
         $kegiatan->delete();
 
-        return redirect()->route('kegiatan.show')->with('success', 'Kegiatan berhasil dihapus');
+        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil dihapus');
     }
 
 }

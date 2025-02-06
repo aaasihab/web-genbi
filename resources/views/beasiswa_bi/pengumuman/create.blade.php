@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <a href="{{ route('pengumuman.show') }}"
+                    <a href="{{ route('pengumuman.index') }}"
                         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md">
                         Kembali
                     </a>

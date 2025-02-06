@@ -46,7 +46,7 @@
 
                 <div class="mb-4">
                     <label for="file" class="block text-gray-700 font-semibold">File</label>
-                    <input type="file" name="file" id="file" @error('file') is-invalid @enderror required
+                    <input type="file" name="file" id="file" @error('file') is-invalid @enderror
                         accept=".pdf,.doc,.docx,.xlsx,.xls,.ppt,.pptx,.jpg,.png,.jpeg"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('file')
@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <a href="{{ route('download.show') }}"
+                    <a href="{{ route('download.index') }}"
                         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md">
                         Kembali
                     </a>

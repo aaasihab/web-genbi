@@ -66,7 +66,7 @@
 
                 <!-- Buttons -->
                 <div class="flex justify-between mt-6">
-                    <a href="{{ route('download.show') }}"
+                    <a href="{{ route('download.index') }}"
                         class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg shadow-md transition">
                         Kembali
                     </a>
