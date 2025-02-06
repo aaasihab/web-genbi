@@ -64,13 +64,12 @@ Route::prefix('kegiatan')->name('kegiatan.')->group(function () {
 Route::get('/tentang/point', [GenbiPointController::class, 'index'])->name('genbiPoint');
 Route::get('/tentang/genbi', [TentangGenbiController::class, 'index'])->name('tentangGenbi');
 
+// crud struktur organisasi 
 Route::resource('organisasi', OrganisasiController::class);
 Route::resource('divisi', DivisiController::class);
 Route::resource('pengurus_harian', PengurusHarianController::class);
 Route::resource('pengurus_divisi', PengurusDivisiController::class);
 Route::resource('anggota', AnggotaController::class);
-
-// });
 
 Route::prefix('pengumuman')->name('pengumuman.')->group(function () {
     Route::get('/', [PengumumanController::class, 'index'])->name('index'); // Menampilkan semua pengumuman

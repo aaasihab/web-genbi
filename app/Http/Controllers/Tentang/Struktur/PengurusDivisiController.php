@@ -31,15 +31,29 @@ class PengurusDivisiController extends Controller
             'status' => 'required|in:published,nonaktif',
         ]);
 
+        // Cek apakah sudah ada yang menjabat sebagai CO atau SekCO di divisi ini
+        $existingPengurus = PengurusDivisi::where('divisi_id', $request->divisi_id)
+            ->where('jabatan', $request->jabatan)
+            ->exists(); // Akan mengembalikan true jika sudah ada
+
+        if ($existingPengurus) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['jabatan' => 'Jabatan ' . $request->jabatan . ' sudah terisi di divisi ini.']);
+        }
+
+        // Simpan foto jika ada
         if ($request->hasFile('foto')) {
             $validated['foto'] = $request->file('foto')->store('pengurus_divisi', 'public');
         }
 
+        // Simpan data pengurus
         PengurusDivisi::create($validated);
 
         return redirect()->route('pengurus_divisi.index')
             ->with('success', 'Data berhasil ditambahkan.');
     }
+
 
     public function edit($id)
     {
