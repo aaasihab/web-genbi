@@ -3,63 +3,85 @@
 namespace App\Http\Controllers\Tentang\Struktur;
 
 use App\Http\Controllers\Controller;
+use App\Models\Struktur\Anggota;
+use App\Models\Struktur\Divisi;
 use Illuminate\Http\Request;
+
 
 class AnggotaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $anggota = Anggota::with('divisi')->get();
+        return view('tentang.struktur.anggota.index', compact('anggota'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $divisi = Divisi::all();
+        return view('tentang.struktur.anggota.create', compact('divisi'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'divisi_id' => 'required|exists:divisi,id',
+            'nama' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+            'status' => 'required|in:published,nonaktif',
+        ]);
+
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('anggota', 'public');
+        }
+
+        Anggota::create($validated);
+
+        return redirect()->route('anggota.index')
+            ->with('success', 'Data anggota berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $anggota = Anggota::findOrFail($id);
+        $divisi = Divisi::all();
+        return view('tentang.struktur.anggota.edit', compact('anggota', 'divisi'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'divisi_id' => 'required|exists:divisi,id',
+            'nama' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+            'status' => 'required|in:published,nonaktif',
+        ]);
+
+        $anggota = Anggota::findOrFail($id);
+
+        if ($request->hasFile('foto')) {
+            if ($anggota->foto) {
+                \Storage::delete('public/' . $anggota->foto);
+            }
+            $validated['foto'] = $request->file('foto')->store('anggota', 'public');
+        }
+
+        $anggota->update($validated);
+
+        return redirect()->route('anggota.index')
+            ->with('success', 'Data anggota berhasil diperbarui.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $anggota = Anggota::findOrFail($id);
+        if ($anggota->foto) {
+            \Storage::delete('public/' . $anggota->foto);
+        }
+        $anggota->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('anggota.index')
+            ->with('success', 'Data anggota berhasil dihapus.');
     }
 }
+

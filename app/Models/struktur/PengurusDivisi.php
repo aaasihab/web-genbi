@@ -13,6 +13,6 @@ class PengurusDivisi extends Model
 
     public function divisi()
     {
-        return $this->belongsTo(Organisasi::class);
+        return $this->belongsTo(Divisi::class);
     }
 }

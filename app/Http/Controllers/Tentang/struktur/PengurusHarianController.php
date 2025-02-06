@@ -26,8 +26,9 @@ class PengurusHarianController extends Controller
         $validated = $request->validate([
             'organisasi_id' => 'required|exists:organisasi,id',
             'nama' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120'
+            'jabatan' => 'required|in:Ketua,Sekretaris,Bendahara',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'status' => 'required|in:published,nonaktif'
         ]);
 
         if ($request->hasFile('foto')) {
@@ -52,8 +53,9 @@ class PengurusHarianController extends Controller
         $validated = $request->validate([
             'organisasi_id' => 'required|exists:organisasi,id',
             'nama' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120'
+            'jabatan' => 'required|in:Ketua,Sekretaris,Bendahara',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'status' => 'required|in:published,nonaktif'
         ]);
 
         $pengurus = PengurusHarian::findOrFail($id);

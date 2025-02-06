@@ -23,54 +23,72 @@
         </div>
     </section>
 
-    <!-- Content Daftar Anggota -->
-    <section id="daftar-anggota" class="bg-gray-50 py-12 mt-14">
-        <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Data Anggota</h2>
+    <!-- Daftar Anggota -->
+    <section id="index-anggota" class="relative bg-gray-50 py-12 mt-14">
+        <div class="container mx-auto max-w-5xl bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">Daftar Anggota</h2>
+
+            <!-- Alert Notifikasi -->
+            @if (session('success'))
+                <div class="mb-4 text-green-700 bg-green-200 p-3 rounded-md">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Tombol Tambah Anggota -->
+            <div class="mb-4 text-right">
                 <a href="{{ route('anggota.create') }}"
-                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition">
-                    + Tambah Anggota
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
+                    Tambah Anggota
                 </a>
             </div>
 
-            <!-- Responsive Table -->
+            <!-- Tabel Data Anggota -->
             <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-200">
+                <table class="w-full border-collapse border border-gray-300">
                     <thead>
-                        <tr class="bg-gray-800 text-white">
-                            <th class="p-3">No</th>
-                            <th class="p-3">Nama Anggota</th>
-                            <th class="p-3">Divisi</th>
-                            <th class="p-3">Foto</th>
-                            <th class="p-3">Tanggal Posting</th>
-                            <th class="p-3">Terakhir Diubah</th>
-                            <th class="p-3">Aksi</th>
+                        <tr class="bg-gray-200">
+                            <th class="border border-gray-300 px-4 py-2">No</th>
+                            <th class="border border-gray-300 px-4 py-2">Foto</th>
+                            <th class="border border-gray-300 px-4 py-2">Nama</th>
+                            <th class="border border-gray-300 px-4 py-2">Divisi</th>
+                            <th class="border border-gray-300 px-4 py-2">Status</th>
+                            <th class="border border-gray-300 px-4 py-2">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="text-gray-700">
-                        @forelse ($anggota as $key => $agt)
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="p-3 text-center">{{ $key + 1 }}</td>
-                                <td class="p-3 text-center">{{ $agt->nama }}</td>
-                                <td class="p-3 text-center">{{ $agt->divisi->nama }}</td>
-                                <td class="p-3 text-center">
-                                    <img src="{{ asset('storage/' . $agt->foto) }}" alt="Foto {{ $agt->nama }}"
-                                        class="h-16 w-16 rounded-full mx-auto">
+                    <tbody>
+                        @forelse ($anggota as $key => $member)
+                            <tr class="text-center">
+                                <td class="border border-gray-300 px-4 py-2">{{ $key + 1 }}</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    @if ($member->foto)
+                                        <img src="{{ asset('storage/' . $member->foto) }}" alt="Foto"
+                                            class="w-16 h-16 rounded-md object-cover">
+                                    @else
+                                        <span class="text-gray-500">Tidak ada foto</span>
+                                    @endif
                                 </td>
-                                <td class="p-3 text-center">{{ $agt->created_at->format('d M Y') }}</td>
-                                <td class="p-3 text-center">{{ $agt->updated_at->diffForHumans() }}</td>
-                                <td class="p-3 text-center">
-                                    <a href="{{ route('anggota.edit', $agt->id) }}"
-                                        class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold rounded shadow-md transition">
+                                <td class="border border-gray-300 px-4 py-2">{{ $member->nama }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $member->divisi->nama }}</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <span
+                                        class="px-2 py-1 text-white rounded-md 
+                                    {{ $member->status == 'published' ? 'bg-green-500' : 'bg-gray-500' }}">
+                                        {{ ucfirst($member->status) }}
+                                    </span>
+                                </td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <a href="{{ route('anggota.edit', $member->id) }}"
+                                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded-md">
                                         Edit
                                     </a>
-                                    <form action="{{ route('anggota.destroy', $agt->id) }}" method="POST"
-                                        class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                    <form action="{{ route('anggota.destroy', $member->id) }}" method="POST"
+                                        class="inline-block"
+                                        onsubmit="return confirm('Yakin ingin menghapus anggota ini?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded shadow-md transition">
+                                            class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-md">
                                             Hapus
                                         </button>
                                     </form>
@@ -78,7 +96,9 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="p-6 text-center text-gray-500">Tidak ada data anggota</td>
+                                <td colspan="6" class="border border-gray-300 px-4 py-2 text-center text-gray-500">
+                                    Tidak ada data anggota.
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>

@@ -3,63 +3,86 @@
 namespace App\Http\Controllers\Tentang\Struktur;
 
 use App\Http\Controllers\Controller;
+use App\Models\Struktur\Divisi;
+use App\Models\Struktur\PengurusDivisi;
 use Illuminate\Http\Request;
 
 class PengurusDivisiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $pengurusDivisi = PengurusDivisi::with('divisi')->get();
+        return view('tentang.struktur.pengurus_divisi.index', compact('pengurusDivisi'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $divisi = Divisi::all();
+        return view('tentang.struktur.pengurus_divisi.create', compact('divisi'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'divisi_id' => 'required|exists:divisi,id',
+            'nama' => 'required|string|max:255',
+            'jabatan' => 'required|in:CO,SekCO',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+            'status' => 'required|in:published,nonaktif',
+        ]);
+
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('pengurus_divisi', 'public');
+        }
+
+        PengurusDivisi::create($validated);
+
+        return redirect()->route('pengurus_divisi.index')
+            ->with('success', 'Data berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $pengurusDivisi = PengurusDivisi::findOrFail($id);
+        $divisi = Divisi::all();
+        return view('tentang.struktur.pengurus_divisi.edit', compact('pengurusDivisi', 'divisi'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'divisi_id' => 'required|exists:divisi,id',
+            'nama' => 'required|string|max:255',
+            'jabatan' => 'required|in:CO,SekCO',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+            'status' => 'required|in:published,nonaktif',
+        ]);
+
+        $pengurusDivisi = PengurusDivisi::findOrFail($id);
+
+        if ($request->hasFile('foto')) {
+            if ($pengurusDivisi->foto) {
+                \Storage::delete('public/' . $pengurusDivisi->foto);
+            }
+            $validated['foto'] = $request->file('foto')->store('pengurus_divisi', 'public');
+        }
+
+        $pengurusDivisi->update($validated);
+
+        return redirect()->route('pengurus_divisi.index')
+            ->with('success', 'Data berhasil diperbarui.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $pengurusDivisi = PengurusDivisi::findOrFail($id);
+        if ($pengurusDivisi->foto) {
+            \Storage::delete('public/' . $pengurusDivisi->foto);
+        }
+        $pengurusDivisi->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('pengurus_divisi.index')
+            ->with('success', 'Data berhasil dihapus.');
     }
 }
+

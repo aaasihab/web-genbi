@@ -56,7 +56,8 @@
                 <!-- Nama Pengurus -->
                 <div class="mb-4">
                     <label for="nama" class="block text-gray-700 font-semibold">Nama Pengurus</label>
-                    <input type="text" name="nama" id="nama" @error('nama') is-invalid @enderror required value="{{ old('nama', $pengurusHarian->nama) }}"
+                    <input type="text" name="nama" id="nama" @error('nama') is-invalid @enderror required
+                        value="{{ old('nama', $pengurusHarian->nama) }}"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('nama')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">
@@ -71,7 +72,8 @@
                     <select name="jabatan" id="jabatan" @error('jabatan') is-invalid @enderror required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="Ketua" {{ $pengurusHarian->jabatan == 'Ketua' ? 'selected' : '' }}>Ketua</option>
-                        <option value="Sekretaris" {{ $pengurusHarian->jabatan == 'Sekretaris' ? 'selected' : '' }}>Sekretaris</option>
+                        <option value="Sekretaris" {{ $pengurusHarian->jabatan == 'Sekretaris' ? 'selected' : '' }}>
+                            Sekretaris</option>
                         <option value="Bendahara" {{ $pengurusHarian->jabatan == 'Bendahara' ? 'selected' : '' }}>Bendahara
                         </option>
                     </select>
@@ -85,7 +87,8 @@
                 <!-- Upload Foto -->
                 <div class="mb-4">
                     <label for="foto" class="block text-gray-700 font-semibold">Foto</label>
-                    <input type="file" name="foto" id="foto" @error('foto') is-invalid @enderror accept=".jpeg,.png,.jpg"
+                    <input type="file" name="foto" id="foto" @error('foto') is-invalid @enderror
+                        accept=".jpeg,.png,.jpg"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('foto')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">
@@ -101,6 +104,16 @@
                                 class="w-40 rounded-md border">
                         </div>
                     @endif
+                </div>
+
+
+                <div class="mb-4">
+                    <label for="status" class="block font-medium text-gray-700">Status</label>
+                    <select id="status" name="status" required
+                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('status') is-invalid @enderror">
+                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                    </select>
                 </div>
 
                 <div class="flex justify-between">

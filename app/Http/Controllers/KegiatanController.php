@@ -10,11 +10,8 @@ class KegiatanController extends Controller
 {
     public function index()
     {
-        // $kegiatan = Kegiatan::where('status', 'published')
-        //     ->orderBy('tanggal_kegiatan', 'desc')
-        //     ->get();
-
-        // return view('kegiatan.index', compact('kegiatan'));
+        $kegiatan = Kegiatan::all();
+        return view('kegiatan.index', compact('kegiatan'));
     }
     // Menampilkan form tambah anggota
     public function create()
@@ -24,8 +21,7 @@ class KegiatanController extends Controller
 
     public function show()
     {
-        $kegiatan = Kegiatan::all();
-        return view('kegiatan.show', compact('kegiatan'));
+
     }
 
 

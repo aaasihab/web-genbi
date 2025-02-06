@@ -9,7 +9,7 @@ class PengurusHarian extends Model
 {
     use HasFactory;
     protected $table = 'pengurus_harian';
-    protected $fillable = ['organisasi_id', 'nama', 'jabatan', 'foto'];
+    protected $fillable = ['organisasi_id', 'nama', 'jabatan', 'foto', 'status'];
 
     public function organisasi()
     {

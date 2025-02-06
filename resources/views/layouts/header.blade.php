@@ -3,12 +3,12 @@
     <div class="container mx-auto flex items-center justify-between p-4">
         <!-- Logo -->
         <div class="text-2xl font-bold">
-            <a id="navbar-logo" href="{{ route('home.beranda') }}" class="text-white">GenBI UNUJA</a>
+            <a id="navbar-logo" href="{{ route('beranda') }}" class="text-white">GenBI UNUJA</a>
         </div>
 
         <!-- Navigation Links -->
         <nav class="hidden md:flex space-x-8 text-lg">
-            <a href="{{ route('home.beranda') }}" class="hover:text-blue-500">Beranda</a>
+            <a href="{{ route('beranda') }}" class="hover:text-blue-500">Beranda</a>
             <a href="{{ route('home.kegiatan') }}" class="hover:text-blue-500">Kegiatan</a>
 
             <!-- Beasiswa BI Dropdown -->
@@ -59,7 +59,7 @@
         class="hidden bg-white shadow-md p-4 absolute top-19 right-5 w-[250px] z-50 text-gray-800 flex-col rounded-md">
         <div class="menu-items flex flex-col">
             <!-- Menu Item -->
-            <a href="{{ route('home.beranda') }}" class="py-2 hover:text-blue-500">Beranda</a>
+            <a href="{{ route('beranda') }}" class="py-2 hover:text-blue-500">Beranda</a>
             <a href="{{ route('home.kegiatan') }}" class="py-2 hover:text-blue-500">Kegiatan</a>
 
             <!-- Beasiswa Dropdown -->

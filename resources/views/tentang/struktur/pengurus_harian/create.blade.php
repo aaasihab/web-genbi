@@ -91,6 +91,15 @@
                     @enderror
                 </div>
 
+                <div class="mb-4">
+                    <label for="status" class="block font-medium text-gray-700">Status</label>
+                    <select id="status" name="status" required
+                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('status') is-invalid @enderror">
+                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                    </select>
+                </div>
+
                 <div class="flex justify-between">
                     <a href="{{ route('pengurus_harian.index') }}"
                         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md">

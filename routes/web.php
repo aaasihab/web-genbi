@@ -8,8 +8,10 @@ use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\Tentang\GenbiPointController;
+use App\Http\Controllers\Tentang\Struktur\AnggotaController;
 use App\Http\Controllers\Tentang\Struktur\DivisiController;
 use App\Http\Controllers\Tentang\Struktur\OrganisasiController;
+use App\Http\Controllers\Tentang\Struktur\PengurusDivisiController;
 use App\Http\Controllers\Tentang\Struktur\PengurusHarianController;
 use App\Http\Controllers\Tentang\StrukturController;
 use App\Http\Controllers\Tentang\TentangGenbiController;
@@ -31,8 +33,9 @@ Route::get('/notFound', function () {
     return view('errors.404'); // Sesuaikan dengan nama file view yang digunakan
 })->name('notFound');
 
+// halaman pages
+Route::get('/', [HomeController::class, 'beranda'])->name('beranda');
 Route::prefix('home')->name('home.')->group(function () {
-    Route::get('/', [HomeController::class, 'beranda'])->name('beranda');
     Route::get('/kegiatan', [HomeController::class, 'kegiatan'])->name('kegiatan');
     Route::get('/download', [HomeController::class, 'download'])->name('download');
     Route::get('/persyaratan', [HomeController::class, 'persyaratan'])->name('persyaratan');
@@ -44,7 +47,7 @@ Route::prefix('home')->name('home.')->group(function () {
 });
 
 // halaman beranda
-Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+// Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
 // halaman kegiatan
 Route::prefix('kegiatan')->name('kegiatan.')->group(function () {
@@ -64,6 +67,8 @@ Route::get('/tentang/genbi', [TentangGenbiController::class, 'index'])->name('te
 Route::resource('organisasi', OrganisasiController::class);
 Route::resource('divisi', DivisiController::class);
 Route::resource('pengurus_harian', PengurusHarianController::class);
+Route::resource('pengurus_divisi', PengurusDivisiController::class);
+Route::resource('anggota', AnggotaController::class);
 
 // });
 
