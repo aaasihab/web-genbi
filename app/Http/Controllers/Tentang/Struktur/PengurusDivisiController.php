@@ -18,8 +18,23 @@ class PengurusDivisiController extends Controller
     public function create()
     {
         $divisi = Divisi::all();
+
+        // Cek apakah semua divisi sudah memiliki CO dan SekCO
+        $filledPositions = PengurusDivisi::select('divisi_id')
+            ->whereIn('jabatan', ['CO', 'SekCO'])
+            ->groupBy('divisi_id')
+            ->havingRaw('COUNT(DISTINCT jabatan) >= 2')
+            ->pluck('divisi_id')
+            ->toArray();
+
+        if (count($filledPositions) == Divisi::count()) {
+            return redirect()->route('pengurus_divisi.index')
+                ->with('error', 'Semua divisi sudah memiliki CO dan SekCO. Tidak dapat menambah pengurus divisi baru.');
+        }
+
         return view('tentang.struktur.pengurus_divisi.create', compact('divisi'));
     }
+
 
     public function store(Request $request)
     {
@@ -31,12 +46,20 @@ class PengurusDivisiController extends Controller
             'status' => 'required|in:published,nonaktif',
         ]);
 
-        // Cek apakah sudah ada yang menjabat sebagai CO atau SekCO di divisi ini
-        $existingPengurus = PengurusDivisi::where('divisi_id', $request->divisi_id)
-            ->where('jabatan', $request->jabatan)
-            ->exists(); // Akan mengembalikan true jika sudah ada
+        // Cek apakah CO dan SekCO sudah terisi dalam divisi ini
+        $filledPositions = PengurusDivisi::where('divisi_id', $request->divisi_id)
+            ->whereIn('jabatan', ['CO', 'SekCO'])
+            ->pluck('jabatan')
+            ->toArray();
 
-        if ($existingPengurus) {
+        if (count($filledPositions) >= 2) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['jabatan' => 'Semua jabatan (CO dan SekCO) sudah terisi di divisi ini.']);
+        }
+
+        // Cek apakah jabatan yang dipilih sudah ada dalam divisi
+        if (in_array($request->jabatan, $filledPositions)) {
             return redirect()->back()
                 ->withInput()
                 ->withErrors(['jabatan' => 'Jabatan ' . $request->jabatan . ' sudah terisi di divisi ini.']);
@@ -53,6 +76,7 @@ class PengurusDivisiController extends Controller
         return redirect()->route('pengurus_divisi.index')
             ->with('success', 'Data berhasil ditambahkan.');
     }
+
 
 
     public function edit($id)
@@ -74,6 +98,19 @@ class PengurusDivisiController extends Controller
 
         $pengurusDivisi = PengurusDivisi::findOrFail($id);
 
+        // Cek apakah ada orang lain dengan jabatan yang sama di divisi ini
+        $existingPengurus = PengurusDivisi::where('divisi_id', $request->divisi_id)
+            ->where('jabatan', $request->jabatan)
+            ->where('id', '!=', $id) // Pastikan tidak mengecek dirinya sendiri
+            ->exists();
+
+        if ($existingPengurus) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['jabatan' => 'Jabatan ' . $request->jabatan . ' sudah terisi di divisi ini.']);
+        }
+
+        // Update foto jika ada file baru yang diunggah
         if ($request->hasFile('foto')) {
             if ($pengurusDivisi->foto) {
                 \Storage::delete('public/' . $pengurusDivisi->foto);
@@ -81,11 +118,13 @@ class PengurusDivisiController extends Controller
             $validated['foto'] = $request->file('foto')->store('pengurus_divisi', 'public');
         }
 
+        // Perbarui data pengurus divisi
         $pengurusDivisi->update($validated);
 
         return redirect()->route('pengurus_divisi.index')
             ->with('success', 'Data berhasil diperbarui.');
     }
+
 
     public function destroy($id)
     {
