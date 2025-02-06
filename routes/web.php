@@ -61,11 +61,9 @@ Route::prefix('kegiatan')->name('kegiatan.')->group(function () {
 });
 
 // halaman tentang
-Route::get('/tentang/point', [GenbiPointController::class, 'index'])->name('genbiPoint');
-Route::get('/tentang/genbi', [TentangGenbiController::class, 'index'])->name('tentangGenbi');
+Route::resource('genbi_point', GenbiPointController::class);
 
-// crud struktur organisasi 
-Route::resource('organisasi', OrganisasiController::class);
+// struktur organisasi 
 Route::resource('divisi', DivisiController::class);
 Route::resource('pengurus_harian', PengurusHarianController::class);
 Route::resource('pengurus_divisi', PengurusDivisiController::class);

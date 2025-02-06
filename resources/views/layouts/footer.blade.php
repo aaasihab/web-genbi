@@ -16,8 +16,8 @@
           <h3 class="text-xl font-semibold mb-4">Navigasi</h3>
           <ul class="space-y-2 text-gray-300">
             <li><a href="{{ route('beranda') }}" class="hover:text-white transition">Beranda</a></li>
-            <li><a href="{{ route('tentangGenbi') }}" class="hover:text-white transition">Tentang</a></li>
-            <li><a href="{{ route('kegiatan.index') }}" class="hover:text-white transition">Program</a></li>
+            <li><a href="{{ route('home.tentangGenbi') }}" class="hover:text-white transition">Tentang</a></li>
+            <li><a href="{{ route('home.kegiatan') }}" class="hover:text-white transition">Program</a></li>
             <li><a href="#kontak" class="hover:text-white transition">Kontak</a></li>
           </ul>
         </div>

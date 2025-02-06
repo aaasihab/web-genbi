@@ -9,7 +9,6 @@ class Pengumuman extends Model
 {
     use HasFactory;
     protected $table = 'pengumuman'; // Nama tabel di database
-    protected $primaryKey = 'id'; // Primary Key
     protected $fillable = [
         'judul',
         'deskripsi',

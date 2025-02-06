@@ -27,63 +27,31 @@
     <section id="genbi-point" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-center text-3xl font-bold text-gray-800 mb-8 animate-hidden">GenBI Point</h2>
-            <div class="max-w-3xl mx-auto space-y-4">
 
-                <!-- Point -->
-                <div
-                    class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition animate-hidden animate-from-bottom">
-                    <a href="/path/to/rekap-januari.pdf" target="_blank"
-                        class="flex items-center justify-between text-blue-600 hover:text-blue-800 transition">
-                        <span class="text-lg font-medium">Point Anggota GenBI bulan Januari</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                        </svg>
-                    </a>
+            @if ($genbiPoints->isEmpty())
+                <!-- Pesan jika data kosong -->
+                <p class="text-center text-lg text-gray-600">Data GenBI Point belum tersedia.</p>
+            @else
+                <div class="max-w-3xl mx-auto space-y-4">
+                    @foreach ($genbiPoints as $genbiPoint)
+                        <!-- Point -->
+                        <div
+                            class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition animate-hidden animate-from-bottom">
+                            <a href="{{ $genbiPoint->link_drive }}" target="_blank"
+                                class="flex items-center justify-between text-blue-600 hover:text-blue-800 transition">
+                                <span class="text-lg font-medium">Point Anggota GenBI bulan {{ $genbiPoint->bulan }}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                                </svg>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
-
-                <!-- Point -->
-                <div
-                    class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition animate-hidden animate-from-bottom">
-                    <a href="/path/to/rekap-februari.pdf" target="_blank"
-                        class="flex items-center justify-between text-blue-600 hover:text-blue-800 transition">
-                        <span class="text-lg font-medium">Point Anggota GenBI bulan Februari</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                        </svg>
-                    </a>
-                </div>
-
-                <!-- Point -->
-                <div
-                    class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition animate-hidden animate-from-bottom">
-                    <a href="/path/to/rekap-Maret.pdf" target="_blank"
-                        class="flex items-center justify-between text-blue-600 hover:text-blue-800 transition">
-                        <span class="text-lg font-medium">Point Anggota GenBI bulan Maret</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                        </svg>
-                    </a>
-                </div>
-
-                <!-- Point -->
-                <div
-                    class="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition animate-hidden animate-from-bottom">
-                    <a href="/path/to/rekap-April.pdf" target="_blank"
-                        class="flex items-center justify-between text-blue-600 hover:text-blue-800 transition">
-                        <span class="text-lg font-medium">Point Anggota GenBI bulan April</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                        </svg>
-                    </a>
-                </div>
-
-            </div>
+            @endif
         </div>
     </section>
+
 @endsection
 
 @section('this-page-scripts')

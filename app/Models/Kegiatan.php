@@ -10,9 +10,6 @@ class Kegiatan extends Model
     use HasFactory;
 
     protected $table = 'kegiatan'; // Nama tabel di database
-
-    protected $primaryKey = 'id'; // Primary Key
-
     protected $fillable = [
         'nama',
         'deskripsi',

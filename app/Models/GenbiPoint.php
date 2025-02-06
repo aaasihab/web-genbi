@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Download extends Model
+class GenbiPoint extends Model
 {
     use HasFactory;
-    protected $table = 'download'; // Nama tabel di databa
+    protected $table = 'genbi_point'; // Nama tabel di database
+
     protected $fillable = [
-        'nama_file',
-        'file',
+        'bulan',
+        'link_drive',
         'status',
     ];
 }

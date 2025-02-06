@@ -11,8 +11,6 @@ class PengumumanController extends Controller
 {
     public function index()
     {
-        $pengumuman = Pengumuman::all();
-        return view('beasiswa_bi.pengumuman.show', compact('pengumuman'));
     }
 
     public function show()

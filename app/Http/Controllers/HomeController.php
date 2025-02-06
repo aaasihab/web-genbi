@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Download;
+use App\Models\GenbiPoint;
 use App\Models\Kegiatan;
 use App\Models\Pengumuman;
 use App\Models\Struktur\Divisi;
@@ -56,7 +57,8 @@ class HomeController extends Controller
     // tentang
     public function genbiPoint()
     {
-        return view('home.tentang.genbiPoint');
+        $genbiPoints = GenbiPoint::where('status', 'published')->get();
+        return view('home.tentang.genbiPoint', compact('genbiPoints'));
     }
 
     public function strukturOrganisasi()
