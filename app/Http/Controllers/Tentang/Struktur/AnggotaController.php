@@ -14,7 +14,7 @@ class AnggotaController extends Controller
 {
     public function index()
     {
-        $anggota = Anggota::with('divisi')->get();
+        $anggota = Anggota::with('divisi')->get()->sortBy('divisi.nama');;
         return view('admin.tentang.struktur.anggota.index', compact('anggota'));
     }
 

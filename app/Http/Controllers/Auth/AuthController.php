@@ -176,7 +176,7 @@ class AuthController extends Controller
 
             // Hitung percobaan tersisa
             $attemptsLeft = RateLimiter::remaining($key, 5);
-            return back()->with('error', "Email atau password salah. Percobaan tersisa: $attemptsLeft.");
+            return redirect()->back()->with('error', "Email atau password salah. Percobaan tersisa: $attemptsLeft.");
         }
 
         // Jika login berhasil, reset rate limiter dan hapus blokir dari cache
@@ -186,7 +186,7 @@ class AuthController extends Controller
         // Regenerasi session setelah login sukses
         $request->session()->regenerate();
 
-        return redirect()->intended('/')->with('success', 'Login berhasil.');
+        return redirect()->route('admin.kegiatan.index')->with('success', 'Berhasil Login');
     }
 
     public function logout(Request $request)
@@ -197,7 +197,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         // Redirect ke halaman login
-        return redirect()->route('login');
+        return redirect()->route('beranda');
     }
 
     // Menampilkan halaman unauthorized

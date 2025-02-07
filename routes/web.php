@@ -58,6 +58,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('/pengurus_divisi', PengurusDivisiController::class);
     Route::resource('/anggota', AnggotaController::class);
 
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
     // pengumuman
     Route::prefix('/pengumuman')->name('pengumuman.')->group(function () {
         Route::resource('/', PengumumanController::class)->parameters(['' => 'pengumuman']);
@@ -79,7 +81,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/unauthorized', [AuthController::class, 'unauthorized'])->middleware('auth')->name('unauthorized');
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
     Route::post('/register', [AuthController::class, 'register'])->name('register');

@@ -36,9 +36,12 @@
                 <ul id="orgDropdown" class="hidden ml-4">
                     {{-- <li class="mb-2"><a href="{{ url('/admin/tentang_bi') }}" class="block py-2 px-3 rounded hover:bg-blue-600">Tentang BI</a></li> --}}
                     {{-- <li class="mb-2"><a href="{{ url('/admin/persyaratan') }}" class="block py-2 px-3 rounded hover:bg-blue-600">Persyaratan</a></li> --}}
-                    <li class="mb-2"><a href="{{ url('/admin/pengurus_harian') }}" class="block py-2 px-3 rounded hover:bg-blue-600">Pengurus Harian</a></li>
-                    <li class="mb-2"><a href="{{ url('/admin/pengurus_divisi') }}" class="block py-2 px-3 rounded hover:bg-blue-600">Pengurus Divisi</a></li>
-                    <li class="mb-2"><a href="{{ url('/admin/anggota') }}" class="block py-2 px-3 rounded hover:bg-blue-600">Anggota</a></li>
+                    <li class="mb-2"><a href="{{ url('/admin/pengurus_harian') }}"
+                            class="block py-2 px-3 rounded hover:bg-blue-600">Pengurus Harian</a></li>
+                    <li class="mb-2"><a href="{{ url('/admin/pengurus_divisi') }}"
+                            class="block py-2 px-3 rounded hover:bg-blue-600">Pengurus Divisi</a></li>
+                    <li class="mb-2"><a href="{{ url('/admin/anggota') }}"
+                            class="block py-2 px-3 rounded hover:bg-blue-600">Anggota</a></li>
                 </ul>
             </li>
             <li class="mb-2"><a href="{{ url('/admin/genbi_point') }}"
@@ -46,6 +49,8 @@
             {{-- <li class="mb-2"><a href="{{ url('/admin/tentang_genbi') }}" class="block py-2 px-3 rounded hover:bg-blue-600">Tentang GenBI</a></li> --}}
             <li class="mb-4"><a href="{{ url('/admin/download') }}"
                     class="block py-2 px-3 rounded hover:bg-blue-700">Manajemen Download</a></li>
+            <li class="mb-4"><a href="{{ route('admin.logout') }}"
+                    class="block py-2 px-3 rounded hover:bg-blue-700">Logout</a></li>
         </ul>
     </div>
 
@@ -67,6 +72,8 @@
             dropdown.classList.toggle('hidden');
         }
     </script>
+
+    @yield('this-page-scripts')
 </body>
 
 </html>

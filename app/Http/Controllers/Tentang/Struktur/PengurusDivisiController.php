@@ -12,7 +12,7 @@ class PengurusDivisiController extends Controller
 {
     public function index()
     {
-        $pengurusDivisi = PengurusDivisi::with('divisi')->get();
+        $pengurusDivisi = PengurusDivisi::with('divisi')->get()->sortBy('divisi.nama');;
         return view('admin.tentang.struktur.pengurus_divisi.index', compact('pengurusDivisi'));
     }
 

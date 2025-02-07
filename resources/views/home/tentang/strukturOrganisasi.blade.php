@@ -2,20 +2,22 @@
 
 @section('this-page-style')
     <style>
-
-    /* awal css struktur organisasi*/
-    .swiper-container {
+        /* awal css struktur organisasi*/
+        .swiper-container {
             width: 100%;
             padding-bottom: 20px;
             overflow: hidden;
         }
+
         .swiper-wrapper {
             display: flex;
         }
+
         .swiper-slide {
             flex-shrink: 0;
             width: auto;
         }
+
         .card {
             background: white;
             padding: 20px;
@@ -25,6 +27,7 @@
             width: 250px;
             margin-right: 15px;
         }
+
         .card img {
             width: 100px;
             height: 100px;
@@ -32,29 +35,33 @@
             object-fit: cover;
             margin-bottom: 10px;
         }
+
         .swiper-button-prev,
         .swiper-button-next {
             color: #007bff;
             display: none;
         }
+
         .swiper-scrollbar {
             background: #ccc;
         }
 
         @media (max-width: 640px) {
-        .swiper-slide {
-            width: 250px !important;
-            display: flex;
-            justify-content: center;
+            .swiper-slide {
+                width: 250px !important;
+                display: flex;
+                justify-content: center;
+            }
+
+            .swiper-slide .card {
+                /* width: 90% !important;
+                max-width: 100%; Batas maksimum agar tidak terlalu lebar */
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
         }
-        .swiper-slide .card {
-            /* width: 90% !important;
-            max-width: 100%; Batas maksimum agar tidak terlalu lebar */
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-    }
-    /* alhir code struktur organisasi */
+
+        /* alhir code struktur organisasi */
     </style>
 @endsection
 
@@ -63,7 +70,7 @@
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
             style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
+        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
         <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
@@ -78,10 +85,9 @@
 
     <section class="container mx-auto px-4 py-16">
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Struktur Organisasi</h1>
-
         <!-- Ketua Komis -->
         <div class="text-center mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Ketua Komis</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengurus Harian Komisariat</h2>
             <div class="flex justify-center">
                 @php $ketua = optional($pengurusHarian->get('Ketua')) @endphp
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64">
@@ -143,7 +149,8 @@
                                 </div> --}}
                                 <div class="swiper-slide w-64">
                                     <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                                        <img src="{{ asset('storage/' . ($anggota->foto ?? 'default.jpg')) }}" alt="${anggota.nama}" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                                        <img src="{{ asset('storage/' . ($anggota->foto ?? 'default.jpg')) }}"
+                                            alt="${anggota.nama}" class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
                                         <h3 class="text-[1rem] font-bold text-gray-800">{{ $anggota->nama }}</h3>
                                         <p class="text-blue-600 font-semibold">{{ $div->nama }}</p>
                                     </div>

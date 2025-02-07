@@ -10,7 +10,7 @@
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
             style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
+        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
 
         <!-- Overlay Gradient -->
@@ -176,7 +176,7 @@
                         <h3 class="text-center text-[1.1rem] text-gray-800">Kewirausahaan</h3>
                     </div>
                 </div>
-
+                
                 <!-- Card 4: Lingkungan Hidup -->
                 <div class="w-full sm:w-1/3 md:w-[20%] p-4 animate-hidden animate-from-bottom">
                     <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 h-[150px]">

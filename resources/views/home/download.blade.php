@@ -10,7 +10,7 @@
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
             style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
+        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
 
         <!-- Overlay Gradient -->
@@ -35,17 +35,22 @@
             <h1 class="md:text-4xl text-3xl font-bold text-gray-800 mb-8">Download Logo Resmi</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @foreach ($downloads as $file)
-                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                        <img src="{{ Storage::url($file->file) }}" alt="{{ $file->nama_file }}"
-                            class="w-24 h-24 mb-4">
-                        <h2 class="text-lg font-bold text-gray-800">{{ $file->nama_file }}</h2>
-                        <a href="{{ route('home.downloadFile', $file->id) }}"
-                            class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            Download
-                        </a>
+                @if ($pengumuman->isEmpty())
+                    <div class="col-span-3 text-center text-gray-500">
+                        <p>Masih belum ada pengumuman beasiswa saat ini.</p>
                     </div>
-                @endforeach
+                @else
+                    @foreach ($downloads as $file)
+                        <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                            <img src="{{ Storage::url($file->file) }}" alt="{{ $file->nama_file }}" class="w-24 h-24 mb-4">
+                            <h2 class="text-lg font-bold text-gray-800">{{ $file->nama_file }}</h2>
+                            <a href="{{ route('home.downloadFile', $file->id) }}"
+                                class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                Download
+                            </a>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>

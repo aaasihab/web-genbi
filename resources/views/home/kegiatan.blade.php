@@ -10,7 +10,7 @@
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
             style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
 
         <!-- Overlay Gradient -->
@@ -54,7 +54,8 @@
                         <img src="{{ asset('storage/' . $item->gambar) }}" alt="Foto Kegiatan"
                             class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d F Y') }}
+                            <p class="text-sm text-gray-500">
+                                {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d F Y') }}
                             </p>
                             <h3 class="text-lg font-semibold text-gray-800 mt-2">{{ $item->nama }}</h3>
                             <p class="text-gray-600 mt-2">
@@ -137,6 +138,5 @@
         });
 
         // akhir script kegiatan
-
     </script>
 @endsection

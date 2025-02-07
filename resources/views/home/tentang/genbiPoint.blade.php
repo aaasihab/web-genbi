@@ -10,7 +10,7 @@
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
             style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
 
         <!-- Overlay Gradient -->

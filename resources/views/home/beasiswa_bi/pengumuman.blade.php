@@ -10,7 +10,7 @@
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
             style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
         <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
+        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
 
         <!-- Overlay Gradient -->
@@ -37,24 +37,33 @@
 
             <!-- Grid Card -->
             <div class="grid gap-8 md:grid-cols-3">
-                @foreach ($pengumuman as $item)
-                    <a href="{{ route('home.downloadPengumuman', $item->id) }}" class="block group">
-                        <div
-                            class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}"
-                                class="w-full h-40 object-cover group-hover:opacity-90 transition-opacity">
-                            <div class="p-6">
-                                <p class="text-sm text-gray-500">Tanggal:
-                                    {{ \Carbon\Carbon::parse($item->tanggal)->format('d F Y') }}</p>
-                                <h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
-                                    {{ $item->judul }}
-                                </h3>
-                                <p class="text-gray-600 mt-2">{{ Str::limit($item->deskripsi, 100) }}</p>
+                @if ($pengumuman->isEmpty())
+                    <div class="col-span-3 text-center text-gray-500">
+                        <p>Masih belum ada pengumuman beasiswa saat ini.</p>
+                    </div>
+                @else
+                    @foreach ($pengumuman as $item)
+                        <a href="{{ route('home.downloadPengumuman', $item->id) }}" class="block group">
+                            <div
+                                class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}"
+                                    class="w-full h-40 object-cover group-hover:opacity-90 transition-opacity">
+                                <div class="p-6">
+                                    <p class="text-sm text-gray-500">Tanggal:
+                                        {{ \Carbon\Carbon::parse($item->tanggal)->format('d F Y') }}
+                                    </p>
+                                    <h3
+                                        class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                                        {{ $item->judul }}
+                                    </h3>
+                                    <p class="text-gray-600 mt-2">{{ Str::limit($item->deskripsi, 100) }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                @endforeach
+                        </a>
+                    @endforeach
+                @endif
             </div>
+
         </div>
     </section>
 @endsection
