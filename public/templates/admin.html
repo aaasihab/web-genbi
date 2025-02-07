@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <header class="bg-gray-900 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold"><a href="#">Admin Panel</a></h1>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-gray-300">Beranda</a>
+                <a href="#" class="hover:text-gray-300">Kegiatan</a>
+                
+                <!-- Beasiswa Dropdown -->
+                <div class="relative group">
+                    <button class="hover:text-gray-300 flex items-center">
+                        Beasiswa BI <i class="fas fa-angle-down ml-1"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-gray-800 text-white mt-2 py-2 rounded shadow-md">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Tentang BI</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Persyaratan</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Pengumuman</a>
+                    </div>
+                </div>
+                
+                <!-- Tentang Dropdown -->
+                <div class="relative group">
+                    <button class="hover:text-gray-300 flex items-center">
+                        Tentang <i class="fas fa-angle-down ml-1"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-gray-800 text-white mt-2 py-2 rounded shadow-md">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700">GenBI Point</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Tentang GenBI</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-700">Struktur Organisasi</a>
+                    </div>
+                </div>
+                
+                <a href="#" class="hover:text-gray-300">Download</a>
+            </nav>
+            <button class="text-gray-300 hover:text-white focus:outline-none md:hidden" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <nav class="md:hidden bg-gray-900 text-white hidden flex-col space-y-2 p-4" id="mobile-menu">
+        <a href="#" class="block py-2 px-4 hover:bg-gray-700">Beranda</a>
+        <a href="#" class="block py-2 px-4 hover:bg-gray-700">Kegiatan</a>
+        
+        <!-- Beasiswa Dropdown -->
+        <div class="group">
+            <button class="block w-full text-left py-2 px-4 flex justify-between items-center hover:bg-gray-700">
+                Beasiswa BI <i class="fas fa-angle-down"></i>
+            </button>
+            <div class="hidden group-hover:block bg-gray-800">
+                <a href="#" class="block py-2 px-6 hover:bg-gray-700">Tentang BI</a>
+                <a href="#" class="block py-2 px-6 hover:bg-gray-700">Persyaratan</a>
+                <a href="#" class="block py-2 px-6 hover:bg-gray-700">Pengumuman</a>
+            </div>
+        </div>
+        
+        <!-- Tentang Dropdown -->
+        <div class="group">
+            <button class="block w-full text-left py-2 px-4 flex justify-between items-center hover:bg-gray-700">
+                Tentang <i class="fas fa-angle-down"></i>
+            </button>
+            <div class="hidden group-hover:block bg-gray-800">
+                <a href="#" class="block py-2 px-6 hover:bg-gray-700">GenBI Point</a>
+                <a href="#" class="block py-2 px-6 hover:bg-gray-700">Tentang GenBI</a>
+                <a href="#" class="block py-2 px-6 hover:bg-gray-700">Struktur Organisasi</a>
+            </div>
+        </div>
+        
+        <a href="#" class="block py-2 px-4 hover:bg-gray-700">Download</a>
+    </nav>
+    
+    <!-- Content -->
+    <main class="p-6">
+
+    </main>
+    
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

@@ -12,7 +12,7 @@ class PengumumanController extends Controller
     public function index()
     {
         $pengumuman = Pengumuman::all();
-        return view('beasiswa_bi.pengumuman.index', compact('pengumuman'));
+        return view('admin.beasiswa_bi.pengumuman.index', compact('pengumuman'));
     }
 
     public function show()
@@ -46,7 +46,7 @@ class PengumumanController extends Controller
     }
     public function create()
     {
-        return view('beasiswa_bi.pengumuman.create');
+        return view('admin.beasiswa_bi.pengumuman.create');
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class PengumumanController extends Controller
 
         // Cek apakah kedua file diunggah sebelum menyimpan
         if (!$request->hasFile('gambar') || !$request->hasFile('file_download')) {
-            return redirect()->route('pengumuman.index')->with('error', 'Gagal menambah data Pengumuman, file tidak lengkap.');
+            return redirect()->route('admin.pengumuman.index')->with('error', 'Gagal menambah data Pengumuman, file tidak lengkap.');
         }
 
         // Simpan file yang diunggah
@@ -73,12 +73,12 @@ class PengumumanController extends Controller
         Pengumuman::create($validated);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil ditambahkan');
+        return redirect()->route('admin.pengumuman.index')->with('success', 'Pengumuman berhasil ditambahkan');
     }
     public function edit(string $id)
     {
         $pengumuman = Pengumuman::findOrFail($id);
-        return view('beasiswa_bi.pengumuman.edit', compact('pengumuman'));
+        return view('admin.beasiswa_bi.pengumuman.edit', compact('pengumuman'));
     }
 
     public function update(Request $request, $id)
@@ -116,7 +116,7 @@ class PengumumanController extends Controller
         $pengumuman->fill($validated);
         $pengumuman->save();
 
-        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil diperbarui');
+        return redirect()->route('admin.pengumuman.index')->with('success', 'Pengumuman berhasil diperbarui');
     }
 
 
@@ -137,7 +137,7 @@ class PengumumanController extends Controller
         // Hapus data dari database
         $pengumuman->delete();
 
-        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil dihapus.');
+        return redirect()->route('admin.pengumuman.index')->with('success', 'Pengumuman berhasil dihapus.');
     }
 
 }

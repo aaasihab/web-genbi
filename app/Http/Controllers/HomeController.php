@@ -9,6 +9,7 @@ use App\Models\Pengumuman;
 use App\Models\Struktur\Divisi;
 use App\Models\Struktur\Organisasi;
 use App\Models\Struktur\PengurusHarian;
+use Cache;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -67,18 +68,18 @@ class HomeController extends Controller
 
     public function strukturOrganisasi()
     {
-        $organisasi = Organisasi::with([
-            'divisi.pengurusDivisi',
-            'divisi.anggota',
-            'pengurusHarian'
-        ])->first(); // Ambil satu data organisasi jika hanya ada satu
-
+        $organisasi = Cache::rememberForever('struktur_organisasi', function () {
+            return Organisasi::with([
+                'divisi.pengurusDivisi',
+                'divisi.anggota',
+                'pengurusHarian'
+            ])->first();
+        });
+        
         return view('home.tentang.strukturOrganisasi', [
             'organisasi' => $organisasi
         ]);
     }
-
-
 
     public function tentangGenbi()
     {

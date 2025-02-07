@@ -14,7 +14,7 @@ class GenbiPointController extends Controller
             FIELD(bulan, 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember')
         ")->get();
 
-        return view('tentang.genbi_point.index', compact('genbiPoints'));
+        return view('admin.tentang.genbi_point.index', compact('genbiPoints'));
     }
 
     public function create()
@@ -38,7 +38,7 @@ class GenbiPointController extends Controller
         $usedMonths = GenbiPoint::select('bulan')->pluck('bulan')->toArray();
         $availableMonths = array_diff($allMonths, $usedMonths);
 
-        return view('tentang.genbi_point.create', compact('availableMonths'));
+        return view('admin.tentang.genbi_point.create', compact('availableMonths'));
     }
     public function store(Request $request)
     {
@@ -63,7 +63,7 @@ class GenbiPointController extends Controller
     public function show($id)
     {
         $genbiPoint = GenbiPoint::findOrFail($id);
-        return view('tentang.genbi_point.show', compact('genbiPoint'));
+        return view('admin.tentang.genbi_point.show', compact('genbiPoint'));
     }
 
     public function edit($id)
@@ -94,7 +94,7 @@ class GenbiPointController extends Controller
         // Ambil bulan yang belum digunakan
         $availableMonths = array_diff($allMonths, $usedMonths);
 
-        return view('tentang.genbi_point.edit', compact('genbiPoint', 'availableMonths', 'allMonths'));
+        return view('admin.tentang.genbi_point.edit', compact('genbiPoint', 'availableMonths', 'allMonths'));
     }
 
 

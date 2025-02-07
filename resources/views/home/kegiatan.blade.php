@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('home.layouts.main')
 
 @section('this-page-style')
 @endsection

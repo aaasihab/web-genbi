@@ -176,7 +176,7 @@
         <div class="shape"></div>
     </div>
     <main class="form-signin w-100 m-auto">
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('auth.login') }}" method="POST">
             @csrf
             <h3>LOGIN</h3>
 
@@ -205,13 +205,11 @@
 
             <!-- Register Button -->
             <div class="btn-wrapper">
-                <a href="{{ route('register.form') }}" class="btn-register text-white">Register</a>
+                <a href="{{ route('auth.register.form') }}" class="btn-register text-white">Register</a>
             </div>
         </form>
     </main>
 
-    {{-- Include scripts --}}
-    @include('layouts.scripts')
     <script>
         @if (session('success'))
             const Toast = Swal.mixin({

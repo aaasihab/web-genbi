@@ -10,12 +10,6 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
     <meta name="generator" content="Hugo 0.122.0" />
     <title>Register Form</title>
-
-    {{-- Include common styles --}}
-    @include('layouts.styles')
-    {{-- Include additional styles --}}
-    @yield('this-page-style')
-
     <style>
         body {
             background-color: #f0f0f0;
@@ -177,7 +171,7 @@
         <div class="shape"></div>
     </div>
     <main class="form-signin w-100 m-auto">
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('auth.register') }}" method="POST">
             @csrf
             <h3>Register</h3>
 
@@ -221,12 +215,10 @@
             </div>
 
             <button type="submit">Register</button>
-            <a href="{{ route('login') }}">Sudah memiliki Akun?</a>
+            <a href="{{ route('auth.login') }}">Sudah memiliki Akun?</a>
         </form>
     </main>
 
-    {{-- Include scripts --}}
-    @include('layouts.scripts')
     <script>
         @if (session('error'))
         Swal.fire({
@@ -237,7 +229,6 @@
         });
         @endif
     </script>
-    @yield('this-page-scripts')
 </body>
 
 </html>

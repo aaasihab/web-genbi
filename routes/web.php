@@ -30,23 +30,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// halaman error
+// halaman home
 Route::get('/', [HomeController::class, 'beranda'])->name('beranda');
-
-Route::get('login', [AuthController::class, 'loginForm'])->name('login.form');
-Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('unauthorized', [AuthController::class, 'unauthorized'])->middleware('auth')->name('unauthorized');
-
-// halaman error
-Route::get('/blocked', [AuthController::class, 'blocked'])->name('blocked');
-Route::get('/notFound', [ErrorController::class, 'notFound'])->name('notFound');
-Route::get('/methodNotAllowed', [ErrorController::class, 'methodNotAllowed'])->name('methodNotAllowed');
-
-Route::get('register', [AuthController::class, 'registerForm'])->name('register.form');
-Route::post('register', [AuthController::class, 'register'])->name('register');
-// halaman pages
-
 Route::prefix('home')->name('home.')->group(function () {
     Route::get('/kegiatan', [HomeController::class, 'kegiatan'])->name('kegiatan');
     Route::get('/download', [HomeController::class, 'download'])->name('download');
@@ -58,7 +43,8 @@ Route::prefix('home')->name('home.')->group(function () {
     Route::get('/struktur-organisasi', [HomeController::class, 'strukturOrganisasi'])->name('strukturOrganisasi');
 });
 
-Route::middleware(['auth','role:admin'])->group(function () {
+// halaman admin
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // halaman kegiatan
     Route::resource('kegiatan', KegiatanController::class);
 
@@ -66,6 +52,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('genbi_point', GenbiPointController::class);
 
     // struktur organisasi 
+    // Route::resource('organisasi', OrganisasiController::class);
     Route::resource('divisi', DivisiController::class);
     Route::resource('pengurus_harian', PengurusHarianController::class);
     Route::resource('pengurus_divisi', PengurusDivisiController::class);
@@ -82,4 +69,24 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::resource('/', DownloadController::class)->parameters(['' => 'file']);
         Route::get('/downloadFile/{file}', [DownloadController::class, 'downloadFile'])->name('downloadFile');
     });
+
+    // coming soon
+    Route::get('/beranda', [BerandaController::class, 'beranda'])->name('beranda');
+    Route::get('/persyaratan', [PersyaratanController::class, 'persyaratan'])->name('persyaratan');
+    Route::get('/tentang-BI', [TentangBiController::class, 'tentangBi'])->name('tentangBi');
+    Route::get('/tentang-genbi', [TentangGenbiController::class, 'tentangGenbi'])->name('tentangGenbi');
+
 });
+
+Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/unauthorized', [AuthController::class, 'unauthorized'])->middleware('auth')->name('unauthorized');
+    Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
+// halaman error
+Route::get('/blocked', [AuthController::class, 'blocked'])->name('blocked');
+Route::get('/notFound', [ErrorController::class, 'notFound'])->name('notFound');
+Route::get('/methodNotAllowed', [ErrorController::class, 'methodNotAllowed'])->name('methodNotAllowed');

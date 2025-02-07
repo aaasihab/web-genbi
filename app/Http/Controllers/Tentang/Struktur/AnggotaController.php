@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Tentang\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\Struktur\Anggota;
 use App\Models\Struktur\Divisi;
+use Cache;
 use Illuminate\Http\Request;
+use Storage;
 
 
 class AnggotaController extends Controller
@@ -13,13 +15,13 @@ class AnggotaController extends Controller
     public function index()
     {
         $anggota = Anggota::with('divisi')->get();
-        return view('tentang.struktur.anggota.index', compact('anggota'));
+        return view('admin.tentang.struktur.anggota.index', compact('anggota'));
     }
 
     public function create()
     {
         $divisi = Divisi::all();
-        return view('tentang.struktur.anggota.create', compact('divisi'));
+        return view('admin.tentang.struktur.anggota.create', compact('divisi'));
     }
 
     public function store(Request $request)
@@ -37,7 +39,10 @@ class AnggotaController extends Controller
 
         Anggota::create($validated);
 
-        return redirect()->route('anggota.index')
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.anggota.index')
             ->with('success', 'Data anggota berhasil ditambahkan.');
     }
 
@@ -45,7 +50,7 @@ class AnggotaController extends Controller
     {
         $anggota = Anggota::findOrFail($id);
         $divisi = Divisi::all();
-        return view('tentang.struktur.anggota.edit', compact('anggota', 'divisi'));
+        return view('admin.tentang.struktur.anggota.edit', compact('anggota', 'divisi'));
     }
 
     public function update(Request $request, $id)
@@ -61,14 +66,17 @@ class AnggotaController extends Controller
 
         if ($request->hasFile('foto')) {
             if ($anggota->foto) {
-                \Storage::delete('public/' . $anggota->foto);
+                Storage::delete('public/' . $anggota->foto);
             }
             $validated['foto'] = $request->file('foto')->store('anggota', 'public');
         }
 
         $anggota->update($validated);
 
-        return redirect()->route('anggota.index')
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.anggota.index')
             ->with('success', 'Data anggota berhasil diperbarui.');
     }
 
@@ -76,12 +84,16 @@ class AnggotaController extends Controller
     {
         $anggota = Anggota::findOrFail($id);
         if ($anggota->foto) {
-            \Storage::delete('public/' . $anggota->foto);
+            Storage::delete('public/' . $anggota->foto);
         }
         $anggota->delete();
 
-        return redirect()->route('anggota.index')
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.anggota.index')
             ->with('success', 'Data anggota berhasil dihapus.');
     }
+
 }
 

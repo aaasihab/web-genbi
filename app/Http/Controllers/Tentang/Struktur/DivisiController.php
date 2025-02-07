@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tentang\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\Struktur\Divisi;
 use App\Models\Struktur\Organisasi;
+use Cache;
 use Illuminate\Http\Request;
 
 class DivisiController extends Controller
@@ -12,13 +13,13 @@ class DivisiController extends Controller
     public function index()
     {
         $divisi = Divisi::with('organisasi')->get();
-        return view('tentang.struktur.divisi.index', compact('divisi'));
+        return view('admin.tentang.struktur.divisi.index', compact('divisi'));
     }
 
     public function create()
     {
         $organisasi = Organisasi::all();
-        return view('tentang.struktur.divisi.create', compact('organisasi'));
+        return view('admin.tentang.struktur.divisi.create', compact('organisasi'));
     }
 
     public function store(Request $request)
@@ -30,7 +31,9 @@ class DivisiController extends Controller
 
         Divisi::create($validated);
 
-        return redirect()->route('divisi.index')
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.divisi.index')
             ->with('success', 'Data berhasil ditambahkan.');
     }
 
@@ -38,21 +41,23 @@ class DivisiController extends Controller
     {
         $divisi = Divisi::findOrFail($id);
         $organisasi = Organisasi::all();
-        return view('tentang.struktur.divisi.edit', compact('divisi', 'organisasi'));
+        return view('admin.tentang.struktur.divisi.edit', compact('divisi', 'organisasi'));
     }
 
     public function update(Request $request, $id)
     {
-        $validated  = $request->validate([
+        $validated = $request->validate([
             'organisasi_id' => 'required|exists:organisasi,id',
             'nama' => 'required|string|max:255',
         ]);
 
         $divisi = Divisi::findOrFail($id);
 
-        $divisi->update($validated );
+        $divisi->update($validated);
 
-        return redirect()->route('divisi.index')
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.divisi.index')
             ->with('success', 'Data berhasil diperbarui.');
     }
 
@@ -61,7 +66,9 @@ class DivisiController extends Controller
         $divisi = Divisi::findOrFail($id);
         $divisi->delete();
 
-        return redirect()->route('divisi.index')
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.divisi.index')
             ->with('success', 'Data berhasil dihapus.');
     }
 }

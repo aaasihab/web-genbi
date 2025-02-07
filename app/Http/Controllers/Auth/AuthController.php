@@ -61,7 +61,11 @@ class AuthController extends Controller
     //  Menampilkan halaman register
     public function registerForm()
     {
-        return view('auth.registerForm'); // Pastikan file `registerForm.blade.php` tersedia
+        if (Auth::check()) {
+            return redirect()->route('dashboard')->with('message', 'Anda sudah login!');
+        }
+
+        return view('auth.registerForm');
     }
 
     public function register(Request $request)

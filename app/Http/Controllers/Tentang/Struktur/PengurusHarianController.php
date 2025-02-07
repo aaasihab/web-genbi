@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tentang\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\Struktur\Organisasi;
 use App\Models\Struktur\PengurusHarian;
+use Cache;
 use Illuminate\Http\Request;
 
 class PengurusHarianController extends Controller
@@ -12,7 +13,7 @@ class PengurusHarianController extends Controller
     public function index()
     {
         $pengurusHarian = PengurusHarian::with('organisasi')->get();
-        return view('tentang.struktur.pengurus_harian.index', compact('pengurusHarian'));
+        return view('admin.tentang.struktur.pengurus_harian.index', compact('pengurusHarian'));
     }
 
     public function create()
@@ -28,11 +29,11 @@ class PengurusHarianController extends Controller
             ->toArray();
 
         if (count($filledPositions) == Organisasi::count()) {
-            return redirect()->route('pengurus_harian.index')
+            return redirect()->route('admin.pengurus_harian.index')
                 ->with('error', 'Jabatan di organisasi ini sudah memiliki Ketua, Sekretaris, dan Bendahara. Tidak dapat menambah pengurus harian baru.');
         }
 
-        return view('tentang.struktur.pengurus_harian.create', compact('organisasi'));
+        return view('admin.tentang.struktur.pengurus_harian.create', compact('organisasi'));
     }
 
 
@@ -73,7 +74,10 @@ class PengurusHarianController extends Controller
         // Simpan data pengurus
         PengurusHarian::create($validated);
 
-        return redirect()->route('pengurus_harian.index')
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.pengurus_harian.index')
             ->with('success', 'Data berhasil ditambahkan.');
     }
 
@@ -81,7 +85,7 @@ class PengurusHarianController extends Controller
     {
         $pengurusHarian = PengurusHarian::findOrFail($id);
         $organisasi = Organisasi::all();
-        return view('tentang.struktur.pengurus_harian.edit', compact('pengurusHarian', 'organisasi'));
+        return view('admin.tentang.struktur.pengurus_harian.edit', compact('pengurusHarian', 'organisasi'));
     }
 
     public function update(Request $request, $id)
@@ -119,8 +123,10 @@ class PengurusHarianController extends Controller
 
         // Perbarui data pengurus harian
         $pengurus->update($validated);
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
 
-        return redirect()->route('pengurus_harian.index')
+        return redirect()->route('admin.pengurus_harian.index')
             ->with('success', 'Data berhasil diperbarui.');
     }
 
@@ -135,8 +141,10 @@ class PengurusHarianController extends Controller
         }
 
         $pengurus->delete();
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
 
-        return redirect()->route('pengurus_harian.index')
+        return redirect()->route('admin.pengurus_harian.index')
             ->with('success', 'Data berhasil dihapus.');
     }
 }

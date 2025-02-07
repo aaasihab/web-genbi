@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tentang\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\Struktur\Divisi;
 use App\Models\Struktur\PengurusDivisi;
+use Cache;
 use Illuminate\Http\Request;
 
 class PengurusDivisiController extends Controller
@@ -12,7 +13,7 @@ class PengurusDivisiController extends Controller
     public function index()
     {
         $pengurusDivisi = PengurusDivisi::with('divisi')->get();
-        return view('tentang.struktur.pengurus_divisi.index', compact('pengurusDivisi'));
+        return view('admin.tentang.struktur.pengurus_divisi.index', compact('pengurusDivisi'));
     }
 
     public function create()
@@ -28,11 +29,11 @@ class PengurusDivisiController extends Controller
             ->toArray();
 
         if (count($filledPositions) == Divisi::count()) {
-            return redirect()->route('pengurus_divisi.index')
+            return redirect()->route('admin.pengurus_divisi.index')
                 ->with('error', 'Semua divisi sudah memiliki CO dan SekCO. Tidak dapat menambah pengurus divisi baru.');
         }
 
-        return view('tentang.struktur.pengurus_divisi.create', compact('divisi'));
+        return view('admin.tentang.struktur.pengurus_divisi.create', compact('divisi'));
     }
 
 
@@ -73,17 +74,19 @@ class PengurusDivisiController extends Controller
         // Simpan data pengurus
         PengurusDivisi::create($validated);
 
-        return redirect()->route('pengurus_divisi.index')
+
+        // Hapus cache agar data terbaru dimuat
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.pengurus_divisi.index')
             ->with('success', 'Data berhasil ditambahkan.');
     }
-
-
 
     public function edit($id)
     {
         $pengurusDivisi = PengurusDivisi::findOrFail($id);
         $divisi = Divisi::all();
-        return view('tentang.struktur.pengurus_divisi.edit', compact('pengurusDivisi', 'divisi'));
+        return view('admin.tentang.struktur.pengurus_divisi.edit', compact('pengurusDivisi', 'divisi'));
     }
 
     public function update(Request $request, $id)
@@ -120,12 +123,12 @@ class PengurusDivisiController extends Controller
 
         // Perbarui data pengurus divisi
         $pengurusDivisi->update($validated);
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
 
-        return redirect()->route('pengurus_divisi.index')
+        return redirect()->route('admin.pengurus_divisi.index')
             ->with('success', 'Data berhasil diperbarui.');
     }
-
-
     public function destroy($id)
     {
         $pengurusDivisi = PengurusDivisi::findOrFail($id);
@@ -134,7 +137,10 @@ class PengurusDivisiController extends Controller
         }
         $pengurusDivisi->delete();
 
-        return redirect()->route('pengurus_divisi.index')
+        // Hapus cache agar data terbaru dapat diambil
+        Cache::forget('struktur_organisasi');
+
+        return redirect()->route('admin.pengurus_divisi.index')
             ->with('success', 'Data berhasil dihapus.');
     }
 }

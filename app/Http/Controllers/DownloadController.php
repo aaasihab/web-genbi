@@ -11,7 +11,7 @@ class DownloadController extends Controller
     public function index()
     {
         $files = Download::all();
-        return view('download.index', compact('files'));
+        return view('admin.download.index', compact('files'));
     }
 
     public function show()
@@ -46,7 +46,7 @@ class DownloadController extends Controller
 
     public function create()
     {
-        return view('download.create');
+        return view('admin.download.create');
     }
 
     public function store(Request $request)
@@ -65,13 +65,13 @@ class DownloadController extends Controller
         Download::create($validated);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('download.index')->with('success', 'File berhasil ditambahkan.');
+        return redirect()->route('admin.download.index')->with('success', 'File berhasil ditambahkan.');
     }
 
     public function edit(string $id)
     {
         $download = Download::findOrFail($id);
-        return view('download.edit', compact('download'));
+        return view('admin.download.edit', compact('download'));
     }
 
     public function update(Request $request, $id)
@@ -95,7 +95,7 @@ class DownloadController extends Controller
 
         $download->update($validated);
 
-        return redirect()->route('download.index')->with('success', 'File berhasil diperbarui');
+        return redirect()->route('admin.download.index')->with('success', 'File berhasil diperbarui');
     }
 
 
@@ -111,7 +111,7 @@ class DownloadController extends Controller
         // Hapus data dari database
         $file->delete();
 
-        return redirect()->route('download.index')->with('success', 'File berhasil dihapus.');
+        return redirect()->route('admin.download.index')->with('success', 'File berhasil dihapus.');
     }
 
 

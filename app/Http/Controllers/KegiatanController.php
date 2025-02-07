@@ -11,12 +11,12 @@ class KegiatanController extends Controller
     public function index()
     {
         $kegiatan = Kegiatan::all();
-        return view('kegiatan.index', compact('kegiatan'));
+        return view('admin.kegiatan.index', compact('kegiatan'));
     }
     // Menampilkan form tambah anggota
     public function create()
     {
-        return view('kegiatan.create');
+        return view('admin.kegiatan.create');
     }
 
     public function show()
@@ -46,14 +46,14 @@ class KegiatanController extends Controller
 
         Kegiatan::create($validated);
 
-        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan');
+        return redirect()->route('admin.kegiatan.index')->with('success', 'Kegiatan berhasil ditambahkan');
     }
 
 
     public function edit(string $id)
     {
         $kegiatan = Kegiatan::findOrFail($id);
-        return view('kegiatan.edit', compact('kegiatan'));
+        return view('admin.kegiatan.edit', compact('kegiatan'));
     }
 
     public function update(Request $request, $id)
@@ -81,7 +81,7 @@ class KegiatanController extends Controller
         $validated['tanggal_post'] = now()->toDateString();
         $kegiatan->update($validated);
 
-        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil diperbarui');
+        return redirect()->route('admin.kegiatan.index')->with('success', 'Kegiatan berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -94,7 +94,7 @@ class KegiatanController extends Controller
 
         $kegiatan->delete();
 
-        return redirect()->route('kegiatan.index')->with('success', 'Kegiatan berhasil dihapus');
+        return redirect()->route('admin.kegiatan.index')->with('success', 'Kegiatan berhasil dihapus');
     }
 
 }
