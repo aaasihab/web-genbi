@@ -35,7 +35,7 @@
             <h1 class="md:text-4xl text-3xl font-bold text-gray-800 mb-8">Download Logo Resmi</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                @if ($pengumuman->isEmpty())
+                @if ($downloads->isEmpty())
                     <div class="col-span-3 text-center text-gray-500">
                         <p>Masih belum ada pengumuman beasiswa saat ini.</p>
                     </div>
