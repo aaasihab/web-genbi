@@ -75,7 +75,7 @@ class HomeController extends Controller
                 'pengurusHarian'
             ])->first();
         });
-        
+
         return view('home.tentang.strukturOrganisasi', [
             'organisasi' => $organisasi
         ]);

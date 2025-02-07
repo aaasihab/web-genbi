@@ -31,7 +31,8 @@
                 <div class="dropdown-card-dekstop">
                     <a href="{{ route('home.genbiPoint') }}"><i class="fas fa-star"></i>GenBI Point</a>
                     <a href="{{ route('home.tentangGenbi') }}"><i class="fas fa-users"></i>Tentang GenBI</a>
-                    <a href="{{ route('home.strukturOrganisasi') }}"><i class="fas fa-sitemap"></i>Struktur Organisasi</a>
+                    <a href="{{ route('home.strukturOrganisasi') }}"><i class="fas fa-sitemap"></i>Struktur
+                        Organisasi</a>
                 </div>
             </div>
 
@@ -40,12 +41,12 @@
 
         <!-- Button -->
         <div class="hidden md:block">
-            <a href="#hubungi-kami"
-                class="bg-blue-500 text-white px-4 py-3 rounded-lg shadow hover:bg-blue-600 transition-all">
+            <a href="https://wa.me/628980476865" target="_blank"
+                class="py-2 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
                 Hubungi Kami
             </a>
         </div>
-
+        
         <!-- Mobile Menu Button -->
         <button id="menu-toggle" class="md:hidden toggle-icon focus:outline-none">
             <span></span>
@@ -82,13 +83,14 @@
                 <div class="dropdown-card-mobile hidden flex-col">
                     <a href="{{ route('home.genbiPoint') }}" class="py-2 px-6 hover:bg-gray-100">GenBI Point</a>
                     <a href="{{ route('home.tentangGenbi') }}" class="py-2 px-6 hover:bg-gray-100">Tentang GenBI</a>
-                    <a href="{{ route('home.strukturOrganisasi') }}" class="py-2 px-6 hover:bg-gray-100">Struktur Organisasi</a>
+                    <a href="{{ route('home.strukturOrganisasi') }}" class="py-2 px-6 hover:bg-gray-100">Struktur
+                        Organisasi</a>
                 </div>
             </div>
 
             <a href="{{ route('home.download') }}" class="py-2 pb-5 hover:text-blue-500">Download</a>
-
-            <a href="#hubungi-kami" class="py-2 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
+            <a href="https://wa.me/6281233163409?text=Halo%20saya%20tertarik%20dengan%20produk%20Anda" target="_blank"
+                class="py-2 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
                 Hubungi Kami
             </a>
 

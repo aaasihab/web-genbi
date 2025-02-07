@@ -40,7 +40,7 @@
                         <img src="{{ Storage::url($file->file) }}" alt="{{ $file->nama_file }}"
                             class="w-24 h-24 mb-4">
                         <h2 class="text-lg font-bold text-gray-800">{{ $file->nama_file }}</h2>
-                        <a href="{{ route('download.downloadFile', $file->id) }}"
+                        <a href="{{ route('home.downloadFile', $file->id) }}"
                             class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                             Download
                         </a>

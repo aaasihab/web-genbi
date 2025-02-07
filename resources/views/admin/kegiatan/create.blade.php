@@ -1,28 +1,8 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.admin')
 
-@section('this-page-style')
-@endsection
+@section('title', 'Dashboard')
 
 @section('content')
-    <!-- Hero Section -->
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
-        <!-- Background Image -->
-        <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
-        </div>
-
-        <!-- Overlay Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
-
-        <!-- Content -->
-        <div class="relative z-10 text-center space-y-4">
-            <h1 class="text-4xl md:text-5xl font-bold">Tambah Kegiatan</h1>
-        </div>
-    </section>
-
     <!-- Form Tambah Kegiatan -->
     <section id="tambah-kegiatan" class="bg-gray-50 py-12 mt-14">
         <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">

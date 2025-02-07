@@ -31,9 +31,9 @@
             <div class="md:w-1/2 space-y-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 animate-hidden animate-from-left">Tentang GenBI</h2>
                 <p class="text-gray-600 text-lg leading-relaxed text-justify animate-hidden animate-from-left">
-                    GenBI (Generasi Baru Indonesia) adalah komunitas penerima beasiswa Bank Indonesia yang berkomitmen untuk
-                    menjadi agen perubahan. GenBI UNUJA adalah bagian dari komunitas ini, berfokus pada kegiatan edukasi,
-                    sosial, dan pengembangan masyarakat.
+                    Generasi Baru Indonesia (GenBI) adalah komunitas mahasiswa penerima beasiswa Bank Indonesia yang dibentuk pada 11 November 2011. Sebagai wadah bagi mahasiswa terbaik di Indonesia, GenBI berperan dalam mengembangkan potensi, kepemimpinan, dan wawasan anggotanya agar siap menghadapi tantangan masa depan.  
+                    <br>
+                    Sebagai fronliner Bank Indonesia, GenBI berkontribusi dalam edukasi, sosialisasi kebijakan, serta inovasi bagi masyarakat. Selain itu, GenBI aktif dalam program strategis bersama Bank Indonesia untuk menangani isu sosial, menghubungkan mahasiswa dengan masyarakat, serta menumbuhkan kepekaan sosial dan jiwa pengabdian.
                 </p>
                 <ul class="space-y-2 text-gray-700 animate-hidden animate-from-left pb-14">
                     <li><i class="fas fa-check-circle text-blue-500"></i> Menjadi komunitas muda inspiratif</li>
@@ -46,7 +46,7 @@
                 </a>
             </div>
             <!-- Image -->
-            <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center animate-hidden">
+            <div class="md:w-1/3 mt-5 md:mt-0 flex justify-center animate-hidden">
                 <img src="{{ asset('templates/img/genbi.jpg') }}" alt="Tentang GenBI"
                     class="rounded-lg shadow-lg w-[500px]">
             </div>
@@ -72,8 +72,7 @@
                 <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start">
                     <h2 class="text-3xl font-bold text-center animate-hidden animate-from-left">Visi</h2>
                     <p class="text-lg leading-relaxed text-justify animate-hidden animate-from-left">
-                        Menjadi agen perubahan yang memberikan dampak positif bagi masyarakat melalui pendidikan,
-                        pemberdayaan, dan inovasi berkelanjutan.
+                        Menjadikan kaum muda Indonesia sebagai generasi yang kompeten dalam berbagai bidang keilmuan serta dapat membawa perubahan positif dan menjadi inspirasi bagi bangsa dan negara.
                     </p>
                 </div>
 
@@ -81,9 +80,10 @@
                 <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start pb-24">
                     <h2 class="text-3xl font-bold text-center animate-hidden animate-from-right">Misi</h2>
                     <p class="text-lg leading-relaxed text-justify animate-hidden animate-from-right">
-                        1. Mendorong mahasiswa untuk menjadi individu yang kreatif dan berdaya saing tinggi.<br>
-                        2. Memberikan kontribusi nyata terhadap pengembangan masyarakat melalui program-program sosial.<br>
-                        3. Menanamkan nilai-nilai kepemimpinan yang berintegritas dan berorientasi pada kebaikan bersama.
+                        1. Menggagas berbagai kegiatan pemberdayaan masyarakat untuk Indonesia yang lebih baik (INITIATE).<br>
+                        2. Menjadi garda terdepan dalam melakukan aksi nyata untuk pembangunan (ACT)<br>
+                        3. Peduli dan berkontribusi nyata untuk pemberdayaan masyarakat(SHARE)<br>
+                        4. Berbagi inspirasi dan motivasi untuk menjadi energi bagi negeri (INSPIRE)
                     </p>
                 </div>
             </div>
@@ -107,8 +107,7 @@
                             <i class="fas fa-users-cog text-blue-600 text-4xl"></i>
                         </div>
                         <h3 class="text-center text-xl font-semibold text-gray-800">Frontliners</h3>
-                        <p class="text-center text-gray-600 mt-4">GenBI bertujuan untuk menjadi garda terdepan dalam
-                            menghadapi perubahan di dunia pendidikan dan sosial.</p>
+                        <p class="text-center text-gray-600 mt-4">mengkomunikasikan kelembagaan dan berbagai kebijakan Bank Indonesia kepada sesama mahasiswa dan masyarakat umum.</p>
                     </div>
                 </div>
 
@@ -119,8 +118,7 @@
                             <i class="fas fa-exchange-alt text-blue-600 text-4xl"></i>
                         </div>
                         <h3 class="text-center text-xl font-semibold text-gray-800">Change Agent</h3>
-                        <p class="text-center text-gray-600 mt-4">GenBI ingin menjadi agen perubahan yang dapat memberikan
-                            dampak positif bagi masyarakat dan bangsa.</p>
+                        <p class="text-center text-gray-600 mt-4">menjadi agen perubahan dan role model dikalangan pelajar, mahasiswa, dan masyarakat.</p>
                     </div>
                 </div>
 
@@ -131,8 +129,7 @@
                             <i class="fas fa-chalkboard-teacher text-blue-600 text-4xl"></i>
                         </div>
                         <h3 class="text-center text-xl font-semibold text-gray-800">Future Leaders</h3>
-                        <p class="text-center text-gray-600 mt-4">GenBI berkomitmen untuk mencetak pemimpin masa depan yang
-                            memiliki integritas tinggi dan kompeten.</p>
+                        <p class="text-center text-gray-600 mt-4">menjadi pemimpin masa depan di berbagai bidang dan tingkatan.</p>
                     </div>
                 </div>
             </div>
@@ -156,7 +153,7 @@
                         <div class="text-center mb-4">
                             <i class="fas fa-tv text-blue-600 text-4xl"></i>
                         </div>
-                        <h3 class="text-center text-xl text-gray-800">Media Kreatif</h3>
+                        <h3 class="text-center text-[1.1rem] text-gray-800">Media Kreatif</h3>
                     </div>
                 </div>
 
@@ -166,7 +163,7 @@
                         <div class="text-center mb-4">
                             <i class="fas fa-book-reader text-blue-600 text-4xl"></i>
                         </div>
-                        <h3 class="text-center text-xl text-gray-800">Pendidikan</h3>
+                        <h3 class="text-center text-[1.1rem] text-gray-800">Pendidikan</h3>
                     </div>
                 </div>
 
@@ -176,7 +173,7 @@
                         <div class="text-center mb-4">
                             <i class="fas fa-lightbulb text-blue-600 text-4xl"></i>
                         </div>
-                        <h3 class="text-center text-xl text-gray-800">Kewirausahaan</h3>
+                        <h3 class="text-center text-[1.1rem] text-gray-800">Kewirausahaan</h3>
                     </div>
                 </div>
 
@@ -186,7 +183,7 @@
                         <div class="text-center mb-4">
                             <i class="fas fa-leaf text-blue-600 text-4xl"></i>
                         </div>
-                        <h3 class="text-center text-xl text-gray-800">Lingkungan Hidup</h3>
+                        <h3 class="text-center text-[1.1rem] text-gray-800">Lingkungan Hidup</h3>
                     </div>
                 </div>
 
@@ -196,7 +193,7 @@
                         <div class="text-center mb-4">
                             <i class="fas fa-hands-helping text-blue-600 text-4xl"></i>
                         </div>
-                        <h3 class="text-center text-xl text-gray-800">Pengabdian Masyarakat</h3>
+                        <h3 class="text-center text-[1.1rem] text-gray-800">Pengabdian Masyarakat</h3>
                     </div>
                 </div>
             </div>

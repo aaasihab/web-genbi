@@ -1,28 +1,9 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.admin')
 
-@section('this-page-style')
-@endsection
+@section('title', 'Dashboard')
+
 
 @section('content')
-    <!-- Hero Section -->
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
-        <!-- Background Image -->
-        <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('../../img/genbi.jpg'); background-size: contain; background-position: 50% 60%;">
-        </div>
-
-        <!-- Overlay Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
-
-        <!-- Content -->
-        <div class="relative z-10 text-center space-y-4">
-            <h1 class="text-4xl md:text-5xl font-bold">Edit Organisasi</h1>
-        </div>
-    </section>
-
     <!-- Form Edit Pengurus Divisi -->
     <section id="edit-pengurus-divisi" class="relative bg-gray-50 py-12 mt-14">
         <div class="container mx-auto max-w-3xl bg-white shadow-md rounded-lg p-6">
@@ -111,7 +92,8 @@
                     <select name="status" id="status" @error('status') is-invalid @enderror required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="" disabled>Pilih Status...</option>
-                        <option value="published" {{ old('status', $pengurusDivisi->status) == 'published' ? 'selected' : '' }}>
+                        <option value="published"
+                            {{ old('status', $pengurusDivisi->status) == 'published' ? 'selected' : '' }}>
                             Published</option>
                         <option value="nonaktif"
                             {{ old('status', $pengurusDivisi->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>

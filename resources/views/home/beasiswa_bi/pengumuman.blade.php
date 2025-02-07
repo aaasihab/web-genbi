@@ -38,7 +38,7 @@
             <!-- Grid Card -->
             <div class="grid gap-8 md:grid-cols-3">
                 @foreach ($pengumuman as $item)
-                    <a href="{{ route('pengumuman.downloadFile', $item->id) }}" class="block group">
+                    <a href="{{ route('home.downloadPengumuman', $item->id) }}" class="block group">
                         <div
                             class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                             <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}"
