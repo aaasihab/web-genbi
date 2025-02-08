@@ -35,10 +35,10 @@
         <div class="container mx-auto px-4 text-center animate-hidden animate-from botom">
             <div class="flex flex-wrap justify-center gap-10 md:gap-20">
                 <img src="{{ asset('templates/img/Logo-UNUJA.png') }}" alt="Universitas 1" class="w-24">
-                <img src="{{ asset('templates/img/Logo-UNUJA.png') }}" alt="Universitas 2" class="w-24">
-                <img src="{{ asset('templates/img/Logo-UNUJA.png') }}" alt="Universitas 3" class="w-24">
-                <img src="{{ asset('templates/img/Logo-UNUJA.png') }}" alt="Universitas 4" class="w-24">
-                <img src="{{ asset('templates/img/Logo-UNUJA.png') }}" alt="Universitas 5" class="w-24">
+                <img src="{{ asset('templates/img/LOGO-UIN-MALANG-HI-RES-2048x1990.png') }}" alt="Universitas 2" class="w-24">
+                <img src="{{ asset('templates/img/Logo_Universitas_Brawijaya.svg.png') }}" alt="Universitas 3" class="w-24">
+                <img src="{{ asset('templates/img/Lambang-UM-550x550.png') }}" alt="Universitas 4" class="w-24">
+                <img src="{{ asset('templates/img/Logo_umm.png') }}" alt="Universitas 5" class="w-24">
             </div>
         </div>
     </section>
