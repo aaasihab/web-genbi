@@ -51,6 +51,8 @@
                     class="block py-2 px-3 rounded hover:bg-blue-700">Manajemen Download</a></li>
             <li class="mb-4"><a href="{{ route('admin.logout') }}"
                     class="block py-2 px-3 rounded hover:bg-blue-700">Logout</a></li>
+            <li class="mb-4"><a href="{{ route('beranda') }}" class="block py-2 px-3 rounded hover:bg-blue-700">menuju
+                    beranda</a></li>
         </ul>
     </div>
 
@@ -72,7 +74,8 @@
             dropdown.classList.toggle('hidden');
         }
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     @yield('this-page-scripts')
 </body>
 

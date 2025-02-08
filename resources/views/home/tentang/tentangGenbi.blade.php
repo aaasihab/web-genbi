@@ -5,14 +5,14 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
+    <section id="beranda" class="relative h-screen flex items-center justify-center text-white md:-mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');">
         </div>
-
+        <div class="absolute inset-0 bg-center bg-no-repeat opacity-50 block md:hidden"
+            style="background-image: url('{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+        </div>
         <!-- Overlay Gradient -->
         <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
@@ -24,16 +24,21 @@
     </section>
 
     <!-- Content Tentang GenBI -->
-    <section id="tentang-genbi" class="relative bg-gray-50 py-12 mt-14">
+    <section id="tentang-genbi" class="relative bg-gray-50 pt-10 pb-12 mt-14">
         <!-- Hero Image -->
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-12">
             <!-- Text Content -->
             <div class="md:w-1/2 space-y-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 animate-hidden animate-from-left">Tentang GenBI</h2>
                 <p class="text-gray-600 text-lg leading-relaxed text-justify animate-hidden animate-from-left">
-                    Generasi Baru Indonesia (GenBI) adalah komunitas mahasiswa penerima beasiswa Bank Indonesia yang dibentuk pada 11 November 2011. Sebagai wadah bagi mahasiswa terbaik di Indonesia, GenBI berperan dalam mengembangkan potensi, kepemimpinan, dan wawasan anggotanya agar siap menghadapi tantangan masa depan.  
+                    Generasi Baru Indonesia (GenBI) adalah komunitas mahasiswa penerima beasiswa Bank Indonesia yang
+                    dibentuk pada 11 November 2011. Sebagai wadah bagi mahasiswa terbaik di Indonesia, GenBI berperan dalam
+                    mengembangkan potensi, kepemimpinan, dan wawasan anggotanya agar siap menghadapi tantangan masa depan.
                     <br>
-                    Sebagai fronliner Bank Indonesia, GenBI berkontribusi dalam edukasi, sosialisasi kebijakan, serta inovasi bagi masyarakat. Selain itu, GenBI aktif dalam program strategis bersama Bank Indonesia untuk menangani isu sosial, menghubungkan mahasiswa dengan masyarakat, serta menumbuhkan kepekaan sosial dan jiwa pengabdian.
+                    Sebagai fronliner Bank Indonesia, GenBI berkontribusi dalam edukasi, sosialisasi kebijakan, serta
+                    inovasi bagi masyarakat. Selain itu, GenBI aktif dalam program strategis bersama Bank Indonesia untuk
+                    menangani isu sosial, menghubungkan mahasiswa dengan masyarakat, serta menumbuhkan kepekaan sosial dan
+                    jiwa pengabdian.
                 </p>
                 <ul class="space-y-2 text-gray-700 animate-hidden animate-from-left pb-14">
                     <li><i class="fas fa-check-circle text-blue-500"></i> Menjadi komunitas muda inspiratif</li>
@@ -72,7 +77,8 @@
                 <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start">
                     <h2 class="text-3xl font-bold text-center animate-hidden animate-from-left">Visi</h2>
                     <p class="text-lg leading-relaxed text-justify animate-hidden animate-from-left">
-                        Menjadikan kaum muda Indonesia sebagai generasi yang kompeten dalam berbagai bidang keilmuan serta dapat membawa perubahan positif dan menjadi inspirasi bagi bangsa dan negara.
+                        Menjadikan kaum muda Indonesia sebagai generasi yang kompeten dalam berbagai bidang keilmuan serta
+                        dapat membawa perubahan positif dan menjadi inspirasi bagi bangsa dan negara.
                     </p>
                 </div>
 
@@ -80,7 +86,8 @@
                 <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start pb-24">
                     <h2 class="text-3xl font-bold text-center animate-hidden animate-from-right">Misi</h2>
                     <p class="text-lg leading-relaxed text-justify animate-hidden animate-from-right">
-                        1. Menggagas berbagai kegiatan pemberdayaan masyarakat untuk Indonesia yang lebih baik (INITIATE).<br>
+                        1. Menggagas berbagai kegiatan pemberdayaan masyarakat untuk Indonesia yang lebih baik
+                        (INITIATE).<br>
                         2. Menjadi garda terdepan dalam melakukan aksi nyata untuk pembangunan (ACT)<br>
                         3. Peduli dan berkontribusi nyata untuk pemberdayaan masyarakat(SHARE)<br>
                         4. Berbagi inspirasi dan motivasi untuk menjadi energi bagi negeri (INSPIRE)
@@ -107,7 +114,8 @@
                             <i class="fas fa-users-cog text-blue-600 text-4xl"></i>
                         </div>
                         <h3 class="text-center text-xl font-semibold text-gray-800">Frontliners</h3>
-                        <p class="text-center text-gray-600 mt-4">mengkomunikasikan kelembagaan dan berbagai kebijakan Bank Indonesia kepada sesama mahasiswa dan masyarakat umum.</p>
+                        <p class="text-center text-gray-600 mt-4">mengkomunikasikan kelembagaan dan berbagai kebijakan Bank
+                            Indonesia kepada sesama mahasiswa dan masyarakat umum.</p>
                     </div>
                 </div>
 
@@ -118,7 +126,8 @@
                             <i class="fas fa-exchange-alt text-blue-600 text-4xl"></i>
                         </div>
                         <h3 class="text-center text-xl font-semibold text-gray-800">Change Agent</h3>
-                        <p class="text-center text-gray-600 mt-4">menjadi agen perubahan dan role model dikalangan pelajar, mahasiswa, dan masyarakat.</p>
+                        <p class="text-center text-gray-600 mt-4">menjadi agen perubahan dan role model dikalangan pelajar,
+                            mahasiswa, dan masyarakat.</p>
                     </div>
                 </div>
 
@@ -129,7 +138,8 @@
                             <i class="fas fa-chalkboard-teacher text-blue-600 text-4xl"></i>
                         </div>
                         <h3 class="text-center text-xl font-semibold text-gray-800">Future Leaders</h3>
-                        <p class="text-center text-gray-600 mt-4">menjadi pemimpin masa depan di berbagai bidang dan tingkatan.</p>
+                        <p class="text-center text-gray-600 mt-4">menjadi pemimpin masa depan di berbagai bidang dan
+                            tingkatan.</p>
                     </div>
                 </div>
             </div>
@@ -176,7 +186,7 @@
                         <h3 class="text-center text-[1.1rem] text-gray-800">Kewirausahaan</h3>
                     </div>
                 </div>
-                
+
                 <!-- Card 4: Lingkungan Hidup -->
                 <div class="w-full sm:w-1/3 md:w-[20%] p-4 animate-hidden animate-from-bottom">
                     <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 h-[150px]">

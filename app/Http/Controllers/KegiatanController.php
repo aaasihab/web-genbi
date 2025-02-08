@@ -19,12 +19,6 @@ class KegiatanController extends Controller
         return view('admin.kegiatan.create');
     }
 
-    public function show()
-    {
-
-    }
-
-
     // Method untuk menyimpan data Kegiatan (Create)
     public function store(Request $request)
     {
@@ -33,7 +27,7 @@ class KegiatanController extends Controller
             'deskripsi' => 'required|string',
             'tanggal_kegiatan' => 'nullable|date', // Biarkan nullable agar bisa diisi otomatis
             'tanggal_posts' => 'date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'status' => 'required|in:published,nonaktif'
         ]);
 
@@ -62,7 +56,7 @@ class KegiatanController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'tanggal_kegiatan' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'status' => 'required|in:published,nonaktif'
         ]);
 

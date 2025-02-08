@@ -55,7 +55,7 @@
 
             .swiper-slide .card {
                 /* width: 90% !important;
-                max-width: 100%; Batas maksimum agar tidak terlalu lebar */
+                                            max-width: 100%; Batas maksimum agar tidak terlalu lebar */
                 word-wrap: break-word;
                 overflow-wrap: break-word;
             }
@@ -66,12 +66,16 @@
 @endsection
 
 @section('content')
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
+    <!-- Hero Section -->
+    <section id="beranda" class="relative h-screen flex items-center justify-center text-white md:-mt-12">
+        <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');">
         </div>
+        <div class="absolute inset-0 bg-center bg-no-repeat opacity-50 block md:hidden"
+            style="background-image: url('{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+        </div>
+
         <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
         <div class="relative z-10 text-center space-y-4">
@@ -83,21 +87,32 @@
         $pengurusHarian = $organisasi->pengurusHarian->where('status', 'published')->keyBy('jabatan');
     @endphp
 
-    <section class="container mx-auto px-4 py-16">
+    <section class="container mx-auto px-4 pt-11 pb-16">
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Struktur Organisasi</h1>
+
         <!-- Ketua Komis -->
-        <div class="text-center mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengurus Harian Komisariat</h2>
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-12">Pimpinan Komisariat</h2>
+        <div class="text-center mb-12 flex flex-col md:flex-row gap-8 justify-center">
             <div class="flex justify-center">
                 @php $ketua = optional($pengurusHarian->get('Ketua')) @endphp
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64">
                     <img src="{{ asset('storage/' . ($ketua->foto ?? 'default.jpg')) }}" alt="Ketua Komis"
                         class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
                     <h3 class="text-[1rem] font-bold text-gray-800">{{ $ketua->nama ?? 'Belum Ada' }}</h3>
-                    <p class="text-blue-600 font-semibold">Ketua</p>
+                    <p class="text-blue-600 font-semibold">Ketua Komis</p>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                @php $ketua = optional($pengurusHarian->get('Ketua')) @endphp
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64">
+                    <img src="{{ asset('storage/' . ($ketua->foto ?? 'default.jpg')) }}" alt="Ketua Komis"
+                        class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                    <h3 class="text-[1rem] font-bold text-gray-800">{{ $ketua->nama ?? 'Belum Ada' }}</h3>
+                    <p class="text-blue-600 font-semibold">PJ Komis</p>
                 </div>
             </div>
         </div>
+
 
         <!-- Sekretaris dan Bendahara -->
         <div class="flex flex-wrap justify-center gap-8 text-center mb-12">
@@ -173,7 +188,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll(".swiper").forEach(swiper => {
                 new Swiper(swiper, {
-                    slidesPerView: 3.5,
+                    slidesPerView: 4,
                     spaceBetween: 20,
                     navigation: {
                         nextEl: swiper.querySelector(".swiper-button-next"),
@@ -189,10 +204,10 @@
                     loop: true,
                     breakpoints: {
                         640: {
-                            slidesPerView: 2.5
+                            slidesPerView: 4
                         },
                         1024: {
-                            slidesPerView: 3.5
+                            slidesPerView: 4
                         }
                     }
                 });

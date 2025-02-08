@@ -5,23 +5,23 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
+    <section id="beranda" class="relative h-screen flex items-center justify-center text-white md:-mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');">
         </div>
-
+        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
+            style="background-image: url('{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+        </div>
         <!-- Overlay Gradient -->
         <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
 
         <!-- Content -->
-        <div class="relative z-10 text-center space-y-4">
+        <div class="relative z-10 text-center space-y-4 px-5">
             <h1 class="text-4xl md:text-5xl font-bold mb-10 ">Mimpi, Aksi, dan Perubahan!</h1>
             <h1 class="text-xl md:text-2xl mb-12 pb-4 block md:hidden">Kita membentuk masa depan dengan pendidikan,
-                 dan aksi nyata. </h1>
+                dan aksi nyata. </h1>
             <h1 class="text-xl md:text-2xl mb-12 pb-4 hidden md:block">Kita membentuk masa depan dengan pendidikan,
                 </br>kolaborasi dan aksi nyata. </h1>
             <button class="bg-blue-500 text-white px-6 py-2 rounded-md shadow-lg mb-6 hover:bg-blue-600 transition">

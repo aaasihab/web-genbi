@@ -35,7 +35,7 @@
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="p-3 text-center">{{ $key + 1 }}</td>
                                 <td class="p-3">{{ $item->nama }}</td>
-                                <td class="p-3">{{ $item->deskripsi }}</td>
+                                <td class="p-3">{{ Str::limit($item->deskripsi, 50, '...') }}</td>
                                 <td class="p-3 text-center">
                                     {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
                                 </td>

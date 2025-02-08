@@ -5,14 +5,14 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
+    <section id="beranda" class="relative h-screen flex items-center justify-center text-white md:-mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');">
         </div>
-
+        <div class="absolute inset-0 bg-center bg-no-repeat opacity-50 block md:hidden"
+            style="background-image: url('{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+        </div>
         <!-- Overlay Gradient -->
         <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
@@ -24,7 +24,7 @@
     </section>
 
     <!-- Halaman Download -->
-    <section id="download" class="bg-gray-50 py-16 md:mx-10 mx-3">
+    <section id="download" class="bg-gray-50 pt-12 pb-16 md:mx-10 mx-3">
         <div class="container mx-auto px-4 text-center">
             <div class="text-center">
                 <button

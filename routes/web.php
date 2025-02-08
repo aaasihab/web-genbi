@@ -34,13 +34,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'beranda'])->name('beranda');
 Route::prefix('home')->name('home.')->group(function () {
     Route::get('/kegiatan', [HomeController::class, 'kegiatan'])->name('kegiatan');
+    Route::get('/detail_kegiatan/{kegiatan}', [HomeController::class, 'detailKegiatan'])->name('detailKegiatan');
     Route::get('/download', [HomeController::class, 'download'])->name('download');
     Route::get('/persyaratan', [HomeController::class, 'persyaratan'])->name('persyaratan');
     Route::get('/pengumuman', [HomeController::class, 'pengumuman'])->name('pengumuman');
     Route::get('/tentang-BI', [HomeController::class, 'tentangBi'])->name('tentangBi');
     Route::get('/genbi-point', [HomeController::class, 'genbiPoint'])->name('genbiPoint');
     Route::get('/tentang-genbi', [HomeController::class, 'tentangGenbi'])->name('tentangGenbi');
-    Route::get('/struktur-organisasi', [HomeController::class, 'strukturOrganisasi'])->name('strukturOrganisasi');
+    Route::get('/struktur_organisasi', [HomeController::class, 'strukturOrganisasi'])->name('strukturOrganisasi');
 
     Route::get('/downloadFile/{file}', [DownloadController::class, 'downloadFile'])->name('downloadFile');
     Route::get('/downloadPengumuman/{pengumuman}', [PengumumanController::class, 'downloadFile'])->name('downloadPengumuman');
@@ -49,34 +50,38 @@ Route::prefix('home')->name('home.')->group(function () {
 // halaman admin
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // halaman kegiatan
-    Route::resource('/kegiatan', KegiatanController::class);
+    Route::resource('/kegiatan', KegiatanController::class)->except(['show']);
     // halaman tentang
-    Route::resource('/genbi_point', GenbiPointController::class);
+    Route::resource('/genbi_point', GenbiPointController::class)->except(['show']);
     // struktur organisasi 
-    Route::resource('/divisi', DivisiController::class);
-    Route::resource('/pengurus_harian', PengurusHarianController::class);
-    Route::resource('/pengurus_divisi', PengurusDivisiController::class);
-    Route::resource('/anggota', AnggotaController::class);
+    Route::resource('/divisi', DivisiController::class)->except(['show']);
+    Route::resource('/pengurus_harian', PengurusHarianController::class)->except(['show']);
+    Route::resource('/pengurus_divisi', PengurusDivisiController::class)->except(['show']);
+    Route::resource('/anggota', AnggotaController::class)->except(['show']);
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // pengumuman
     Route::prefix('/pengumuman')->name('pengumuman.')->group(function () {
-        Route::resource('/', PengumumanController::class)->parameters(['' => 'pengumuman']);
+        Route::resource('/', PengumumanController::class)
+            ->parameters(['' => 'pengumuman'])
+            ->except(['show']);
     });
 
     // halaman download
     Route::prefix('/download')->name('download.')->group(function () {
-        Route::resource('/', DownloadController::class)->parameters(['' => 'file']);
+        Route::resource('/', DownloadController::class)
+            ->parameters(['' => 'file'])
+            ->except(['show']);
     });
 
     // coming soon
-    Route::get('/beranda', [BerandaController::class, 'beranda'])->name('beranda');
-    Route::get('/persyaratan', [PersyaratanController::class, 'persyaratan'])->name('persyaratan');
-    Route::get('/tentang-BI', [TentangBiController::class, 'tentangBi'])->name('tentangBi');
-    Route::get('/tentang-genbi', [TentangGenbiController::class, 'tentangGenbi'])->name('tentangGenbi');
-
+    // Route::get('/beranda', [BerandaController::class, 'beranda'])->name('beranda');
+    // Route::get('/persyaratan', [PersyaratanController::class, 'persyaratan'])->name('persyaratan');
+    // Route::get('/tentang-BI', [TentangBiController::class, 'tentangBi'])->name('tentangBi');
+    // Route::get('/tentang-genbi', [TentangGenbiController::class, 'tentangGenbi'])->name('tentangGenbi');
 });
+
 
 Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
@@ -87,5 +92,8 @@ Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
 });
 // halaman error
 Route::get('/blocked', [AuthController::class, 'blocked'])->name('blocked');
-Route::get('/notFound', [ErrorController::class, 'notFound'])->name('notFound');
+Route::get('/404', [ErrorController::class, 'notFound'])->name('notFound');
 Route::get('/methodNotAllowed', [ErrorController::class, 'methodNotAllowed'])->name('methodNotAllowed');
+// Route::fallback(function () {
+//     abort(404, 'Halaman tidak ditemukan.');
+// });

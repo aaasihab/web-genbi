@@ -5,12 +5,13 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
+    <section id="beranda" class="relative h-screen flex items-center justify-center text-white md:-mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');">
+        </div>
+        <div class="absolute inset-0 bg-center bg-no-repeat opacity-50 block md:hidden"
+            style="background-image: url('{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
 
         <!-- Overlay Gradient -->
@@ -24,7 +25,7 @@
     </section>
 
     <!-- Tentang BI -->
-    <section id="tentang-bi-malang" class="bg-gray-50 py-16 px-10">
+    <section id="tentang-bi-malang" class="bg-gray-50 pt-10 pb-16 px-10">
         <div class="container mx-auto px-4">
             <!-- Header Section -->
             <div class="text-center mb-12">

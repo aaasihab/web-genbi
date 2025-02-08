@@ -5,12 +5,13 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
+    <section id="beranda" class="relative h-screen flex items-center justify-center text-white md:-mt-12">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
-            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
-            style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');">
+        </div>
+        <div class="absolute inset-0 bg-center bg-no-repeat opacity-50 block md:hidden"
+            style="background-image: url('{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
 
         <!-- Overlay Gradient -->
@@ -24,7 +25,7 @@
     </section>
 
     <!-- Kegiatan -->
-    <section id="kegiatan-genbi" class="py-16 bg-gray-50">
+    <section id="kegiatan-genbi" class="pt-10 pb-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <!-- Button & Title -->
             <div class="flex justify-center pb-3 animate-hidden">
@@ -61,21 +62,24 @@
                             <p class="text-gray-600 mt-2">
                                 {{ Str::limit($item->deskripsi, 100, '...') }}
                             </p>
-                            <a href="#detail-kegiatan" class="text-blue-500 hover:underline mt-4 block">Selengkapnya</a>
+                            <a href="{{ route('home.detailKegiatan', $item->id) }}"
+                                class="text-blue-500 hover:underline mt-4 block">Selengkapnya</a>
                         </div>
                     </div>
                 @endforeach
 
             </div>
 
-
             <!-- Tampilkan Lebih Banyak -->
-            <div class="flex justify-center mt-8">
-                <button id="load-more-btn"
-                    class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition">
-                    Tampilkan Lebih Banyak
-                </button>
-            </div>
+            @if ($kegiatan->count() > 6)
+                <div class="flex justify-center mt-8">
+                    <button id="load-more-btn"
+                        class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition">
+                        Tampilkan Lebih Banyak
+                    </button>
+                </div>
+            @endif
+
         </div>
     </section>
 @endsection

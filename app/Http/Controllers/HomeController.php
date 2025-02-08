@@ -27,6 +27,12 @@ class HomeController extends Controller
         return view('home.kegiatan', compact('kegiatan'));
     }
 
+    public function detailKegiatan($id)
+    {
+        $kegiatan = Kegiatan::where('status', 'published')->findOrFail($id);
+        return view('home.detailKegiatan', compact('kegiatan'));
+    }
+
     public function download()
     {
         $downloads = Download::where('status', 'published')

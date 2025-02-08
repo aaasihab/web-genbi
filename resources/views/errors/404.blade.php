@@ -1,31 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        h1 {
-            font-size: 48px;
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            color: #555;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-    <h1>404 | Page Not Found</h1>
-    <p>Maaf, Halaman yang anda cari tidak ditemukan.</p>
-</body>
-</html>
+@extends('home.layouts.main')
+
+@section('this-page-style')
+@endsection
+
+@section('content')
+    <!-- Hero Section -->
+    <section id="beranda" class="relative h-screen flex items-center justify-center text-white -mt-12">
+        <!-- Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-50 hidden md:block"
+            style="background-image: url('{{ asset('templates/img/visi-misi.jpg') }}');"></div>
+        <div class="absolute inset-0 bg-center bg-no-repeat opacity-70 block md:hidden"
+        style="background-image: url('.{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
+        </div>
+
+        <!-- Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center space-y-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-10 ">404 | Not Found</h1>
+            <h1 class="text-xl md:text-2xl mb-12 pb-4 block md:hidden">Maaf, halaman yang anda cari tidak ditemukan</h1>
+            <h1 class="text-xl md:text-2xl mb-12 pb-4 hidden md:block">Maaf, halaman yang anda cari tidak ditemukan</h1>
+        </div>
+    </section>
+@endsection
+
+@section('this-page-scripts')
+@endsection
