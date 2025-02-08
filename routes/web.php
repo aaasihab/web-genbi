@@ -50,13 +50,15 @@ Route::prefix('home')->name('home.')->group(function () {
 // halaman admin
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // halaman kegiatan
-    Route::resource('/kegiatan', KegiatanController::class)->except(['show']);
+    // Route::resource('/kegiatan', KegiatanController::class);
+    Route::resource('kegiatan', KegiatanController::class)->except(['show']);
+
     // halaman tentang
     Route::resource('/genbi_point', GenbiPointController::class)->except(['show']);
     // struktur organisasi 
-    Route::resource('/divisi', DivisiController::class)->except(['show']);
-    Route::resource('/pengurus_harian', PengurusHarianController::class)->except(['show']);
-    Route::resource('/pengurus_divisi', PengurusDivisiController::class)->except(['show']);
+    Route::resource('/divisi', DivisiController::class);
+    Route::resource('/pengurus_harian', PengurusHarianController::class);
+    Route::resource('/pengurus_divisi', PengurusDivisiController::class);
     Route::resource('/anggota', AnggotaController::class)->except(['show']);
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -86,12 +88,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login.form');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/blocked', [AuthController::class, 'blocked'])->name('blocked');
     Route::get('/unauthorized', [AuthController::class, 'unauthorized'])->middleware('auth')->name('unauthorized');
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 // halaman error
-Route::get('/blocked', [AuthController::class, 'blocked'])->name('blocked');
 Route::get('/404', [ErrorController::class, 'notFound'])->name('notFound');
 Route::get('/methodNotAllowed', [ErrorController::class, 'methodNotAllowed'])->name('methodNotAllowed');
 // Route::fallback(function () {

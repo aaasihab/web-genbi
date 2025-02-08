@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HandleBadMethodCall
@@ -16,6 +17,11 @@ class HandleBadMethodCall
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        try {
+            return $next($request);
+        } catch (\BadMethodCallException $e) {
+        // } catch (MethodNotAllowedHttpException $e) {
+            return redirect()->route('notFound');
+        }
     }
 }
