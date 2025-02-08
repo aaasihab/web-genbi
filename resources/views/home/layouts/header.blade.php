@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<header id="navbar" class="fixed top-0 w-full z-50 bg-transparent text-white pt-3">
+<header id="navbar" class="fixed top-0 w-full z-50 bg-transparent text-white md:pt-3">
     <div class="container mx-auto flex items-center justify-between p-4">
         <!-- Logo -->
         <div class="text-2xl font-bold">
