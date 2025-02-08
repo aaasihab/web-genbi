@@ -22,9 +22,9 @@ class PengurusHarianController extends Controller
 
         // Cek apakah semua jabatan sudah terisi dalam setiap organisasi
         $filledPositions = PengurusHarian::select('organisasi_id')
-            ->whereIn('jabatan', ['Ketua', 'Sekretaris', 'Bendahara'])
+            ->whereIn('jabatan', ['Ketua', 'Sekretaris', 'Bendahara', 'PJ_Komisariat'])
             ->groupBy('organisasi_id')
-            ->havingRaw('COUNT(DISTINCT jabatan) >= 3')
+            ->havingRaw('COUNT(DISTINCT jabatan) >= 4')
             ->pluck('organisasi_id')
             ->toArray();
 
@@ -42,21 +42,21 @@ class PengurusHarianController extends Controller
         $validated = $request->validate([
             'organisasi_id' => 'required|exists:organisasi,id',
             'nama' => 'required|string|max:255',
-            'jabatan' => 'required|in:Ketua,Sekretaris,Bendahara',
+            'jabatan' => 'required|in:Ketua,Sekretaris,Bendahara,PJ_Komisariat',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'status' => 'required|in:published,nonaktif'
         ]);
 
         // Cek apakah semua jabatan sudah terisi dalam organisasi ini
         $filledPositions = PengurusHarian::where('organisasi_id', $request->organisasi_id)
-            ->whereIn('jabatan', ['Ketua', 'Sekretaris', 'Bendahara'])
+            ->whereIn('jabatan', ['Ketua', 'Sekretaris', 'Bendahara','PJ_Komisariat'])
             ->pluck('jabatan')
             ->toArray();
 
-        if (count($filledPositions) >= 3) {
+        if (count($filledPositions) >= 4) {
             return redirect()->back()
                 ->withInput()
-                ->withErrors(['jabatan' => 'Semua jabatan (Ketua, Sekretaris, Bendahara) sudah terisi dalam organisasi ini.']);
+                ->withErrors(['jabatan' => 'Semua jabatan (Ketua, Sekretaris, Bendahara, PJ_Komisariat) sudah terisi dalam organisasi ini.']);
         }
 
         // Cek apakah jabatan yang dipilih sudah ada dalam organisasi
@@ -93,7 +93,7 @@ class PengurusHarianController extends Controller
         $validated = $request->validate([
             'organisasi_id' => 'required|exists:organisasi,id',
             'nama' => 'required|string|max:255',
-            'jabatan' => 'required|in:Ketua,Sekretaris,Bendahara',
+            'jabatan' => 'required|in:Ketua,Sekretaris,Bendahara,PJ_Komisariat',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'status' => 'required|in:published,nonaktif'
         ]);

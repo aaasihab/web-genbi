@@ -47,10 +47,11 @@
                     <label for="jabatan" class="block text-gray-700 font-semibold">Jabatan</label>
                     <select name="jabatan" id="jabatan" @error('jabatan') is-invalid @enderror required
                         class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">>
-                        <option value="" disabled selected>Pilih Organisasi...</option>
+                        <option value="" disabled selected>Pilih Jabatan...</option>
                         <option value="Ketua">Ketua</option>
                         <option value="Sekretaris">Sekretaris</option>
                         <option value="Bendahara">Bendahara</option>
+                        <option value="PJ_Komisariat">PJ_Komisariat</option>
                     </select>
                     @error('jabatan')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">
@@ -62,7 +63,7 @@
                 <!-- Upload Foto -->
                 <div class="mb-4">
                     <label for="foto" class="block text-gray-700 font-semibold">Foto</label>
-                    <input type="file" name="foto" id="foto" @error('foto') is-invalid @enderror accept=".jpeg,.png,.jpg" required
+                    <input type="file" name="foto" id="foto" @error('foto') is-invalid @enderror accept=".jpeg,.png,.jpg"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('foto')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">

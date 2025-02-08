@@ -52,6 +52,7 @@
                     <select name="jabatan" id="jabatan" @error('jabatan') is-invalid @enderror required
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="Ketua" {{ $pengurusHarian->jabatan == 'Ketua' ? 'selected' : '' }}>Ketua</option>
+                        <option value="PJ_Komisariat" {{ $pengurusHarian->jabatan == 'PJ_Komisariat' ? 'selected' : '' }}>Ketua</option>
                         <option value="Sekretaris" {{ $pengurusHarian->jabatan == 'Sekretaris' ? 'selected' : '' }}>
                             Sekretaris</option>
                         <option value="Bendahara" {{ $pengurusHarian->jabatan == 'Bendahara' ? 'selected' : '' }}>Bendahara
@@ -90,9 +91,9 @@
                 <div class="mb-4">
                     <label for="status" class="block font-medium text-gray-700">Status</label>
                     <select id="status" name="status" required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('status') is-invalid @enderror">
-                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
-                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('status', $pengurusHarian->status) is-invalid @enderror">
+                        <option value="published" {{ old('status', $pengurusHarian->status) == 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="nonaktif" {{ old('status', $pengurusHarian->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
                     </select>
                 </div>
 

@@ -55,7 +55,7 @@ class GenbiPointController extends Controller
 
         GenbiPoint::create($validated);
 
-        return redirect()->route('genbi_point.index')
+        return redirect()->route('admin.genbi_point.index')
             ->with('success', 'Data berhasil ditambahkan.');
     }
 
@@ -113,7 +113,7 @@ class GenbiPointController extends Controller
 
         $genbiPoint->update($validated);
 
-        return redirect()->route('genbi_point.index')
+        return redirect()->route('admin.genbi_point.index')
             ->with('success', 'Data berhasil diperbarui.');
     }
 

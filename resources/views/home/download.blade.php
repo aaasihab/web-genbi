@@ -37,7 +37,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @if ($downloads->isEmpty())
                     <div class="col-span-3 text-center text-gray-500">
-                        <p>Masih belum ada pengumuman beasiswa saat ini.</p>
+                        <p>Tidak ada File yang bisa didownload untuk saat ini.</p>
                     </div>
                 @else
                     @foreach ($downloads as $file)

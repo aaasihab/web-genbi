@@ -55,7 +55,7 @@
 
             .swiper-slide .card {
                 /* width: 90% !important;
-                                            max-width: 100%; Batas maksimum agar tidak terlalu lebar */
+                                                max-width: 100%; Batas maksimum agar tidak terlalu lebar */
                 word-wrap: break-word;
                 overflow-wrap: break-word;
             }
@@ -91,15 +91,15 @@
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Struktur Organisasi</h1>
 
         <!-- Ketua Komis -->
-        <h2 class="text-2xl font-bold text-gray-800 text-center mb-12">Pimpinan Komisariat</h2>
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-12">Pengurus Harian</h2>
         <div class="text-center mb-12 flex flex-col md:flex-row gap-8 justify-center">
             <div class="flex justify-center">
-                @php $ketua = optional($pengurusHarian->get('Ketua')) @endphp
+                @php $pj = optional($pengurusHarian->get('PJ_Komisariat')) @endphp
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center w-64">
-                    <img src="{{ asset('storage/' . ($ketua->foto ?? 'default.jpg')) }}" alt="Ketua Komis"
+                    <img src="{{ asset('storage/' . ($pj->foto ?? 'default.jpg')) }}" alt="PJ Komis"
                         class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                    <h3 class="text-[1rem] font-bold text-gray-800">{{ $ketua->nama ?? 'Belum Ada' }}</h3>
-                    <p class="text-blue-600 font-semibold">Ketua Komis</p>
+                    <h3 class="text-[1rem] font-bold text-gray-800">{{ $pj->nama ?? 'Belum Ada' }}</h3>
+                    <p class="text-blue-600 font-semibold">PJ Komisariat</p>
                 </div>
             </div>
             <div class="flex justify-center">
@@ -108,7 +108,7 @@
                     <img src="{{ asset('storage/' . ($ketua->foto ?? 'default.jpg')) }}" alt="Ketua Komis"
                         class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
                     <h3 class="text-[1rem] font-bold text-gray-800">{{ $ketua->nama ?? 'Belum Ada' }}</h3>
-                    <p class="text-blue-600 font-semibold">PJ Komis</p>
+                    <p class="text-blue-600 font-semibold">Ketua Komis</p>
                 </div>
             </div>
         </div>

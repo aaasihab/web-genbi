@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
- <!-- Content Daftar Kegiatan -->
+    <!-- Content Daftar Kegiatan -->
     <section id="daftar-kegiatan" class="bg-gray-50 py-12 mt-14">
         <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
             <div class="flex justify-between items-center mb-6">
@@ -37,7 +37,7 @@
                                 <td class="p-3">{{ $item->nama }}</td>
                                 <td class="p-3">{{ Str::limit($item->deskripsi, 50, '...') }}</td>
                                 <td class="p-3 text-center">
-                                    {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
+                                    {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d M Y') }}
                                 </td>
                                 <td class="p-3 text-center">
                                     {{ $item->created_at->format('d M Y') }}

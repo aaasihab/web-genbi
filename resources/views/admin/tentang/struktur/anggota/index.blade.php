@@ -37,9 +37,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($anggota as $key => $member)
+                        @forelse ($anggota as $member)
                             <tr class="text-center">
-                                <td class="border border-gray-300 px-4 py-2">{{ $key + 1 }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $loop->iteration }}</td>
                                 <td class="border border-gray-300 px-4 py-2">
                                     @if ($member->foto)
                                         <img src="{{ asset('storage/' . $member->foto) }}" alt="Foto"

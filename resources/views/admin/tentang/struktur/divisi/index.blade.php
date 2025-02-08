@@ -28,9 +28,9 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        @forelse ($divisi as $key => $div)
+                        @forelse ($divisi as $div)
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="p-3 text-center">{{ $key + 1 }}</td>
+                                <td class="p-3 text-center">{{ $loop->iteration }}</td>
                                 <td class="p-3 text-center">{{ $div->nama }}</td>
                                 <td class="p-3 text-center">{{ $div->organisasi->nama }}</td>
                                 <td class="p-3 text-center">{{ $div->created_at->format('d M Y') }}</td>

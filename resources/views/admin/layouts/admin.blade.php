@@ -38,6 +38,8 @@
                     {{-- <li class="mb-2"><a href="{{ url('/admin/persyaratan') }}" class="block py-2 px-3 rounded hover:bg-blue-600">Persyaratan</a></li> --}}
                     <li class="mb-2"><a href="{{ url('/admin/pengurus_harian') }}"
                             class="block py-2 px-3 rounded hover:bg-blue-600">Pengurus Harian</a></li>
+                    <li class="mb-2"><a href="{{ url('/admin/divisi') }}"
+                            class="block py-2 px-3 rounded hover:bg-blue-600">Divisi</a></li>
                     <li class="mb-2"><a href="{{ url('/admin/pengurus_divisi') }}"
                             class="block py-2 px-3 rounded hover:bg-blue-600">Pengurus Divisi</a></li>
                     <li class="mb-2"><a href="{{ url('/admin/anggota') }}"

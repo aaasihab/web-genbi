@@ -29,7 +29,7 @@
                     Tentang <i class="fas fa-angle-down ml-2"></i>
                 </a>
                 <div class="dropdown-card-dekstop">
-                    <a href="{{ route('home.genbiPoint') }}"><i class="fas fa-star"></i>GenBI Point</a>
+                    <a href="{{ route('home.genbi_point') }}"><i class="fas fa-star"></i>GenBI Point</a>
                     <a href="{{ route('home.tentangGenbi') }}"><i class="fas fa-users"></i>Tentang GenBI</a>
                     <a href="{{ route('home.strukturOrganisasi') }}"><i class="fas fa-sitemap"></i>Struktur
                         Organisasi</a>
@@ -81,7 +81,7 @@
                     Tentang <i class="fas fa-angle-down"></i>
                 </button>
                 <div class="dropdown-card-mobile hidden flex-col">
-                    <a href="{{ route('home.genbiPoint') }}" class="py-2 px-6 hover:bg-gray-100">GenBI Point</a>
+                    <a href="{{ route('home.genbi_point') }}" class="py-2 px-6 hover:bg-gray-100">GenBI Point</a>
                     <a href="{{ route('home.tentangGenbi') }}" class="py-2 px-6 hover:bg-gray-100">Tentang GenBI</a>
                     <a href="{{ route('home.strukturOrganisasi') }}" class="py-2 px-6 hover:bg-gray-100">Struktur
                         Organisasi</a>

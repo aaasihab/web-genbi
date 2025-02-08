@@ -57,7 +57,7 @@
 
                 <div>
                     <label for="gambar" class="block font-medium text-gray-700">Gambar (Opsional)</label>
-                    <input type="file" id="gambar" name="gambar" @error('gambar') is-invalid @enderror accept="image/*" required
+                    <input type="file" id="gambar" name="gambar" @error('gambar') is-invalid @enderror accept="image/*"
                         class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md">
                     @error('gambar')
                         <div class="invalid-feedback text-red-500 text-sm mt-1">

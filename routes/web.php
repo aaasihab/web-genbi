@@ -39,7 +39,7 @@ Route::prefix('home')->name('home.')->group(function () {
     Route::get('/persyaratan', [HomeController::class, 'persyaratan'])->name('persyaratan');
     Route::get('/pengumuman', [HomeController::class, 'pengumuman'])->name('pengumuman');
     Route::get('/tentang-BI', [HomeController::class, 'tentangBi'])->name('tentangBi');
-    Route::get('/genbi-point', [HomeController::class, 'genbiPoint'])->name('genbiPoint');
+    Route::get('/genbi-point', [HomeController::class, 'genbiPoint'])->name('genbi_point');
     Route::get('/tentang-genbi', [HomeController::class, 'tentangGenbi'])->name('tentangGenbi');
     Route::get('/struktur_organisasi', [HomeController::class, 'strukturOrganisasi'])->name('strukturOrganisasi');
 
@@ -50,28 +50,27 @@ Route::prefix('home')->name('home.')->group(function () {
 // halaman admin
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // halaman kegiatan
-    // Route::resource('/kegiatan', KegiatanController::class);
     Route::resource('kegiatan', KegiatanController::class);
 
     // halaman tentang
-    Route::resource('/genbi_point', GenbiPointController::class);
+    Route::resource('genbi_point', GenbiPointController::class);
     // struktur organisasi 
-    Route::resource('/divisi', DivisiController::class);
-    Route::resource('/pengurus_harian', PengurusHarianController::class);
-    Route::resource('/pengurus_divisi', PengurusDivisiController::class);
-    Route::resource('/anggota', AnggotaController::class);
+    Route::resource('divisi', DivisiController::class);
+    Route::resource('pengurus_harian', PengurusHarianController::class);
+    Route::resource('pengurus_divisi', PengurusDivisiController::class);
+    Route::resource('anggota', AnggotaController::class);
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // pengumuman
     Route::prefix('/pengumuman')->name('pengumuman.')->group(function () {
-        Route::resource('/', PengumumanController::class)
+        Route::resource('', PengumumanController::class)
             ->parameters(['' => 'pengumuman']);
     });
 
     // halaman download
     Route::prefix('/download')->name('download.')->group(function () {
-        Route::resource('/', DownloadController::class)
+        Route::resource('', DownloadController::class)
             ->parameters(['' => 'file']);
     });
 

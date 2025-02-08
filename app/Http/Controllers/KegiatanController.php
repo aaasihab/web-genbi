@@ -10,7 +10,7 @@ class KegiatanController extends Controller
 {
     public function index()
     {
-        $kegiatan = Kegiatan::all();
+        $kegiatan = Kegiatan::orderBy('tanggal_kegiatan', 'asc')->get();
         return view('admin.kegiatan.index', compact('kegiatan'));
     }
 
@@ -31,14 +31,10 @@ class KegiatanController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'tanggal_kegiatan' => 'nullable|date', // Biarkan nullable agar bisa diisi otomatis
-            'tanggal_posts' => 'date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+            'tanggal_kegiatan' => 'required|date', // Biarkan nullable agar bisa diisi otomatis
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:10240',
             'status' => 'required|in:published,nonaktif'
         ]);
-
-        // Set tanggal_kegiatan ke hari ini
-        $validated['tanggal_kegiatan'] = now();
 
         if ($request->hasFile('gambar')) {
             $validated['gambar'] = $request->file('gambar')->store('gambar_kegiatan', 'public');
@@ -62,7 +58,7 @@ class KegiatanController extends Controller
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'tanggal_kegiatan' => 'required|date',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:10240',
             'status' => 'required|in:published,nonaktif'
         ]);
 

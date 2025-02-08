@@ -38,9 +38,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($pengurusDivisi as $key => $pengurus)
+                        @forelse ($pengurusDivisi as $pengurus)
                             <tr class="text-center">
-                                <td class="border border-gray-300 px-4 py-2">{{ $key + 1 }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $loop->iteration }}</td>
                                 <td class="border border-gray-300 px-4 py-2">
                                     <img src="{{ asset('storage/' . $pengurus->foto) }}" alt="Foto"
                                         class="w-16 h-16 rounded-md object-cover">
