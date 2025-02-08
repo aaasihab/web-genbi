@@ -26,7 +26,7 @@ class RoleMiddleware
 
         // Jika peran pengguna tidak ada dalam daftar peran yang diizinkan, tampilkan halaman 403
         if (!in_array($user->role, $roles)) {
-            return redirect()->route('auth.unauthorized');
+            return redirect()->route('notFound');
         }
 
         // Lanjutkan ke rute berikutnya jika pengecekan akses berhasil

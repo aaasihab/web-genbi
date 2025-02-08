@@ -14,6 +14,10 @@ class DownloadController extends Controller
         return view('admin.download.index', compact('files'));
     }
 
+    public function show($id)
+    {
+        abort(404);
+    }
     public function downloadFile($id)
     {
         $file = Download::findOrFail($id);

@@ -62,8 +62,7 @@ class GenbiPointController extends Controller
 
     public function show($id)
     {
-        $genbiPoint = GenbiPoint::findOrFail($id);
-        return view('admin.tentang.genbi_point.show', compact('genbiPoint'));
+        abort(404);
     }
 
     public function edit($id)

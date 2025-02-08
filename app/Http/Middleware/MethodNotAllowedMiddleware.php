@@ -17,10 +17,6 @@ class MethodNotAllowedMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        try {
-            return $next($request);
-        } catch (MethodNotAllowedHttpException $e) {
-            return redirect()->route('notFound');
-        }
+        return $next($request);
     }
 }

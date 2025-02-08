@@ -13,6 +13,12 @@ class KegiatanController extends Controller
         $kegiatan = Kegiatan::all();
         return view('admin.kegiatan.index', compact('kegiatan'));
     }
+
+    public function show($id)
+    {
+        abort(404);
+    }
+
     // Menampilkan form tambah anggota
     public function create()
     {

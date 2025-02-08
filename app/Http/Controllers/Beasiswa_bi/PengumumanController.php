@@ -15,9 +15,9 @@ class PengumumanController extends Controller
         return view('admin.beasiswa_bi.pengumuman.index', compact('pengumuman'));
     }
 
-    public function show()
+    public function show($id)
     {
-
+        abort(404);
     }
 
     public function downloadFile($id)

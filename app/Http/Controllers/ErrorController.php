@@ -13,6 +13,6 @@ class ErrorController extends Controller
 
     public function methodNotAllowed()
     {
-        return view('errors.405');
+        return view('errors.404');
     }
 }
