@@ -16,7 +16,11 @@ class HomeController extends Controller
 {
     public function beranda()
     {
-        return view('home.beranda');
+        $kegiatan = Kegiatan::where('status', 'published') // Hanya kegiatan yang aktif
+            ->orderBy('tanggal_kegiatan', 'desc')
+            ->take(3)
+            ->get();
+        return view('home.beranda', compact('kegiatan'));
     }
     public function kegiatan()
     {

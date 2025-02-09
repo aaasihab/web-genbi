@@ -35,8 +35,10 @@
         <div class="container mx-auto px-4 text-center animate-hidden animate-from botom">
             <div class="flex flex-wrap justify-center gap-10 md:gap-20">
                 <img src="{{ asset('templates/img/Logo-UNUJA.png') }}" alt="Universitas 1" class="w-24">
-                <img src="{{ asset('templates/img/LOGO-UIN-MALANG-HI-RES-2048x1990.png') }}" alt="Universitas 2" class="w-24">
-                <img src="{{ asset('templates/img/Logo_Universitas_Brawijaya.svg.png') }}" alt="Universitas 3" class="w-24">
+                <img src="{{ asset('templates/img/LOGO-UIN-MALANG-HI-RES-2048x1990.png') }}" alt="Universitas 2"
+                    class="w-24">
+                <img src="{{ asset('templates/img/Logo_Universitas_Brawijaya.svg.png') }}" alt="Universitas 3"
+                    class="w-24">
                 <img src="{{ asset('templates/img/Lambang-UM-550x550.png') }}" alt="Universitas 4" class="w-24">
                 <img src="{{ asset('templates/img/Logo_umm.png') }}" alt="Universitas 5" class="w-24">
             </div>
@@ -147,27 +149,19 @@
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-4xl font-bold text-gray-800 mb-8 animate-hidden">Kegiatan Terbaru</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card -->
-                <div class="bg-white p-6 rounded-lg shadow-lg text-left animate-hidden animate-from-bottom">
-                    <img src="../../img/visi-misi.jpg" alt="Kegiatan 1" class="rounded-lg mb-4 h-48 w-full object-cover">
-                    <h3 class="text-xl font-bold text-gray-800">Judul Kegiatan 1</h3>
-                    <p class="text-gray-600 text-sm mt-2">Tanggal: 10 Januari 2025</p>
-                    <a href="#" class="text-blue-600 font-semibold mt-4 block">Selengkapnya →</a>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-lg text-left animate-hidden animate-from-bottom">
-                    <img src="../../img/visi-misi.jpg" alt="Kegiatan 2" class="rounded-lg mb-4 h-48 w-full object-cover">
-                    <h3 class="text-xl font-bold text-gray-800">Judul Kegiatan 2</h3>
-                    <p class="text-gray-600 text-sm mt-2">Tanggal: 20 Februari 2025</p>
-                    <a href="#" class="text-blue-600 font-semibold mt-4 block">Selengkapnya →</a>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-lg text-left animate-hidden animate-from-bottom">
-                    <img src="../../img/visi-misi.jpg" alt="Kegiatan 3" class="rounded-lg mb-4 h-48 w-full object-cover">
-                    <h3 class="text-xl font-bold text-gray-800">Judul Kegiatan 3</h3>
-                    <p class="text-gray-600 text-sm mt-2">Tanggal: 5 Maret 2025</p>
-                    <a href="#" class="text-blue-600 font-semibold mt-4 block">Selengkapnya →</a>
-                </div>
+                @foreach ($kegiatan as $item)
+                    <!-- Card -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-left animate-hidden animate-from-bottom">
+                        <img src="{{ asset('storage/' . ($item->gambar ?? 'img/default.jpg')) }}"
+                            alt="{{ $item->nama }}" class="rounded-lg mb-4 h-48 w-full object-cover">
+                        <h3 class="text-xl font-bold text-gray-800">{{ $item->nama }}</h3>
+                        <p class="text-gray-600 text-sm mt-2">
+                            Tanggal: {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d F Y') }}
+                        </p>
+                        <p class="text-gray-600 text-sm mt-2">{{ Str::limit($item->deskripsi, 100) }}</p>
+                        <a href="#" class="text-blue-600 font-semibold mt-4 block">Selengkapnya →</a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

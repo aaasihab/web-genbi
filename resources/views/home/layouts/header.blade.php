@@ -13,7 +13,7 @@
 
             <!-- Beasiswa BI Dropdown -->
             <div class="dropdown relative">
-                <a href="#beasiswa" class="hover:text-blue-500 flex items-center">
+                <a href="{{ route('home.tentangGenbi') }}" class="hover:text-blue-500 flex items-center">
                     Beasiswa BI <i class="fas fa-angle-down ml-2"></i>
                 </a>
                 <div class="dropdown-card-dekstop">
@@ -25,7 +25,7 @@
 
             <!-- Tentang Dropdown -->
             <div class="dropdown relative">
-                <a href="#tentang" class="hover:text-blue-500 flex items-center">
+                <a href="{{ route('home.tentangGenbi') }}" class="hover:text-blue-500 flex items-center">
                     Tentang <i class="fas fa-angle-down ml-2"></i>
                 </a>
                 <div class="dropdown-card-dekstop">
