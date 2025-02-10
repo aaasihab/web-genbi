@@ -58,7 +58,7 @@
                     </p>
                 </div>
                 <div>
-                    <img src="{{ asset('templates/img/gedung_BI.JPG') }}" alt="Tentang Kami"
+                    <img src="{{ asset('templates/img/genbiMalang.jpg') }}" alt="Tentang Kami"
                         class="rounded-lg shadow-md animate-hidden animate-from-right">
                 </div>
             </div>
