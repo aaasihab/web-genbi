@@ -42,8 +42,10 @@
                 @else
                     @foreach ($downloads as $file)
                         <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                            <img src="{{ Storage::url($file->file) }}" alt="{{ $file->nama_file }}" class="w-24 h-24 mb-4 bg-cover">
-                            <h2 class="text-lg font-bold text-gray-800">{{ $file->nama_file }}</h2>
+                            <img src="{{ Storage::url($file->file) }}" 
+                                alt="{{ $file->nama_file }}" 
+                                class="w-full max-w-xs h-auto aspect-square object-cover rounded-lg shadow-md">
+                            <h2 class="text-lg font-bold text-gray-800 mt-4 text-center">{{ $file->nama_file }}</h2>
                             <a href="{{ route('home.downloadFile', $file->id) }}"
                                 class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                                 Download
