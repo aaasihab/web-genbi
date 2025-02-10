@@ -89,7 +89,7 @@
             </div>
 
             <a href="{{ route('home.download') }}" class="py-2 pb-5 hover:text-blue-500">Download</a>
-            <a href="https://wa.me/6281233163409" target="_blank"
+            <a href="https://wa.me/628980476865" target="_blank"
                 class="py-2 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
                 Hubungi Kami
             </a>

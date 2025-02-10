@@ -35,7 +35,7 @@
                 <div class="flex space-x-4 mt-4">
                     {{-- <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-2xl"></i></a> --}}
                     {{-- <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-2xl"></i></a> --}}
-                    <a href="https://wa.me/6281233163409" target="_blank"
+                    <a href="https://wa.me/628980476865" target="_blank"
                         class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-2xl"></i></a>
                     {{-- <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin text-2xl"></i></a> --}}
                 </div>
