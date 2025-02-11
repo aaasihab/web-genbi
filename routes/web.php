@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 */
 // halaman home
 Route::get('/', [HomeController::class, 'beranda'])->name('beranda');
-Route::prefix('home')->name('home.')->group(function () {
+Route::name('home.')->group(function () {
     Route::get('/kegiatan', [HomeController::class, 'kegiatan'])->name('kegiatan');
     Route::get('/detail_kegiatan/{kegiatan}', [HomeController::class, 'detailKegiatan'])->name('detailKegiatan');
     Route::get('/download', [HomeController::class, 'download'])->name('download');
@@ -90,9 +90,3 @@ Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
     Route::get('/register', [AuthController::class, 'registerForm'])->name('register.form');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
-// halaman error
-Route::get('/404', [ErrorController::class, 'notFound'])->name('notFound');
-Route::get('/methodNotAllowed', [ErrorController::class, 'methodNotAllowed'])->name('methodNotAllowed');
-// Route::fallback(function () {
-//     abort(404, 'Halaman tidak ditemukan.');
-// });
