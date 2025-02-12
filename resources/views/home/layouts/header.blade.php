@@ -41,7 +41,7 @@
 
         <!-- Button -->
         <div class="hidden md:block">
-            <a href="https://wa.me/628980476865" target="_blank"
+            <a href="https://wa.me/6285730916413" target="_blank"
                 class="py-2 px-3 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
                 Hubungi Kami
             </a>
@@ -89,11 +89,10 @@
             </div>
 
             <a href="{{ route('home.download') }}" class="py-2 pb-5 hover:text-blue-500">Download</a>
-            <a href="https://wa.me/628980476865" target="_blank"
+            <a href="https://wa.me/6285730916413" target="_blank"
                 class="py-2 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
                 Hubungi Kami
             </a>
-
         </div>
     </nav>
 
