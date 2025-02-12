@@ -48,14 +48,14 @@
 
         @media (max-width: 640px) {
             .swiper-slide {
-                width: 250px !important;
+                width: 215px !important;
                 display: flex;
                 justify-content: center;
             }
 
             .swiper-slide .card {
-                /* width: 90% !important;
-                                                max-width: 100%; Batas maksimum agar tidak terlalu lebar */
+                /* width: 90% !important; */
+                /* max-width: 100%; */
                 word-wrap: break-word;
                 overflow-wrap: break-word;
             }
@@ -153,15 +153,6 @@
                     <div class="swiper overflow-hidden cursor-grab" id="swiper-{{ $index }}">
                         <div class="swiper-wrapper flex">
                             @foreach ($anggotaAktif as $anggota)
-                                {{-- <div class="swiper-slide w-64">
-                                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                                        <img src="{{ asset('storage/' . ($anggota->foto ?? 'default.jpg')) }}"
-                                            alt="{{ $anggota->nama }}"
-                                            class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
-                                        <h3 class="text-[1rem] font-bold text-gray-800">{{ $anggota->nama }}</h3>
-                                        <p class="text-blue-600 font-semibold">{{ $div->nama }}</p>
-                                    </div>
-                                </div> --}}
                                 <div class="swiper-slide w-64">
                                     <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                                         <img src="{{ asset('storage/' . ($anggota->foto ?? 'default.jpg')) }}"
@@ -188,7 +179,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll(".swiper").forEach(swiper => {
                 new Swiper(swiper, {
-                    slidesPerView: 4,
+                    slidesPerView: "auto",
                     spaceBetween: 20,
                     navigation: {
                         nextEl: swiper.querySelector(".swiper-button-next"),
@@ -201,15 +192,7 @@
                         delay: 4000,
                         disableOnInteraction: false
                     },
-                    loop: true,
-                    breakpoints: {
-                        640: {
-                            slidesPerView: 4
-                        },
-                        1024: {
-                            slidesPerView: 4
-                        }
-                    }
+                    loop: true
                 });
             });
         });
