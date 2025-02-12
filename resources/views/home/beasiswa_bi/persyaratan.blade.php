@@ -100,22 +100,28 @@
             </div>
             <div class="grid md:grid-cols-3 gap-6 animate-hidden animate-from-bottom">
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <h3 class="text-xl font-semibold text-blue-600">Ekonomi & Keuangan</h3>
+                    <h3 class="text-xl font-semibold text-blue-600">Ekonomi</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-blue-600">Ekonomi Syariah</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-blue-600">Perbankan Syariah</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-blue-600">Hukum</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <h3 class="text-xl font-semibold text-blue-600">Teknik Informatika</h3>
                 </div>
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
                     <h3 class="text-xl font-semibold text-blue-600">Teknologi Informasi</h3>
                 </div>
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <h3 class="text-xl font-semibold text-blue-600">Hukum & Kebijakan Publik</h3>
+                    <h3 class="text-xl font-semibold text-blue-600">Pendidikan Matematika</h3>
                 </div>
                 <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <h3 class="text-xl font-semibold text-blue-600">Ekonomi & Keuangan</h3>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <h3 class="text-xl font-semibold text-blue-600">Teknologi Informasi</h3>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                    <h3 class="text-xl font-semibold text-blue-600">Hukum & Kebijakan Publik</h3>
+                    <h3 class="text-xl font-semibold text-blue-600">Komunikasi dan Penyiaran Islam</h3>
                 </div>
             </div>
 
