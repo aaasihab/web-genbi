@@ -32,7 +32,8 @@
                             <th class="border border-gray-300 px-4 py-2">Foto</th>
                             <th class="border border-gray-300 px-4 py-2">Nama</th>
                             <th class="border border-gray-300 px-4 py-2">Jabatan</th>
-                            <th class="border border-gray-300 px-4 py-2">Organisasi</th>
+                            <th class="border border-gray-300 px-4 py-2">Tanggal Posting</th>
+                            <th class="border border-gray-300 px-4 py-2">Terakhir Diubah</th>
                             <th class="border border-gray-300 px-4 py-2">Status</th>
                             <th class="border border-gray-300 px-4 py-2">Aksi</th>
                         </tr>
@@ -47,7 +48,8 @@
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $pengurus->nama }}</td>
                                 <td class="border border-gray-300 px-4 py-2">{{ $pengurus->jabatan }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $pengurus->organisasi->nama }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $pengurus->created_at->format('d M Y') }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $pengurus->updated_at->diffForHumans() }}</td>
                                 <td class="border border-gray-300 px-4 py-2">
                                     <span
                                         class="px-2 py-1 text-white rounded-md 
@@ -60,8 +62,8 @@
                                         class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded-md">
                                         Edit
                                     </a>
-                                    <form action="{{ route('admin.pengurus_harian.destroy', $pengurus->id) }}" method="POST"
-                                        class="inline-block"
+                                    <form action="{{ route('admin.pengurus_harian.destroy', $pengurus->id) }}"
+                                        method="POST" class="inline-block"
                                         onsubmit="return confirm('Yakin ingin menghapus pengurus ini?');">
                                         @csrf
                                         @method('DELETE')
