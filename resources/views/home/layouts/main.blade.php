@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GenBI UNUJA</title>
+    <link rel="shortcut icon" href="{{ asset('templates/img/genbi.png') }}" type="image/x-icon">
     @include('home.layouts.styles')
 
     @yield('this-page-style')
