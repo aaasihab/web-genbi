@@ -6,6 +6,7 @@ use App\Models\Download;
 use App\Models\GenbiPoint;
 use App\Models\Kegiatan;
 use App\Models\Pengumuman;
+use App\Models\Struktur\Anggota;
 use App\Models\Struktur\Divisi;
 use App\Models\Struktur\Organisasi;
 use App\Models\Struktur\PengurusHarian;
@@ -20,8 +21,22 @@ class HomeController extends Controller
             ->orderBy('tanggal_kegiatan', 'desc')
             ->take(3)
             ->get();
-        return view('home.beranda', compact('kegiatan'));
+
+        // $anggota = Anggota::where('status', 'published')->orderBy('nama', 'desc')
+        //     ->take(3)
+        //     ->get();
+        $anggota = Anggota::whereIn('nama', [
+            'MUHAMMAD AFANDI',
+            'MEIRIKE DIANA EKA LESTARI',
+            'SAIYIDATUL KAMALIA SAUDAH'
+        ])
+            ->orderByRaw("FIELD(nama, 'MUHAMMAD AFANDI', 'MEIRIKE DIANA EKA LESTARI', 'SAIYIDATUL KAMALIA SAUDAH')")
+            ->get();
+
+
+        return view('home.beranda', compact('kegiatan', 'anggota'));
     }
+
     public function kegiatan()
     {
         $kegiatan = Kegiatan::where('status', 'published')

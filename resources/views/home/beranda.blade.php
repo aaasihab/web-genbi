@@ -83,6 +83,33 @@
     <!-- Anggota Teraktif -->
     <section id="anggota-teraktif" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-6 animate-hidden">Anggota Teraktif Bulan Januari</h2>
+            <p class="text-gray-600 mb-10 text-lg animate-hidden hidden md:block">
+                Menginspirasi melalui Dedikasi: Anggota Teraktif Yang Membuktikan </br>Bahwa Kerja Keras dan Komitmen
+                Membawa Keberhasilan.
+            </p>
+            <p class="text-gray-600 mb-10 text-lg animate-hidden block md:hidden">
+                Menginspirasi melalui Dedikasi: Anggota Teraktif Yang Membuktikan Bahwa Kerja Keras dan Komitmen Membawa
+                Keberhasilan.
+            </p>
+
+            <!-- Anggota teraktif  -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                @foreach ($anggota as $member)
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-hidden animate-from-bottom">
+                        <img src="{{ asset('storage/' . $member->foto) }}" alt="{{ $member->nama }}"
+                            class="w-48 h-48 rounded-lg mx-auto mb-4 object-cover">
+                        <h3 class="text-2xl font-bold text-gray-800">{{ $member->nama }}</h3>
+                        <p class="text-blue-600 font-semibold">{{ $member->divisi->nama }}</p>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+    {{-- <!-- Anggota Teraktif -->
+    <section id="anggota-teraktif" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
             <h2 class="text-4xl font-bold text-gray-800 mb-6 animate-hidden">Anggota Teraktif</h2>
             <p class="text-gray-600 mb-10 text-lg animate-hidden hidden md:block">
                 Menginspirasi melalui Dedikasi: Anggota Teraktif Yang Membuktikan </br>Bahwa Kerja Keras dan Komitmen
@@ -141,7 +168,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
     <!-- Kegiatan Terbaru -->
@@ -159,7 +186,8 @@
                             Tanggal: {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d F Y') }}
                         </p>
                         <p class="text-gray-600 text-sm mt-2">{{ Str::limit($item->deskripsi, 100) }}</p>
-                        <a href="#" class="text-blue-600 font-semibold mt-4 block">Selengkapnya →</a>
+                        <a href="{{ route('home.detailKegiatan', $item->id) }}"
+                            class="text-blue-600 font-semibold mt-4 block">Selengkapnya →</a>
                     </div>
                 @endforeach
             </div>
