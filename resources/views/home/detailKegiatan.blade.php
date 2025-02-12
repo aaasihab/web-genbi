@@ -24,13 +24,13 @@
     <section id="detail-kegiatan" class="pt-10 pb-16 bg-gray-50">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="bg-white rounded-xl shadow-lg p-8 animate-hidden animate-from-bottom">
-                <p class="text-sm text-gray-500 mb-4 text-center">
-                    {{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d F Y') }}
-                </p>
                 <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">{{ $kegiatan->nama }}</h2>
-                <div class="w-full overflow-hidden rounded-xl mb-6">
+                <div class="w-full overflow-hidden rounded-xl mb-6 relative">
                     <img src="{{ asset('storage/' . $kegiatan->gambar) }}" alt="Foto Kegiatan"
                         class="w-full h-auto rounded-xl">
+                    <p class="text-sm text-black absolute bottom-2 left-2 bg-white bg-opacity-75 px-2 py-1 rounded-md">
+                        {{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d F Y') }}
+                    </p>
                 </div>
                 <p class="text-gray-700 leading-relaxed text-md d:text-lg text-justify">{{ $kegiatan->deskripsi }}</p>
             </div>
