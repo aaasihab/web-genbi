@@ -39,14 +39,6 @@
             <a href="{{ route('home.download') }}" class="hover:text-blue-500">Download</a>
         </nav>
 
-        <!-- Button -->
-        <div class="hidden md:block">
-            <a href="https://wa.me/6285730916413" target="_blank"
-                class="py-2 px-3 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
-                Hubungi Kami
-            </a>
-        </div>
-        
         <!-- Mobile Menu Button -->
         <button id="menu-toggle" class="md:hidden toggle-icon focus:outline-none">
             <span></span>
@@ -89,11 +81,22 @@
             </div>
 
             <a href="{{ route('home.download') }}" class="py-2 pb-5 hover:text-blue-500">Download</a>
-            <a href="https://wa.me/6285730916413" target="_blank"
-                class="py-2 bg-blue-500 text-white rounded-lg shadow text-center hover:bg-blue-600">
-                Hubungi Kami
-            </a>
         </div>
     </nav>
 
 </header>
+{{-- tambahan icon hubungi --}}
+<div class="fixed bottom-5 right-5 z-50 group">
+    <a href="https://wa.me/6285730916413?text=Halo%20saya%20ingin%20bertanya%20tentang%20..." target="_blank"
+        class="relative block">
+        <div
+            class="bg-green-500 text-white w-16 h-16 flex items-center justify-center rounded-full shadow-xl hover:bg-green-600 transition duration-300 hover:scale-110 hover:shadow-2xl animate-pulse">
+            <i class="fab fa-whatsapp text-4xl"></i>
+        </div>
+        <!-- Tooltip -->
+        <span
+            class="absolute right-20 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+            Hubungi Kami di WhatsApp
+        </span>
+    </a>
+</div>

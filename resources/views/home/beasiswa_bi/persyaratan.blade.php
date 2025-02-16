@@ -68,7 +68,7 @@
                     <h2 class="text-2xl font-bold text-gray-800 mb-6">Kriteria</h2>
                     <ul class="list-disc list-inside text-gray-600 leading-relaxed space-y-2">
                         <li>Minimal semester 3 (tiga) dan telah menyelesaikan sekurang-kurangnya 40 (empat puluh) SKS.</li>
-                        <li>Maksimal berusia 23 tahun pada bulan November 2023.</li>
+                        <li>Maksimal berusia 23 tahun pada bulan November 2025.</li>
                         <li>
                             Tidak sedang menerima beasiswa atau bantuan lainnya, serta tidak berada dalam status ikatan
                             dinas dari lembaga/instansi lain.

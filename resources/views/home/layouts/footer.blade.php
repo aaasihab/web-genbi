@@ -29,12 +29,10 @@
                 <h3 class="text-xl font-semibold mb-4">Kontak</h3>
                 <p class="text-gray-300 text-sm">Jl. Pondok Pesantren Nurul Jadid, Paiton, Probolinggo</p>
                 <p class="text-gray-300 text-sm mt-2">Email: genbi@unuja.ac.id</p>
-                <p class="text-gray-300 text-sm mt-2">Telepon: +62 812-3456-7890</p>
+                <p class="text-gray-300 text-sm mt-2">Telepon: +62 857 3091 6413</p>
 
                 <!-- Ikon Sosial Media -->
                 <div class="flex space-x-4 mt-4">
-                    {{-- <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-2xl"></i></a> --}}
-                    {{-- <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-2xl"></i></a> --}}
                     <a href="https://www.instagram.com/genbimalang?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
                         class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-2xl"></i></a>
                     <a href="https://wa.me/6285730916413" target="_blank"
