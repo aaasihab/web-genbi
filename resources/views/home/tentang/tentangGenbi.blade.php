@@ -24,7 +24,7 @@
     </section>
 
     <!-- Content Tentang GenBI -->
-    <section id="tentang-genbi" class="relative bg-gray-50 pt-10 pb-12 mt-14">
+    <section id="tentang-genbi" class="relative bg-gray-50 pt-10 pb-12 mt-14 mx-5 md:mx-0">
         <!-- Hero Image -->
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-12">
             <!-- Text Content -->
@@ -74,7 +74,7 @@
             <div
                 class="relative z-10 flex flex-col md:flex-row items-center justify-center h-full px-4 md:px-16 gap-12 pt-10">
                 <!-- Visi -->
-                <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start">
+                <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start px-10">
                     <h2 class="text-3xl font-bold text-center animate-hidden animate-from-left">Visi</h2>
                     <p class="text-lg leading-relaxed text-justify animate-hidden animate-from-left">
                         Menjadikan kaum muda Indonesia sebagai generasi yang kompeten dalam berbagai bidang keilmuan serta
@@ -83,7 +83,7 @@
                 </div>
 
                 <!-- Misi -->
-                <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start pb-24">
+                <div class="text-white max-w-lg space-y-6 text-center md:text-left self-start pb-24 px-10">
                     <h2 class="text-3xl font-bold text-center animate-hidden animate-from-right">Misi</h2>
                     <p class="text-lg leading-relaxed text-justify animate-hidden animate-from-right">
                         1. Menggagas berbagai kegiatan pemberdayaan masyarakat untuk Indonesia yang lebih baik
