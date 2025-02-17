@@ -126,7 +126,7 @@
             </div>
 
             <!-- Timeline Pendaftaran -->
-            <section id="timeline" class="bg-gray-50 py-24">
+            {{-- <section id="timeline" class="bg-gray-50 py-24">
                 <div class="container mx-auto px-4">
                     <h2 class="text-3xl font-bold text-center text-gray-800 mb-12 animate-hidden">Timeline Kegiatan</h2>
                     <div class="relative">
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
 
         </div>
     </section>

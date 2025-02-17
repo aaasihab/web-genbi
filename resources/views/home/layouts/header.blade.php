@@ -87,7 +87,7 @@
 </header>
 {{-- tambahan icon hubungi --}}
 <div class="fixed bottom-5 right-5 z-50 group">
-    <a href="https://wa.me/6285730916413?text=Halo%20saya%20ingin%20bertanya%20tentang%20..." target="_blank"
+    <a href="https://wa.me/6285234662736?text=Halo%20saya%20ingin%20bertanya%20tentang%20..." target="_blank"
         class="relative block">
         <div
             class="bg-green-500 text-white w-16 h-16 flex items-center justify-center rounded-full shadow-xl hover:bg-green-600 transition duration-300 hover:scale-110 hover:shadow-2xl animate-pulse">

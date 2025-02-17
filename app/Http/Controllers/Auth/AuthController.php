@@ -106,7 +106,7 @@ class AuthController extends Controller
 
         // Redirect ke halaman login dengan pesan sukses
         return redirect()
-            ->route('login')
+            ->route('auth.loginForm')
             ->with('success', 'Registrasi berhasil');
     }
 

@@ -19,7 +19,7 @@
                     <li><a href="{{ route('beranda') }}" class="hover:text-white transition">Beranda</a></li>
                     <li><a href="{{ route('home.tentangGenbi') }}" class="hover:text-white transition">Tentang</a></li>
                     <li><a href="{{ route('home.kegiatan') }}" class="hover:text-white transition">Program</a></li>
-                    <li><a href="https://wa.me/6281233163409" target="_blank"
+                    <li><a href="https://wa.me/6285234662736" target="_blank"
                             class="hover:text-white transition">Kontak</a></li>
                 </ul>
             </div>
@@ -29,13 +29,13 @@
                 <h3 class="text-xl font-semibold mb-4">Kontak</h3>
                 <p class="text-gray-300 text-sm">Jl. Pondok Pesantren Nurul Jadid, Paiton, Probolinggo</p>
                 <p class="text-gray-300 text-sm mt-2">Email: genbi@unuja.ac.id</p>
-                <p class="text-gray-300 text-sm mt-2">Telepon: +62 857 3091 6413</p>
+                <p class="text-gray-300 text-sm mt-2">Telepon: +62 852 3466 2736</p>
 
                 <!-- Ikon Sosial Media -->
                 <div class="flex space-x-4 mt-4">
                     <a href="https://www.instagram.com/genbimalang?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
                         class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-2xl"></i></a>
-                    <a href="https://wa.me/6285730916413" target="_blank"
+                    <a href="https://wa.me/6285234662736?text=Halo%20saya%20ingin%20bertanya%20tentang%20..." target="_blank"
                         class="text-gray-400 hover:text-white transition"><i class="fab fa-whatsapp text-2xl"></i></a>
                 </div>
             </div>
