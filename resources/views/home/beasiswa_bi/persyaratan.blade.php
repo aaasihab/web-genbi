@@ -39,9 +39,9 @@
             <!-- Main Section with Flex -->
             <div class="flex flex-col md:flex-row gap-8">
                 <!-- Dokumen Administratif -->
-                <div class="flex-1 bg-white rounded-lg shadow-lg p-8 animate-hidden animate-from-left">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Dokumen Administratif</h2>
-                    <ul class="list-disc list-inside text-gray-600 leading-relaxed space-y-2">
+                <div class="flex-1 bg-white rounded-lg shadow-lg p-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 animate-hidden animate-from-left">Dokumen Administratif</h2>
+                    <ul class="list-disc list-inside text-gray-600 leading-relaxed space-y-2 animate-hidden animate-from-left">
                         <li>Kartu Tanda Mahasiswa (KTM).</li>
                         <li>Kartu Tanda Penduduk (KTP).</li>
                         <li>Pas foto ukuran 4x3 berlatar biru atau merah.</li>
@@ -64,9 +64,9 @@
                 </div>
 
                 <!-- Kriteria -->
-                <div class="flex-1 bg-white rounded-lg shadow-lg p-8 animate-hidden animate-from-right">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Kriteria</h2>
-                    <ul class="list-disc list-inside text-gray-600 leading-relaxed space-y-2">
+                <div class="flex-1 bg-white rounded-lg shadow-lg p-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 animate-hidden animate-from-right ">Kriteria</h2>
+                    <ul class="list-disc list-inside text-gray-600 leading-relaxed space-y-2 animate-hidden animate-from-right">
                         <li>Minimal semester 3 (tiga) dan telah menyelesaikan sekurang-kurangnya 40 (empat puluh) SKS.</li>
                         <li>Maksimal berusia 23 tahun pada bulan November 2025.</li>
                         <li>
@@ -137,7 +137,7 @@
                         <div class="space-y-12">
                             <!-- Tahap 1 -->
                             <div class="relative flex items-center">
-                                <div class="w-1/2 pr-8 text-right animate-hidden animate-from-left" data-aos="fade-right">
+                                <div class="w-1/2 pr-8 text-right animate-hidden animate-from-bottom" data-aos="fade-right">
                                     <h3 class="text-xl font-semibold text-gray-800">Pendaftaran Dibuka</h3>
                                     <p class="text-gray-600">1 - 15 Februari 2024</p>
                                 </div>
@@ -155,7 +155,7 @@
                                     class="w-10 h-10 bg-blue-500 text-white flex items-center justify-center rounded-full absolute left-1/2 transform -translate-x-1/2">
                                     <i class="fa-solid fa-user-check"></i>
                                 </div>
-                                <div class="w-1/2 pl-8 animate-hidden animate-from-right" data-aos="fade-left">
+                                <div class="w-1/2 pl-8 animate-hidden animate-from-bottom" data-aos="fade-left">
                                     <h3 class="text-xl font-semibold text-gray-800">Seleksi Administrasi</h3>
                                     <p class="text-gray-600">16 - 22 Februari 2024</p>
                                 </div>
@@ -163,7 +163,7 @@
 
                             <!-- Tahap 3 -->
                             <div class="relative flex items-center">
-                                <div class="w-1/2 pr-8 text-right animate-hidden animate-from-left" data-aos="fade-right">
+                                <div class="w-1/2 pr-8 text-right animate-hidden animate-from-bottom" data-aos="fade-right">
                                     <h3 class="text-xl font-semibold text-gray-800">Wawancara</h3>
                                     <p class="text-gray-600">25 Februari 2024</p>
                                 </div>
@@ -181,7 +181,7 @@
                                     class="w-10 h-10 bg-blue-500 text-white flex items-center justify-center rounded-full absolute left-1/2 transform -translate-x-1/2">
                                     <i class="fa-solid fa-bullhorn"></i>
                                 </div>
-                                <div class="w-1/2 pl-8 animate-hidden animate-from-right" data-aos="fade-left">
+                                <div class="w-1/2 pl-8 animate-hidden animate-from-bottom" data-aos="fade-left">
                                     <h3 class="text-xl font-semibold text-gray-800">Pengumuman</h3>
                                     <p class="text-gray-600">28 Februari 2024</p>
                                 </div>
