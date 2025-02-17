@@ -28,7 +28,8 @@
                 <div class="w-full overflow-hidden rounded-xl mb-6 relative">
                     <img src="{{ asset('storage/' . $kegiatan->gambar) }}" alt="Foto Kegiatan"
                         class="w-full h-auto rounded-xl">
-                    <p class="text-sm text-black absolute bottom-2 left-2 bg-white bg-opacity-75 px-2 py-1 rounded-md">
+                    <p
+                        class="text-xs sm:text-sm text-black absolute bottom-2 left-2 bg-white bg-opacity-75 px-2 py-1 rounded-md">
                         {{ \Carbon\Carbon::parse($kegiatan->tanggal_kegiatan)->format('d F Y') }}
                     </p>
                 </div>

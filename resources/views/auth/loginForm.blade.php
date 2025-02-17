@@ -111,8 +111,7 @@
             margin-top: 15px;
         }
 
-        button,
-        .btn-register {
+        button {
             margin-top: 15px;
             width: 100%;
             background-color: #007bff;
@@ -129,8 +128,7 @@
             text-decoration: none;
         }
 
-        button::before,
-        .btn-register::before {
+        button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -141,23 +139,13 @@
             transition: all 0.4s ease;
         }
 
-        button:hover::before,
-        .btn-register:hover::before {
+        button:hover::before {
             left: 100%;
         }
 
-        button:hover,
-        .btn-register:hover {
+        button:hover {
             text-decoration: none;
             background-color: #0056b3;
-        }
-
-        .btn-register {
-            background-color: #6c757d;
-        }
-
-        .btn-register:hover {
-            background-color: #5a6268;
         }
 
         .invalid-feedback {
@@ -202,11 +190,6 @@
 
             <!-- Login Button -->
             <button class="btn-submit" type="submit">Log In</button>
-
-            <!-- Register Button -->
-            <div class="btn-wrapper">
-                <a href="{{ route('auth.register.form') }}" class="btn-register text-white">Register</a>
-            </div>
         </form>
     </main>
 
