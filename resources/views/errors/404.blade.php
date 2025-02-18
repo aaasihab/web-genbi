@@ -14,7 +14,7 @@
             style="background-image: url('{{ asset('templates/img/genbi.jpg') }}'); background-size: contain; background-position: 50% 60%;">
         </div>
         <!-- Overlay Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-b to-transparent from-blue-800"></div>
+        <div class="absolute inset-0 bg-gradient-to-b to-transparent from-red-800"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50"></div>
 
         <!-- Content -->
