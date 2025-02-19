@@ -1,21 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login Form</title>
+    <title>Glassmorphism Login Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            background-color: #e3e3e3;
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            color: #333333;
+        }
+
+        body {
+            background-color: #d1d8e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             overflow: hidden;
         }
 
         .background {
-            width: 430px;
+            width: 400px;
             height: 500px;
             position: absolute;
             transform: translate(-50%, -50%);
@@ -24,136 +33,135 @@
         }
 
         .background .shape {
-            height: 200px;
-            width: 200px;
+            height: 150px;
+            width: 150px;
             position: absolute;
             border-radius: 50%;
         }
 
         .shape:first-child {
-            background: linear-gradient(#a8dadc, #457b9d);
-            left: -80px;
-            top: -80px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            left: -70px;
+            top: -70px;
         }
 
         .shape:last-child {
-            background: linear-gradient(to right, #ff9f43, #fecd1a);
-            right: -30px;
-            bottom: -80px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            right: -40px;
+            bottom: -70px;
         }
 
         form {
-            height: 530px;
-            width: 400px;
-            background-color: rgba(255, 255, 255, 0.7);
+            height: 400px;
+            width: 350px;
+            background: rgba(255, 255, 255, 0.2);
             position: absolute;
             transform: translate(-50%, -50%);
             top: 50%;
             left: 50%;
-            border-radius: 10px;
+            border-radius: 15px;
             backdrop-filter: blur(15px);
-            border: 2px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            padding: 50px 35px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(8, 7, 16, 0.3);
+            padding: 40px 30px;
+            text-align: center;
         }
 
         form h3 {
-            font-size: 32px;
-            font-weight: 500;
-            line-height: 42px;
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 26px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            color: #2c3e50;
         }
 
         label {
             display: block;
-            margin-top: 20px;
-            font-size: 16px;
+            text-align: left;
+            font-size: 14px;
             font-weight: 500;
+            color: #34495e;
+            margin-top: 15px;
         }
 
         input {
-            display: block;
-            height: 50px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            border-radius: 3px;
-            padding: 0 10px;
-            margin-top: 8px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.215);
+            border-radius: 6px;
+            padding: 10px;
             font-size: 14px;
-            font-weight: 300;
-            transition: all 0.3s ease-in-out;
-        }
-
-        input:focus {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-color: #007bff;
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-            outline: none;
+            color: #2c3e50;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 5px;
         }
 
         ::placeholder {
-            color: #6c757d;
-        }
-
-        .btn-submit {
-            border: 0;
-            margin-top: 30px;
-        }
-
-        .btn-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
+            color: #7f8c8d;
         }
 
         button {
-            margin-top: 15px;
+            margin-top: 30px;
             width: 100%;
-            background-color: #007bff;
-            color: #ffffff;
-            padding: 10px 0;
-            font-size: 18px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
             font-weight: 600;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            transition: all 0.4s ease;
-        }
-
-        button:hover::before {
-            left: 100%;
+            border: none;
+            transition: 0.3s;
         }
 
         button:hover {
-            text-decoration: none;
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
         }
 
-        .invalid-feedback {
-            display: block;
-            font-size: 14px;
-            color: #dc3545;
-            height: 16px;
-            margin-top: 5px;
+        /* Responsive untuk mobile */
+        @media screen and (max-width: 768px) {
+            .background {
+                width: 300px;
+                height: 400px;
+            }
+
+            .background .shape {
+                height: 120px;
+                width: 120px;
+            }
+
+            .shape:first-child {
+                left: -50px;
+                top: -50px;
+            }
+
+            .shape:last-child {
+                right: -20px;
+                bottom: -50px;
+            }
+
+            form {
+                width: 300px;
+                height: 350px;
+                padding: 30px 25px;
+            }
+
+            form h3 {
+                font-size: 22px;
+            }
+
+            label {
+                font-size: 12px;
+            }
+
+            input {
+                height: 35px;
+                font-size: 12px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -163,35 +171,31 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <main class="form-signin w-100 m-auto">
-        <form action="{{ route('auth.login') }}" method="POST">
-            @csrf
-            <h3>LOGIN</h3>
+    <form action="{{ route('auth.login') }}" method="POST">
+        @csrf
+        <h3>GenBI Unuja Official</h3>
 
-            <!-- Input Email -->
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror"
-                placeholder="Masukkan Email" value="{{ old('email') }}" required>
-            <div class="invalid-feedback">
-                @error('email')
-                    {{ $message }}
-                @enderror
-            </div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror"
+            placeholder="Masukkan Email" value="{{ old('email') }}" required>
+        <div class="invalid-feedback">
+            @error('email')
+                {{ $message }}
+            @enderror
+        </div>
 
-            <!-- Input Password -->
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="@error('password') is-invalid @enderror"
-                placeholder="Masukkan Password" required>
-            <div class="invalid-feedback">
-                @error('password')
-                    {{ $message }}
-                @enderror
-            </div>
+        <!-- Input Password -->
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="@error('password') is-invalid @enderror"
+            placeholder="Masukkan Password" required>
+        <div class="invalid-feedback">
+            @error('password')
+                {{ $message }}
+            @enderror
+        </div>
 
-            <!-- Login Button -->
-            <button class="btn-submit" type="submit">Log In</button>
-        </form>
-    </main>
+        <button type="submit">Log In</button>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
