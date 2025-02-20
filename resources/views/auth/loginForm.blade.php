@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Glassmorphism Login Form</title>
+    <title>Login Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
@@ -117,6 +117,14 @@
             background: linear-gradient(135deg, #2575fc, #6a11cb);
         }
 
+        .invalid-feedback {
+            display: block;
+            font-size: 14px;
+            color: #dc3545;
+            height: 16px;
+            margin-top: 5px;
+        }
+
         /* Responsive untuk mobile */
         @media screen and (max-width: 768px) {
             .background {
@@ -161,6 +169,9 @@
             button {
                 font-size: 14px;
                 padding: 8px;
+            }
+            .invalid-feedback {
+                font-size: 10px;
             }
         }
     </style>
