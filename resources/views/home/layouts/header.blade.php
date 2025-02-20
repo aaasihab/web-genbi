@@ -37,6 +37,14 @@
             </div>
 
             <a href="{{ route('home.download') }}" class="hover:text-blue-500">Download</a>
+            @auth
+                <div class="hidden md:block">
+                    <a href="{{ route('admin.kegiatan.index') }}"
+                        class="bg-blue-500 text-white text-sm px-4 py-3 rounded-lg shadow hover:bg-blue-600 transition-all">
+                        <i class="fas fa-sign-in-alt text-gray-100"></i> Admin Panel
+                    </a>
+                </div>
+            @endauth
         </nav>
 
         <!-- Mobile Menu Button -->
@@ -81,6 +89,12 @@
             </div>
 
             <a href="{{ route('home.download') }}" class="py-2 pb-5 hover:text-blue-500">Download</a>
+            @auth
+                <a href="{{ route('admin.kegiatan.index') }}"
+                    class="py-2 bg-blue-500 text-sm text-white rounded-lg shadow text-center hover:bg-blue-600">
+                    <i class="fas fa-sign-in-alt text-gray-100"></i> Admin Panel
+                </a>
+            @endauth
         </div>
     </nav>
 
