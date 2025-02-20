@@ -1,86 +1,126 @@
-@extends('admin.layouts.admin')
+@extends('admin.layouts.main')
 
-@section('title', 'Dashboard')
-
-@section('content')
-    <!-- Form Tambah Kegiatan -->
-    <section id="tambah-kegiatan" class="bg-gray-50 py-12 mt-14">
-        <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Form Tambah Kegiatan</h2>
-
-            <form action="{{ route('admin.kegiatan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-                @csrf
-
-                <div>
-                    <label for="nama" class="block font-medium text-gray-700">Nama Kegiatan</label>
-                    <input type="text" id="nama" name="nama" @error('nama') is-invalid @enderror required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ old('nama') }}">
-                    @error('nama')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="deskripsi" class="block font-medium text-gray-700">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="3" @error('deskripsi') is-invalid @enderror required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">{{ old('deskripsi') }}</textarea>
-                    @error('deskripsi')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="tanggal_kegiatan" class="block font-medium text-gray-700">Tanggal Kegiatan</label>
-                    <input type="date" id="tanggal_kegiatan" name="tanggal_kegiatan" @error('tanggal_kegiatan') is-invalid @enderror required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ old('tanggal_kegiatan') }}">
-                    @error('tanggal_kegiatan')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="status" class="block font-medium text-gray-700">Status</label>
-                    <select id="status" name="status" required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
-                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="gambar" class="block font-medium text-gray-700">Gambar (Opsional)</label>
-                    <input type="file" id="gambar" name="gambar" @error('gambar') is-invalid @enderror accept="image/*"
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md">
-                    @error('gambar')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <!-- Buttons -->
-                <div class="flex justify-between mt-6">
-                    <a href="{{ route('admin.kegiatan.index') }}"
-                        class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg shadow-md transition">
-                        Kembali
-                    </a>
-                    <button type="submit"
-                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition">
-                        Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
+{{-- Styles khusus halaman --}}
+@section('this-page-style')
 @endsection
 
+@section('content')
+    <div class="content-wrapper">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Tambah Kegiatan</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.kegiatan.index') }}">Kegiatan</a></li>
+                            <li class="breadcrumb-item active">Tambah</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Form Tambah Kegiatan</h3>
+                        <div class="card-tools">
+                            <a href="{{ route('admin.kegiatan.index') }}" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-arrow-left"></i> Kembali
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.kegiatan.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <!-- Nama Kegiatan -->
+                            <div class="form-group">
+                                <label for="nama">Nama Kegiatan</label>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                    id="nama" name="nama" value="{{ old('nama') }}"
+                                    placeholder="Masukkan nama kegiatan" required />
+                                @error('nama')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <!-- Deskripsi -->
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3"
+                                    placeholder="Masukkan deskripsi kegiatan" required>{{ old('deskripsi') }}</textarea>
+                                @error('deskripsi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <!-- Tanggal Kegiatan -->
+                            <div class="form-group">
+                                <label for="tanggal_kegiatan">Tanggal Kegiatan</label>
+                                <input type="date" class="form-control @error('tanggal_kegiatan') is-invalid @enderror"
+                                    id="tanggal_kegiatan" name="tanggal_kegiatan" value="{{ old('tanggal_kegiatan') }}"
+                                    required />
+                                @error('tanggal_kegiatan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <!-- Status -->
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control @error('status') is-invalid @enderror" id="status"
+                                    name="status" required>
+                                    <option value="" disabled selected>Pilih Status...</option>
+                                    <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>
+                                        Published</option>
+                                    <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif
+                                    </option>
+                                </select>
+                                @error('status')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <!-- Gambar -->
+                            <div class="form-group">
+                                <label for="gambar">Gambar (Opsional)</label>
+                                <input type="file" class="form-control @error('gambar') is-invalid @enderror"
+                                    id="gambar" name="gambar" accept="image/*" />
+                                @error('gambar')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group mt-3">
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                <a href="{{ route('admin.kegiatan.index') }}" class="btn btn-secondary"><i
+                                        class="fas fa-times"></i> Batal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection
+
+{{-- Scripts khusus halaman --}}
 @section('this-page-scripts')
 @endsection

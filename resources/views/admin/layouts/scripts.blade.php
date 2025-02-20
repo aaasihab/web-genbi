@@ -29,7 +29,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Arahkan ke halaman login
-                window.location.href = "{{ route('login') }}";
+                window.location.href = "{{ route('auth.login') }}";
             }
         });
     }

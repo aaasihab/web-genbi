@@ -1,87 +1,164 @@
-@extends('admin.layouts.admin')
+@extends('admin.layouts.main')
 
-@section('title', 'Dashboard')
+{{-- Untuk styles khusus halaman tertentu --}}
+@section('this-page-style')
+    <style>
+        .table-container {
+            overflow-x: auto;
+        }
 
-@section('content')
-    <!-- Content Daftar Genbi Point -->
-    <section id="daftar-genbi-point" class="bg-gray-50 py-12 mt-14">
-        <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Data Genbi Point</h2>
-                <a href="{{ route('admin.genbi_point.create') }}"
-                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition">
-                    + Tambah Genbi Point
-                </a>
-            </div>
+        @media (max-width: 768px) {
+            .content-header h1 {
+                font-size: 1.3rem;
+            }
 
-            <!-- Responsive Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-200">
-                    <thead>
-                        <tr class="bg-gray-800 text-white">
-                            <th class="p-3">No</th>
-                            <th class="p-3">Bulan</th>
-                            <th class="p-3">Link Drive</th>
-                            <th class="p-3">Tanggal Posting</th>
-                            <th class="p-3">Terakhir Diubah</th>
-                            <th class="p-3">Status</th>
-                            <th class="p-3">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700">
-                        @forelse ($genbiPoints as $key => $genbiPoint)
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="p-3 text-center">{{ $key + 1 }}</td>
-                                <td class="p-3 text-center">{{ $genbiPoint->bulan }}</td>
-                                <td class="p-3 text-center">
-                                    <a href="{{ $genbiPoint->link_drive }}" target="_blank"
-                                        class="text-blue-600 hover:underline">
-                                        {{ Str::limit($genbiPoint->link_drive, 30) }}
-                                    </a>
-                                </td>
-                                <td class="p-3 text-center">
-                                    {{ $genbiPoint->created_at->format('d M Y') }}
-                                </td>
-                                <td class="p-3 text-center">
-                                    {{ $genbiPoint->updated_at->diffForHumans() }}
-                                </td>
-                                <td class="p-3 text-center">
-                                    <span
-                                        class="px-2 py-1 text-white rounded-md 
-                                    {{ $genbiPoint->status == 'published' ? 'bg-green-500' : 'bg-gray-500' }}">
-                                        {{ ucfirst($genbiPoint->status) }}
-                                    </span>
-                                </td>
-                                <td class="p-3 text-center">
-                                    <a href="{{ route('admin.genbi_point.edit', $genbiPoint->id) }}"
-                                        class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold rounded shadow-md transition">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.genbi_point.destroy', $genbiPoint->id) }}" method="POST"
-                                        class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded shadow-md transition">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="p-6 text-center text-gray-500">Tidak ada data Genbi Point</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+            .table th,
+            .table td {
+                font-size: 0.9rem;
+                padding: 5px;
+            }
+
+            .btn-sm {
+                font-size: 0.75rem;
+                padding: 4px 6px;
+            }
+
+            .img-thumbnail {
+                width: 40px !important;
+                height: 40px !important;
+            }
+        }
+    </style>
 @endsection
 
+@section('content')
+    <div class="content-wrapper">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Daftar data GenBI Point</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item active"><a href="{{ route('admin.genbi_point.index') }}">GenBI
+                                    Point</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Daftar Genbi Points</h3>
+                        <div class="card-tools">
+                            <a href="{{ route('admin.genbi_point.create') }}" class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus-lg"></i> Tambah Genbi Point
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table-container">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Bulan</th>
+                                        <th>Link Drive</th>
+                                        <th>Terakhir Diubah</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($genbiPoints as $key => $genbiPoint)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $genbiPoint->bulan }}</td>
+                                            <td>
+                                                <a href="{{ $genbiPoint->link_drive }}" target="_blank"
+                                                    class="text-primary">
+                                                    {{ Str::limit($genbiPoint->link_drive, 30) }}
+                                                </a>
+                                            </td>
+                                            <td>{{ $genbiPoint->updated_at->diffForHumans() }}</td>
+                                            <td>
+                                                <span
+                                                    class="badge {{ $genbiPoint->status == 'published' ? 'bg-success' : 'bg-secondary' }}">
+                                                    {{ ucfirst($genbiPoint->status) }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{ route('admin.genbi_point.edit', $genbiPoint->id) }}"
+                                                        class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <form
+                                                        action="{{ route('admin.genbi_point.destroy', $genbiPoint->id) }}"
+                                                        method="POST" style="display: inline-block;"
+                                                        onsubmit="return confirm('Yakin ingin menghapus?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-trash"></i> Hapus
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="7" class="text-center">Tidak ada data Genbi Point</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+@endsection
+
+{{-- Untuk scripts khusus halaman tertentu --}}
 @section('this-page-scripts')
     <script>
+        $(function() {
+            $("#kegiatan-table").DataTable({
+                "responsive": false,
+                "searching": false,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#kegiatan-table_wrapper .col-md-6:eq(0)');
+        });
+
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data ini akan dihapus secara permanen!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`delete-form-${id}`).submit();
+                }
+            });
+        }
+
         // Tampilkan SweetAlert untuk pesan sukses
         @if (session('success'))
             Swal.fire({
