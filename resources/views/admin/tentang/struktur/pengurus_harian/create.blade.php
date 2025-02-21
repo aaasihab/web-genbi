@@ -1,99 +1,133 @@
-@extends('admin.layouts.admin')
+@extends('admin.layouts.main')
 
-@section('title', 'Dashboard')
-
-@section('content')
-    <!-- Form Tambah Pengurus Harian -->
-    <section id="create-pengurus-harian" class="relative bg-gray-50 py-12 mt-14">
-        <div class="container mx-auto max-w-3xl bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-2xl font-bold mb-4">Tambah Pengurus Harian</h2>
-
-            <form action="{{ route('admin.pengurus_harian.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-
-                <!-- Pilihan Organisasi -->
-                <div class="mb-4">
-                    <label for="organisasi_id" class="block text-gray-700 font-semibold">Organisasi</label>
-                    <select name="organisasi_id" id="organisasi_id" @error('organisasi_id') is-invalid @enderror required
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled selected>Pilih Organisasi...</option>
-                        @foreach ($organisasi as $org)
-                            <option value="{{ $org->id }}" {{ old('organisasi_id') == $org->id ? 'selected' : '' }}>
-                                {{ $org->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('organisasi_id')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <!-- Nama Pengurus -->
-                <div class="mb-4">
-                    <label for="nama" class="block text-gray-700 font-semibold">Nama Pengurus</label>
-                    <input type="text" name="nama" id="nama" @error('nama') is-invalid @enderror required value="{{ old('nama') }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    @error('nama')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <!-- Jabatan -->
-                <div class="mb-4">
-                    <label for="jabatan" class="block text-gray-700 font-semibold">Jabatan</label>
-                    <select name="jabatan" id="jabatan" @error('jabatan') is-invalid @enderror required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">>
-                        <option value="" disabled selected>Pilih Jabatan...</option>
-                        <option value="Ketua">Ketua</option>
-                        <option value="Sekretaris">Sekretaris</option>
-                        <option value="Bendahara">Bendahara</option>
-                        <option value="PJ_Komisariat">PJ_Komisariat</option>
-                    </select>
-                    @error('jabatan')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <!-- Upload Foto -->
-                <div class="mb-4">
-                    <label for="foto" class="block text-gray-700 font-semibold">Foto</label>
-                    <input type="file" name="foto" id="foto" @error('foto') is-invalid @enderror accept=".jpeg,.png,.jpg"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    @error('foto')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
-                    <label for="status" class="block font-medium text-gray-700">Status</label>
-                    <select id="status" name="status" required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('status') is-invalid @enderror">
-                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
-                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
-                    </select>
-                </div>
-
-                <div class="flex justify-between">
-                    <a href="{{ route('admin.pengurus_harian.index') }}"
-                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md">
-                        Kembali
-                    </a>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
-                        Tambah Pengurus
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
+{{-- Styles khusus halaman --}}
+@section('this-page-style')
 @endsection
 
+@section('content')
+    <div class="content-wrapper">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Tambah Pengurus Divisi</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.pengurus_divisi.index') }}">Pengurus
+                                    Divisi</a></li>
+                            <li class="breadcrumb-item active">Tambah</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tambah Pengurus Harian</h3>
+                        <div class="card-tools">
+                            <a href="{{ route('admin.pengurus_harian.index') }}" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-arrow-left"></i> Kembali
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.pengurus_harian.store') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+
+                            <!-- Pilihan Organisasi -->
+                            <div class="form-group">
+                                <label for="organisasi_id">Organisasi</label>
+                                <select name="organisasi_id" id="organisasi_id"
+                                    class="form-control @error('organisasi_id') is-invalid @enderror" required>
+                                    <option value="" disabled selected>Pilih Organisasi...</option>
+                                    @foreach ($organisasi as $org)
+                                        <option value="{{ $org->id }}"
+                                            {{ old('organisasi_id') == $org->id ? 'selected' : '' }}>
+                                            {{ $org->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('organisasi_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Nama Pengurus -->
+                            <div class="form-group">
+                                <label for="nama">Nama Pengurus</label>
+                                <input type="text" name="nama" id="nama"
+                                    class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}"
+                                    required>
+                                @error('nama')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Jabatan -->
+                            <div class="form-group">
+                                <label for="jabatan">Jabatan</label>
+                                <select name="jabatan" id="jabatan"
+                                    class="form-control @error('jabatan') is-invalid @enderror" required>
+                                    <option value="" disabled selected>Pilih Jabatan...</option>
+                                    <option value="Ketua">Ketua</option>
+                                    <option value="Sekretaris">Sekretaris</option>
+                                    <option value="Bendahara">Bendahara</option>
+                                    <option value="PJ_Komisariat">PJ Komisariat</option>
+                                </select>
+                                @error('jabatan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Upload Foto -->
+                            <div class="form-group">
+                                <label for="foto">Foto</label>
+                                <input type="file" name="foto" id="foto" accept=".jpeg,.png,.jpg"
+                                    class="form-control @error('foto') is-invalid @enderror" required>
+                                @error('foto')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Pilihan Status -->
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status"
+                                    class="form-control @error('status') is-invalid @enderror" required>
+                                    <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>
+                                        Published</option>
+                                    <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif
+                                    </option>
+                                </select>
+                                @error('status')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Tombol Simpan -->
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Tambah Pengurus
+                                </button>
+                                <a href="{{ route('admin.pengurus_harian.index') }}" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> Batal
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection
+
+{{-- Scripts khusus halaman --}}
 @section('this-page-scripts')
 @endsection

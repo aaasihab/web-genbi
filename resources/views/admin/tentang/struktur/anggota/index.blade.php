@@ -33,13 +33,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Data GenBI Point</h1>
+                        <h1 class="m-0">Data Anggota</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item active">
-                                <a href="{{ route('admin.genbi_point.index') }}">
-                                    GenBI Point
+                                <a href="{{ route('admin.anggota.index') }}">
+                                    Anggota
                                 </a>
                             </li>
                         </ol>
@@ -66,8 +66,8 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Foto</th>
                                         <th>Nama</th>
+                                        <th>Foto</th>
                                         <th>Divisi</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -77,6 +77,7 @@
                                     @forelse ($anggota as $member)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $member->nama }}</td>
                                             <td class="text-center">
                                                 @if ($member->foto)
                                                     <img src="{{ asset('storage/' . $member->foto) }}" alt="Foto"
@@ -85,7 +86,6 @@
                                                     <span class="text-gray-500">Tidak ada foto</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $member->nama }}</td>
                                             <td>{{ $member->divisi->nama }}</td>
                                             <td class="text-center">
                                                 <span
