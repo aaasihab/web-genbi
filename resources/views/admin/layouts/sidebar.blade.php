@@ -65,7 +65,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="../UI/general.html" class="nav-link">
+                            <a href="{{ route("admin.divisi.index") }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <i class="bi bi-cart4 nav-icon"></i>
                                 <p>Divisi</p>
@@ -82,7 +82,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="../UI/general.html" class="nav-link">
+                            <a href="{{ route("admin.anggota.index") }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <i class="bi bi-cart4 nav-icon"></i>
                                 <p>Anggota</p>

@@ -1,70 +1,148 @@
-@extends('admin.layouts.admin')
+@extends('admin.layouts.main')
 
-@section('title', 'Dashboard')
+{{-- Untuk styles khusus halaman tertentu --}}
+@section('this-page-style')
+    <style>
+        .table-container {
+            overflow-x: auto;
+        }
 
-@section('content')
-    <!-- Content Daftar Divisi -->
-    <section id="daftar-divisi" class="bg-gray-50 py-12 mt-14">
-        <div class="max-w-6xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Data Divisi</h2>
-                <a href="{{ route('admin.divisi.create') }}"
-                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition">
-                    + Tambah Divisi
-                </a>
-            </div>
+        @media (max-width: 768px) {
+            .content-header h1 {
+                font-size: 1.3rem;
+            }
 
-            <!-- Responsive Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-200">
-                    <thead>
-                        <tr class="bg-gray-800 text-white">
-                            <th class="p-3">No</th>
-                            <th class="p-3">Nama Divisi</th>
-                            <th class="p-3">Organisasi</th>
-                            <th class="p-3">Tanggal Posting</th>
-                            <th class="p-3">Terakhir Diubah</th>
-                            <th class="p-3">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700">
-                        @forelse ($divisi as $div)
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="p-3 text-center">{{ $loop->iteration }}</td>
-                                <td class="p-3 text-center">{{ $div->nama }}</td>
-                                <td class="p-3 text-center">{{ $div->organisasi->nama }}</td>
-                                <td class="p-3 text-center">{{ $div->created_at->format('d M Y') }}</td>
-                                <td class="p-3 text-center">{{ $div->updated_at->diffForHumans() }}</td>
-                                <td class="p-3 text-center">
-                                    <a href="{{ route('admin.divisi.edit', $div->id) }}"
-                                        class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold rounded shadow-md transition">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.divisi.destroy', $div->id) }}" method="POST"
-                                        class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded shadow-md transition">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="p-6 text-center text-gray-500">Tidak ada data divisi</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+            .table th,
+            .table td {
+                font-size: 0.8rem;
+                padding: 5px;
+            }
+
+            .btn-sm {
+                font-size: 0.75rem;
+                padding: 4px 6px;
+            }
+        }
+    </style>
 @endsection
 
+@section('content')
+    <div class="content-wrapper">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Data Divisi</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item active">
+                                <a href="{{ route('admin.divisi.index') }}">
+                                    Divisi
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Divisi</h3>
+                        <div class="card-tools">
+                            <a href="{{ route('admin.divisi.create') }}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Tambah Divisi
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table-container">
+                            <table id="divisiTable" class="table table-bordered table-striped">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Divisi</th>
+                                        <th>Organisasi</th>
+                                        <th>Terakhir Diubah</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($divisi as $div)
+                                        <tr class="text-center">
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $div->nama }}</td>
+                                            <td>{{ $div->organisasi->nama }}</td>
+                                            <td>{{ $div->updated_at->diffForHumans() }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{ route('admin.divisi.edit', $div->id) }}"
+                                                        class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                                        onclick="confirmDelete({{ $div->id }})">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                    <form id="delete-form-{{ $div->id }}"
+                                                        action="{{ route('admin.divisi.destroy', $div->id) }}"
+                                                        method="POST" style="display:none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted">Tidak ada data divisi</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection
+
+{{-- Untuk scripts khusus halaman tertentu --}}
 @section('this-page-scripts')
     <script>
+        $(function() {
+            $("#divisiTable").DataTable({
+                "responsive": false,
+                "searching": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#divisiTable_table_wrapper .col-md-6:eq(0)');
+        });
+
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data ini akan dihapus secara permanen!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`delete-form-${id}`).submit();
+                }
+            });
+        }
+
         // Tampilkan SweetAlert untuk pesan sukses
         @if (session('success'))
             Swal.fire({

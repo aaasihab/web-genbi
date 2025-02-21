@@ -1,61 +1,89 @@
-@extends('admin.layouts.admin')
+@extends('admin.layouts.main')
 
-@section('title', 'Dashboard')
-
+{{-- Untuk styles khusus halaman tertentu --}}
+@section('this-page-style')
+@endsection
 
 @section('content')
-    <!-- Form Edit Divisi -->
-    <section id="edit-divisi" class="relative bg-gray-50 py-12 mt-14">
-        <div class="container mx-auto max-w-3xl bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-2xl font-bold mb-4">Edit Divisi</h2>
-
-            <form action="{{ route('admin.divisi.update', $divisi->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-
-                <!-- Pilihan Organisasi -->
-                <div class="mb-4">
-                    <label for="organisasi_id" class="block text-gray-700 font-semibold">Organisasi</label>
-                    <select name="organisasi_id" id="organisasi_id" required
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" disabled>Pilih Organisasi...</option>
-                        @foreach ($organisasi as $org)
-                            <option value="{{ $org->id }}"
-                                {{ old('organisasi_id', $divisi->organisasi_id) == $org->id ? 'selected' : '' }}>
-                                {{ $org->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('organisasi_id')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
+    <div class="content-wrapper">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Edit Divisi</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.divisi.index') }}">Divisi</a></li>
+                            <li class="breadcrumb-item active">Edit</li>
+                        </ol>
+                    </div>
                 </div>
-
-                <!-- Nama Divisi -->
-                <div class="mb-4">
-                    <label for="nama" class="block text-gray-700 font-semibold">Nama Divisi</label>
-                    <input type="text" name="nama" id="nama" @error('nama') is-invalid @enderror required
-                        value="{{ old('nama', $divisi->nama) }}"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    @error('nama')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="flex justify-between">
-                    <a href="{{ route('admin.divisi.index') }}"
-                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md">
-                        Kembali
-                    </a>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
-                        Simpan Perubahan
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
-    </section>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Divisi</h3>
+                        <div class="card-tools">
+                            <a href="{{ route('admin.divisi.index') }}" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-arrow-left"></i> Kembali
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.divisi.update', $divisi->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+
+                            <!-- Pilihan Organisasi -->
+                            <div class="form-group">
+                                <label for="organisasi_id">Organisasi</label>
+                                <select name="organisasi_id" id="organisasi_id" required
+                                    class="form-control @error('organisasi_id') is-invalid @enderror">
+                                    <option value="" disabled>Pilih Organisasi...</option>
+                                    @foreach ($organisasi as $org)
+                                        <option value="{{ $org->id }}"
+                                            {{ old('organisasi_id', $divisi->organisasi_id) == $org->id ? 'selected' : '' }}>
+                                            {{ $org->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('organisasi_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Nama Divisi -->
+                            <div class="form-group">
+                                <label for="nama">Nama Divisi</label>
+                                <input type="text" name="nama" id="nama" required
+                                    class="form-control @error('nama') is-invalid @enderror"
+                                    value="{{ old('nama', $divisi->nama) }}">
+                                @error('nama')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Simpan
+                                    Perubahan</button>
+                                <a href="{{ route('admin.divisi.index') }}" class="btn btn-secondary"><i
+                                        class="fas fa-times"></i> Batal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+@endsection
+
+{{-- Untuk scripts khusus halaman tertentu --}}
+@section('this-page-scripts')
 @endsection
