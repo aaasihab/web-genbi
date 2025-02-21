@@ -38,11 +38,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Daftar Produk</h1>
+                        <h1 class="m-0">Data Kegiatan</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active"><a href="{{ route('admin.kegiatan.index') }}">Kegiatan</a></li>
+                            <li class="breadcrumb-item active">
+                                <a href="{{ route('admin.kegiatan.index') }}">
+                                    Kegiatan
+                                </a>
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -56,10 +60,10 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Daftar Kegiatan</h3>
+                                <h3 class="card-title">Data Kegiatan</h3>
                                 <div class="card-tools">
                                     <a href="{{ route('admin.kegiatan.create') }}" class="btn btn-primary btn-sm">
-                                        <i class="fas fa-cart-plus"></i> Tambah Kegiatan
+                                        <i class="bi bi-plus-lg"></i> Tambah Kegiatan
                                     </a>
                                 </div>
                             </div>
@@ -67,14 +71,14 @@
                                 <div class="table-reponsive table-container">
                                     <table id="kegiatan-table" class="table table-bordered table-striped mt-3">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center align-middle">
                                                 <th style="width: 5%;">No</th>
                                                 <th>Nama</th>
                                                 <th>Deskripsi</th>
                                                 <th>Tanggal Kegiatan</th>
                                                 <th>Terakhir Diubah</th>
-                                                <th>Status</th>
                                                 <th>Gambar</th>
+                                                <th>Status</th>
                                                 <th style="width: 15%;">Aksi</th>
                                             </tr>
                                         </thead>
@@ -83,11 +87,13 @@
                                                 <tr>
                                                     <td class="align-middle">{{ $key + 1 }}</td>
                                                     <td class="align-middle">{{ $item->nama }}</td>
-                                                    <td class="align-middle">{{ Str::limit($item->deskripsi, 50, '...') }}</td>
-                                                    <td class="align-middle">
+                                                    <td class="align-middle">{{ Str::limit($item->deskripsi, 50, '...') }}
+                                                    </td>
+                                                    <td class="text-center align-middle">
                                                         {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d M Y') }}
                                                     </td>
-                                                    <td class="align-middle">{{ $item->updated_at->diffForHumans() }}</td>
+                                                    <td class="align-middle text-center">
+                                                        {{ $item->updated_at->diffForHumans() }}</td>
                                                     <td class="text-center align-middle">
                                                         <!-- Menampilkan gambar -->
                                                         @if ($item->gambar)
@@ -104,15 +110,15 @@
                                                             {{ ucfirst($item->status) }}
                                                         </span>
                                                     </td>
-                                                    <td class="align-middle">
+                                                    <td class="text-center align-middle">
                                                         <div class="btn-group">
                                                             <a href="{{ route('admin.kegiatan.edit', $item->id) }}"
                                                                 class="btn btn-sm btn-outline-secondary">
-                                                                <i class="fas fa-edit"></i> Edit
+                                                                <i class="fas fa-edit"></i>
                                                             </a>
                                                             <button type="button" class="btn btn-sm btn-outline-danger"
                                                                 onclick="confirmDelete({{ $item->id }})">
-                                                                <i class="fas fa-trash"></i> Hapus
+                                                                <i class="fas fa-trash"></i>
                                                             </button>
                                                             <form id="delete-form-{{ $item->id }}"
                                                                 action="{{ route('admin.kegiatan.destroy', $item->id) }}"

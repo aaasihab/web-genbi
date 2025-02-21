@@ -1,66 +1,96 @@
-@extends('admin.layouts.admin')
+@extends('admin.layouts.main')
 
-@section('title', 'Dashboard')
-
-@section('content')
-    <!-- Form Tambah File -->
-    <section id="tambah-file" class="bg-gray-50 py-12 mt-14">
-        <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Form Tambah File</h2>
-
-            <form action="{{ route('admin.download.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-                @csrf
-
-                <div>
-                    <label for="nama_file" class="block font-medium text-gray-700">Nama File</label>
-                    <input type="text" id="nama_file" name="nama_file" @error('nama_file') is-invalid @enderror required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('nama_file') is-invalid @enderror"
-                        value="{{ old('nama_file') }}">
-                    @error('nama_file')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="file" class="block font-medium text-gray-700">Pilih File</label>
-                    <input type="file" id="file" name="file" @error('file') is-invalid @enderror required
-                        accept=".pdf,.doc,.docx,.xlsx,.xls,.ppt,.pptx,.jpg,.png,.jpeg"
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md">
-                    @error('file')
-                        <div class="invalid-feedback text-red-500 text-sm mt-1">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div>
-                    <label for="status" class="block font-medium text-gray-700">Status</label>
-                    <select id="status" name="status" required
-                        class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 @error('status') is-invalid @enderror">
-                        <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
-                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
-                    </select>
-                </div>
-
-                <!-- Buttons -->
-                <div class="flex justify-between mt-6">
-                    <a href="{{ route('admin.download.index') }}"
-                        class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg shadow-md transition">
-                        Kembali
-                    </a>
-                    <button type="submit"
-                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition">
-                        Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
-
-
+{{-- Styles khusus halaman --}}
+@section('this-page-style')
 @endsection
 
+@section('content')
+    <div class="content-wrapper">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Tambah File Download</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.download.index') }}">Download</a></li>
+                            <li class="breadcrumb-item active">Tambah</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tambah Download</h3>
+                        <div class="card-tools">
+                            <a href="{{ route('admin.download.index') }}" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-arrow-left"></i> Kembali
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.download.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <!-- Nama File -->
+                            <div class="form-group">
+                                <label for="nama_file">Nama File</label>
+                                <input type="text" class="form-control @error('nama_file') is-invalid @enderror"
+                                    id="nama_file" name="nama_file" value="{{ old('nama_file') }}"
+                                    placeholder="Masukkan nama file" required>
+                                @error('nama_file')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Pilih File -->
+                            <div class="form-group">
+                                <label for="file">Pilih File</label>
+                                <input type="file" class="form-control @error('file') is-invalid @enderror"
+                                    id="file" name="file"
+                                    accept=".pdf,.doc,.docx,.xlsx,.xls,.ppt,.pptx,.jpg,.png,.jpeg" required>
+                                @error('file')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Status -->
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control @error('status') is-invalid @enderror" id="status"
+                                    name="status" required>
+                                    <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published
+                                    </option>
+                                    <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif
+                                    </option>
+                                </select>
+                                @error('status')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group mt-3">
+                                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Simpan</button>
+                                <a href="{{ route('admin.download.index') }}" class="btn btn-secondary"><i
+                                        class="fas fa-times"></i> Batal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+@endsection
+
+{{-- Scripts khusus halaman --}}
 @section('this-page-scripts')
 @endsection

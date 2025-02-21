@@ -22,11 +22,6 @@
                 font-size: 0.75rem;
                 padding: 4px 6px;
             }
-
-            .img-thumbnail {
-                width: 40px !important;
-                height: 40px !important;
-            }
         }
     </style>
 @endsection
@@ -38,12 +33,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Daftar data GenBI Point</h1>
+                        <h1 class="m-0">Data GenBI Point</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active"><a href="{{ route('admin.genbi_point.index') }}">GenBI
-                                    Point</a></li>
+                            <li class="breadcrumb-item active">
+                                <a href="{{ route('admin.genbi_point.index') }}">
+                                    GenBI Point
+                                </a>
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -55,7 +53,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Daftar Genbi Points</h3>
+                        <h3 class="card-title">Data Genbi Point</h3>
                         <div class="card-tools">
                             <a href="{{ route('admin.genbi_point.create') }}" class="btn btn-primary btn-sm">
                                 <i class="bi bi-plus-lg"></i> Tambah Genbi Point
@@ -65,9 +63,9 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive table-container">
-                            <table class="table table-bordered table-striped">
+                            <table id="genbiPoint_table" class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th>No</th>
                                         <th>Bulan</th>
                                         <th>Link Drive</th>
@@ -79,7 +77,7 @@
                                 <tbody>
                                     @forelse ($genbiPoints as $key => $genbiPoint)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
                                             <td>{{ $genbiPoint->bulan }}</td>
                                             <td>
                                                 <a href="{{ $genbiPoint->link_drive }}" target="_blank"
@@ -87,28 +85,28 @@
                                                     {{ Str::limit($genbiPoint->link_drive, 30) }}
                                                 </a>
                                             </td>
-                                            <td>{{ $genbiPoint->updated_at->diffForHumans() }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $genbiPoint->updated_at->diffForHumans() }}</td>
+                                            <td class="text-center">
                                                 <span
-                                                    class="badge {{ $genbiPoint->status == 'published' ? 'bg-success' : 'bg-secondary' }}">
+                                                    class="badge {{ $genbiPoint->status == 'published' ? 'bg-success' : 'bg-danger' }}">
                                                     {{ ucfirst($genbiPoint->status) }}
                                                 </span>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <div class="btn-group">
                                                     <a href="{{ route('admin.genbi_point.edit', $genbiPoint->id) }}"
                                                         class="btn btn-sm btn-outline-secondary">
-                                                        <i class="fas fa-edit"></i> Edit
+                                                        <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <form
+                                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                                        onclick="confirmDelete({{ $genbiPoint->id }})">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                    <form id="delete-form-{{ $genbiPoint->id }}"
                                                         action="{{ route('admin.genbi_point.destroy', $genbiPoint->id) }}"
-                                                        method="POST" style="display: inline-block;"
-                                                        onsubmit="return confirm('Yakin ingin menghapus?')">
+                                                        method="POST" style="display:none;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                            <i class="fas fa-trash"></i> Hapus
-                                                        </button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -133,12 +131,12 @@
 @section('this-page-scripts')
     <script>
         $(function() {
-            $("#kegiatan-table").DataTable({
+            $("#genbiPoint").DataTable({
                 "responsive": false,
                 "searching": false,
                 "lengthChange": false,
                 "autoWidth": false,
-            }).buttons().container().appendTo('#kegiatan-table_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#genbiPoint_table_wrapper .col-md-6:eq(0)');
         });
 
 

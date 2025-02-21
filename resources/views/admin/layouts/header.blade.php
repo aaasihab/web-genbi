@@ -8,7 +8,7 @@
             </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('admin.kegiatan.index') }}" class="nav-link">Admin Panel</a>
+            <a href="{{ route('beranda') }}" class="nav-link">Home</a>
         </li>
     </ul>
 
@@ -22,12 +22,11 @@
 
         <!-- Dropdown for Settings and Logout -->
         <li class="nav-item dropdown">
-            <a href="#" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            <a href="" class="nav-link text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <i class="fas fa-user-circle"></i> <!-- Icon user circle -->
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow">
-                <div class="dropdown-divider"></div>
                 <!-- Logout Button -->
                 <button type="button" class="dropdown-item text-danger" onclick="confirmLogout()">
                     <i class="fas fa-sign-out-alt"></i> Keluar

@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-lightblue elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('admin.kegiatan.index') }}" class="brand-link">
-        <img src="{{ asset('templates/img/Logo-UNUJA.png') }}" alt="profil" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('templates/img/genbi.png') }}" alt="profil" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">GenBI Unuja Official</span>
     </a>
@@ -37,7 +37,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../UI/general.html" class="nav-link">
+                            <a href="{{ route('admin.pengumuman.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <i class="bi bi-cart4 nav-icon"></i>
                                 <p>Pengumuman</p>

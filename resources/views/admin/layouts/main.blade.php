@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Panel GenBI Unuja</title>
+    <link rel="shortcut icon" href="{{ asset('templates/img/genbi.png') }}" type="image/x-icon">
     @include('admin.layouts.styles')
 
     @yield('this-page-style')

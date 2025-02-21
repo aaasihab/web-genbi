@@ -60,7 +60,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('pengurus_divisi', PengurusDivisiController::class);
     Route::resource('anggota', AnggotaController::class);
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // pengumuman
     Route::prefix('/pengumuman')->name('pengumuman.')->group(function () {

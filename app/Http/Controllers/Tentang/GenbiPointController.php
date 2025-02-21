@@ -123,7 +123,7 @@ class GenbiPointController extends Controller
         $genbiPoint = GenbiPoint::findOrFail($id);
         $genbiPoint->delete();
 
-        return redirect()->route('genbi_point.index')
+        return redirect()->route('admin.genbi_point.index')
             ->with('success', 'Data berhasil dihapus.');
     }
 }
