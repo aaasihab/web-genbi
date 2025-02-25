@@ -12,6 +12,11 @@
 </head>
 
 <body class="bg-gray-50 text-gray-800">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
     {{-- untuk header --}}
     @include('home.layouts.header')
 
@@ -24,6 +29,17 @@
     @include('home.layouts.scripts')
     {{-- untuk scripts khusus halaman tertentu --}}
     @yield('this-page-scripts')
+
+    <script>
+        // Menampilkan preloader saat halaman dimuat
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.getElementById("preloader").style.display = "flex";
+            } else {
+                document.getElementById("preloader").style.display = "none";
+            }
+        };
+    </script>
 
 </body>
 

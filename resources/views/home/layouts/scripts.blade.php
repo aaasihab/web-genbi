@@ -1,4 +1,13 @@
 <script>
+    // Menampilkan preloader saat halaman dimuat
+    document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+            document.getElementById("preloader").style.display = "flex";
+        } else {
+            document.getElementById("preloader").style.display = "none";
+        }
+    };
+
     // Scroll Effect for Navbar
     const navbar = document.getElementById('navbar');
     const logo = document.getElementById('navbar-logo');
