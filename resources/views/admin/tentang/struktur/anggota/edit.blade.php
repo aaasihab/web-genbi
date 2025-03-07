@@ -82,7 +82,7 @@
                                     <div class="mt-2">
                                         <p>Foto saat ini:</p>
                                         <img src="{{ asset('storage/' . $anggota->foto) }}" alt="Foto Anggota"
-                                            class="w-40 rounded-md border">
+                                            class="w-40 rounded-md border" style="width: 150px;">
                                     </div>
                                 @endif
                             </div>
