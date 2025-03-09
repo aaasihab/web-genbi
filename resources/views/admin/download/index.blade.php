@@ -68,84 +68,99 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="fileTable" class="table table-bordered table-striped mt-3">
-                                        <thead>
-                                            <tr class="text-center align-middle">
-                                                <th>No</th>
-                                                <th>Nama File</th>
-                                                <th>File</th>
-                                                <th>Status</th>
-                                                <th>Tanggal Upload</th>
-                                                <th>Terakhir Diubah</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($files as $key => $file)
-                                                <tr>
-                                                    <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                                    <td class="align-middle">{{ $file->nama_file }}</td>
-                                                    <td class="align-middle text-center">
-                                                        @php
-                                                            $extension = pathinfo($file->file, PATHINFO_EXTENSION);
-                                                        @endphp
-                                                        @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'webp']))
-                                                            <img src="{{ asset('storage/' . $file->file) }}"
-                                                                class="img-thumbnail img-fluid"
-                                                                style="max-width: 50px; max-height: 50px; object-fit: cover;">
-                                                        @else
-                                                            <i class="fas fa-file-alt text-gray-500"></i>
-                                                            <span>{{ $file->nama_file }}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="badge {{ $file->status === 'published' ? 'bg-success' : 'bg-danger' }}">
-                                                            {{ ucfirst($file->status) }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        {{ $file->created_at->format('d M Y') }}</td>
-                                                    <td class="align-middle text-center">
-                                                        {{ $file->updated_at->diffForHumans() }}</td>
-                                                    <td class="align-middle text-center">
-                                                        <div class="btn-group">
-                                                            <a href="{{ route('home.downloadFile', $file->id) }}"
-                                                                class="btn btn-sm btn-outline-primary">
-                                                                <i class="fas fa-download"></i>
-                                                            </a>
-                                                            <a href="{{ route('admin.download.edit', $file->id) }}"
-                                                                class="btn btn-sm btn-outline-secondary">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger"
-                                                                onclick="confirmDelete({{ $file->id }})">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                            <form id="delete-form-{{ $file->id }}"
-                                                                action="{{ route('admin.download.destroy', $file->id) }}"
-                                                                method="POST" style="display:none;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                        </div>
-                                                    </td>
+                                <form id="bulkDeleteForm" action="{{ route('admin.download.bulkDelete') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm mt-2" id="deleteSelected">
+                                        <i class="fas fa-trash"></i> Hapus Terpilih
+                                    </button>
+
+                                    <div class="table-responsive">
+                                        <table id="fileTable" class="table table-bordered table-striped mt-3">
+                                            <thead>
+                                                <tr class="text-center align-middle">
+                                                    <th>
+                                                        <input type="checkbox" id="selectAll">
+                                                    </th>
+                                                    <th>No</th>
+                                                    <th>Nama File</th>
+                                                    <th>File</th>
+                                                    <th>Status</th>
+                                                    <th>Tanggal Upload</th>
+                                                    <th>Terakhir Diubah</th>
+                                                    <th>Aksi</th>
                                                 </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="7" class="text-center text-gray-500">Tidak ada data file
-                                                    </td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($files as $key => $file)
+                                                    <tr>
+                                                        <td class="align-middle text-center">
+                                                            <input type="checkbox" name="ids[]"
+                                                                value="{{ $file->id }}">
+                                                        </td>
+                                                        <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                        <td class="align-middle">{{ $file->nama_file }}</td>
+                                                        <td class="align-middle text-center">
+                                                            @php
+                                                                $extension = pathinfo($file->file, PATHINFO_EXTENSION);
+                                                            @endphp
+                                                            @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                                                <img src="{{ asset('storage/' . $file->file) }}"
+                                                                    class="img-thumbnail img-fluid"
+                                                                    style="max-width: 50px; max-height: 50px; object-fit: cover;">
+                                                            @else
+                                                                <i class="fas fa-file-alt text-gray-500"></i>
+                                                                <span>{{ $file->nama_file }}</span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            <span
+                                                                class="badge {{ $file->status === 'published' ? 'bg-success' : 'bg-danger' }}">
+                                                                {{ ucfirst($file->status) }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            {{ $file->created_at->format('d M Y') }}</td>
+                                                        <td class="align-middle text-center">
+                                                            {{ $file->updated_at->diffForHumans() }}</td>
+                                                        <td class="align-middle text-center">
+                                                            <div class="btn-group">
+                                                                <a href="{{ route('home.downloadFile', $file->id) }}"
+                                                                    class="btn btn-sm btn-outline-primary">
+                                                                    <i class="fas fa-download"></i>
+                                                                </a>
+                                                                <a href="{{ route('admin.download.edit', $file->id) }}"
+                                                                    class="btn btn-sm btn-outline-secondary">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                    onclick="confirmDelete({{ $file->id }})">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                                <form id="delete-form-{{ $file->id }}"
+                                                                    action="{{ route('admin.download.destroy', $file->id) }}"
+                                                                    method="POST" style="display:none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="8" class="text-center text-gray-500">Tidak ada data
+                                                            file
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection
@@ -156,29 +171,11 @@
         $(function() {
             $("#fileTable").DataTable({
                 "responsive": false,
-                "searching": false,
+                "searching": true,
                 "lengthChange": false,
                 "autoWidth": false,
-            }).buttons().container().appendTo('#fileTable_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#fileTable_wrapper .col-lg-6:eq(0)');
         });
-
-
-        function confirmDelete(id) {
-            Swal.fire({
-                title: "Apakah Anda yakin?",
-                text: "Data ini akan dihapus secara permanen!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Ya, hapus!",
-                cancelButtonText: "Batal",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(`delete-form-${id}`).submit();
-                }
-            });
-        }
 
         // Tampilkan SweetAlert untuk pesan sukses
         @if (session('success'))

@@ -126,5 +126,19 @@ class GenbiPointController extends Controller
         return redirect()->route('admin.genbi_point.index')
             ->with('success', 'Data berhasil dihapus.');
     }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (!$ids) {
+            return redirect()->back()->with('error', 'Tidak ada Genbi Point yang dipilih.');
+        }
+
+        GenbiPoint::whereIn('id', $ids)->delete();
+
+        return redirect()->back()->with('success', 'Genbi Point yang dipilih berhasil dihapus.');
+    }
+
 }
 

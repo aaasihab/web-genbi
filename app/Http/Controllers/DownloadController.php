@@ -114,5 +114,28 @@ class DownloadController extends Controller
         return redirect()->route('admin.download.index')->with('success', 'File berhasil dihapus.');
     }
 
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (!$ids) {
+            return redirect()->back()->with('error', 'Tidak ada file yang dipilih.');
+        }
+
+        $files = Download::whereIn('id', $ids)->get();
+
+        foreach ($files as $file) {
+            // Hapus file dari storage jika ada
+            if ($file->file && Storage::disk('public')->exists($file->file)) {
+                Storage::disk('public')->delete($file->file);
+            }
+
+            // Hapus data dari database
+            $file->delete();
+        }
+
+        return redirect()->back()->with('success', 'File berhasil dihapus.');
+    }
+
 
 }

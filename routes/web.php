@@ -51,9 +51,17 @@ Route::name('home.')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     // halaman kegiatan
     Route::resource('kegiatan', KegiatanController::class);
+    Route::prefix('/kegiatan')->name('kegiatan.')->group(function () {
+        Route::resource('', KegiatanController::class);
+        Route::delete('/', [KegiatanController::class, 'bulkDelete'])->name('bulkDelete');
+    });
+
 
     // halaman tentang
-    Route::resource('genbi_point', GenbiPointController::class);
+    Route::prefix('/genbi_point')->name('genbi_point.')->group(function () {
+        Route::resource('', GenbiPointController::class);
+        Route::delete('/', [GenbiPointController::class, 'bulkDelete'])->name('bulkDelete');
+    });
     // struktur organisasi 
     Route::resource('divisi', DivisiController::class);
     Route::resource('pengurus_harian', PengurusHarianController::class);
@@ -75,6 +83,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::prefix('/download')->name('download.')->group(function () {
         Route::resource('', DownloadController::class)
             ->parameters(['' => 'file']);
+        Route::delete('/', [DownloadController::class, 'bulkDelete'])->name('bulkDelete');
     });
 
     // coming soon

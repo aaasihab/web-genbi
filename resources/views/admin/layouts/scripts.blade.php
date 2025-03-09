@@ -1,4 +1,74 @@
 <script>
+    // bulk delete
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fungsi untuk memilih semua checkbox
+        document.getElementById('selectAll').addEventListener('change', function() {
+            let checkboxes = document.querySelectorAll('input[name="ids[]"]');
+            checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+        });
+
+        // Tambahkan event listener ke form bulk delete
+        document.getElementById('bulkDeleteForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Cegah submit langsung
+            let selectedCheckboxes = document.querySelectorAll('input[name="ids[]"]:checked');
+            let selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
+            let totalSelected = selectedIds.length;
+
+            if (totalSelected === 0) {
+                showAlert('warning', 'Oops...', 'Pilih setidaknya satu data untuk dihapus!');
+                return;
+            }
+
+            confirmAction(
+                `Apakah Anda yakin ingin menghapus ${totalSelected} data ini?`,
+                "Data yang dipilih akan dihapus secara permanen!",
+                () => {
+                    document.getElementById('bulkDeleteForm').submit();
+                },
+                `Ya, hapus ${totalSelected} data!`
+            );
+        });
+    });
+
+    // Fungsi untuk menampilkan alert SweetAlert
+    function showAlert(icon, title, text) {
+        Swal.fire({
+            icon: icon,
+            title: title,
+            text: text,
+        });
+    }
+
+    // Fungsi untuk konfirmasi sebelum aksi dilakukan
+    function confirmAction(title, text, onConfirm, confirmButtonText = "Ya, hapus!") {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: "Batal",
+        }).then((result) => {
+            if (result.isConfirmed && typeof onConfirm === "function") {
+                onConfirm();
+            }
+        });
+    }
+
+    // Fungsi untuk menghapus satu item
+    function confirmDelete(id) {
+        confirmAction(
+            'Apakah Anda yakin?',
+            'Data ini akan dihapus secara permanen!',
+            () => {
+                document.getElementById(`delete-form-${id}`).submit();
+            }
+        );
+    }
+
+
     function confirmLogout() {
         Swal.fire({
             title: "Apakah Anda yakin?",

@@ -93,5 +93,28 @@ class KegiatanController extends Controller
         return redirect()->route('admin.kegiatan.index')->with('success', 'Kegiatan berhasil dihapus');
     }
 
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (!$ids) {
+            return redirect()->back()->with('error', 'Tidak ada kegiatan yang dipilih.');
+        }
+
+        $kegiatan = Kegiatan::whereIn('id', $ids)->get();
+
+        foreach ($kegiatan as $item) {
+            // Hapus gambar dari storage jika ada
+            if ($item->gambar && Storage::disk('public')->exists($item->gambar)) {
+                Storage::disk('public')->delete($item->gambar);
+            }
+
+            $item->delete();
+        }
+
+        return redirect()->back()->with('success', 'Kegiatan berhasil dihapus.');
+    }
+
+
 }
 

@@ -71,7 +71,10 @@
                                 <form id="bulkDeleteForm" action="{{ route('admin.pengumuman.bulkDelete') }}"
                                     method="POST">
                                     @csrf
-                                    {{-- Ubah dari DELETE ke POST --}}
+                                    <button type="submit" class="btn btn-danger btn-sm mt-2" id="deleteSelected">
+                                        <i class="fas fa-trash"></i> Hapus Terpilih
+                                    </button>
+
                                     <div class="table-responsive">
                                         <table id="pengumumanTable" class="table table-bordered table-striped mt-3">
                                             <thead>
@@ -146,16 +149,13 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <button type="submit" class="btn btn-danger btn-sm mt-2" id="deleteSelected">
-                                        <i class="fas fa-trash"></i> Hapus Terpilih
-                                    </button>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
     </div>
 @endsection
 
@@ -165,70 +165,12 @@
         $(function() {
             $("#kegiatan-table").DataTable({
                 "responsive": false,
-                "searching": false,
+                "searching": true,
                 "lengthChange": false,
                 "autoWidth": false,
             }).buttons().container().appendTo('#kegiatan-table_wrapper .col-md-6:eq(0)');
         });
 
-        // buld delete
-        document.addEventListener('DOMContentLoaded', function() {
-            // Fungsi untuk memilih semua checkbox
-            document.getElementById('selectAll').addEventListener('change', function() {
-                let checkboxes = document.querySelectorAll('input[name="ids[]"]');
-                checkboxes.forEach(checkbox => checkbox.checked = this.checked);
-            });
-
-            // Fungsi untuk menangani submit bulk delete dengan SweetAlert
-            document.getElementById('bulkDeleteForm').addEventListener('submit', function(e) {
-                e.preventDefault(); // Cegah submit form langsung
-
-                let selectedCheckboxes = document.querySelectorAll('input[name="ids[]"]:checked');
-                let selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
-
-                if (selectedIds.length === 0) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'Pilih setidaknya satu pengumuman untuk dihapus!',
-                    });
-                    return;
-                }
-
-                Swal.fire({
-                    title: "Apakah Anda yakin?",
-                    text: "Data yang dipilih akan dihapus secara permanen!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
-                    confirmButtonText: "Ya, hapus!",
-                    cancelButtonText: "Batal",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.getElementById('bulkDeleteForm').submit();
-                    }
-                });
-            });
-        });
-
-        function confirmDelete(id) {
-            Swal.fire({
-                title: "Apakah Anda yakin?",
-                text: "Data ini akan dihapus secara permanen!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Ya, hapus!",
-                cancelButtonText: "Batal",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(`delete-form-${id}`).submit();
-                }
-            });
-        }
-        
         // Tampilkan SweetAlert untuk pesan sukses
         @if (session('success'))
             Swal.fire({

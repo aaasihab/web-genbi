@@ -62,64 +62,76 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive table-container">
-                            <table id="genbiPoint_table" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>No</th>
-                                        <th>Bulan</th>
-                                        <th>Link Drive</th>
-                                        <th>Terakhir Diubah</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($genbiPoints as $key => $genbiPoint)
-                                        <tr>
-                                            <td class="text-center">{{ $key + 1 }}</td>
-                                            <td>{{ $genbiPoint->bulan }}</td>
-                                            <td>
-                                                <a href="{{ $genbiPoint->link_drive }}" target="_blank"
-                                                    class="text-primary">
-                                                    {{ Str::limit($genbiPoint->link_drive, 30) }}
-                                                </a>
-                                            </td>
-                                            <td class="text-center">{{ $genbiPoint->updated_at->diffForHumans() }}</td>
-                                            <td class="text-center">
-                                                <span
-                                                    class="badge {{ $genbiPoint->status == 'published' ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ ucfirst($genbiPoint->status) }}
-                                                </span>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="{{ route('admin.genbi_point.edit', $genbiPoint->id) }}"
-                                                        class="btn btn-sm btn-outline-secondary">
-                                                        <i class="fas fa-edit"></i>
+                        <form id="bulkDeleteForm" action="{{ route('admin.genbi_point.bulkDelete') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm mt-2">
+                                <i class="fas fa-trash"></i> Hapus Terpilih
+                            </button>
+                            <div class="table-responsive table-container">
+                                <table id="genbiPoint_table" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th><input type="checkbox" id="selectAll"></th>
+                                            <th>No</th>
+                                            <th>Bulan</th>
+                                            <th>Link Drive</th>
+                                            <th>Terakhir Diubah</th>
+                                            <th>Status</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($genbiPoints as $key => $genbiPoint)
+                                            <tr>
+                                                <td class="text-center">
+                                                    <input type="checkbox" name="ids[]" value="{{ $genbiPoint->id }}">
+                                                </td>
+                                                <td class="text-center">{{ $key + 1 }}</td>
+                                                <td>{{ $genbiPoint->bulan }}</td>
+                                                <td>
+                                                    <a href="{{ $genbiPoint->link_drive }}" target="_blank"
+                                                        class="text-primary">
+                                                        {{ Str::limit($genbiPoint->link_drive, 30) }}
                                                     </a>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                                        onclick="confirmDelete({{ $genbiPoint->id }})">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                    <form id="delete-form-{{ $genbiPoint->id }}"
-                                                        action="{{ route('admin.genbi_point.destroy', $genbiPoint->id) }}"
-                                                        method="POST" style="display:none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="7" class="text-center">Tidak ada data Genbi Point</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                                </td>
+                                                <td class="text-center">{{ $genbiPoint->updated_at->diffForHumans() }}</td>
+                                                <td class="text-center">
+                                                    <span
+                                                        class="badge {{ $genbiPoint->status == 'published' ? 'bg-success' : 'bg-danger' }}">
+                                                        {{ ucfirst($genbiPoint->status) }}
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('admin.genbi_point.edit', $genbiPoint->id) }}"
+                                                            class="btn btn-sm btn-outline-secondary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            onclick="confirmDelete({{ $genbiPoint->id }})">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                        <form id="delete-form-{{ $genbiPoint->id }}"
+                                                            action="{{ route('admin.genbi_point.destroy', $genbiPoint->id) }}"
+                                                            method="POST" style="display:none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="7" class="text-center">Tidak ada data Genbi Point</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -131,9 +143,9 @@
 @section('this-page-scripts')
     <script>
         $(function() {
-            $("#genbiPoint").DataTable({
+            $("#genbiPoint_table").DataTable({
                 "responsive": false,
-                "searching": false,
+                "searching": true,
                 "lengthChange": false,
                 "autoWidth": false,
             }).buttons().container().appendTo('#genbiPoint_table_wrapper .col-md-6:eq(0)');

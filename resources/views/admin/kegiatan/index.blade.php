@@ -68,72 +68,92 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="table-reponsive table-container">
-                                    <table id="kegiatan-table" class="table table-bordered table-striped mt-3">
-                                        <thead>
-                                            <tr class="text-center align-middle">
-                                                <th style="width: 5%;">No</th>
-                                                <th>Nama</th>
-                                                <th>Deskripsi</th>
-                                                <th>Tanggal Kegiatan</th>
-                                                <th>Terakhir Diubah</th>
-                                                <th>Gambar</th>
-                                                <th>Status</th>
-                                                <th style="width: 15%;">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($kegiatan as $key => $item)
-                                                <tr>
-                                                    <td class="align-middle">{{ $key + 1 }}</td>
-                                                    <td class="align-middle">{{ $item->nama }}</td>
-                                                    <td class="align-middle">{{ Str::limit($item->deskripsi, 50, '...') }}
-                                                    </td>
-                                                    <td class="text-center align-middle">
-                                                        {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d M Y') }}
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        {{ $item->updated_at->diffForHumans() }}</td>
-                                                    <td class="text-center align-middle">
-                                                        <!-- Menampilkan gambar -->
-                                                        @if ($item->gambar)
-                                                            <img src="{{ asset('storage/' . $item->gambar) }}"
-                                                                alt="{{ $item->nama }}" class="img-thumbnail img-fluid"
-                                                                style="max-width: 50px; max-height: 50px; object-fit: cover;">
-                                                        @else
-                                                            <span class="text-muted">Tidak ada gambar</span>
-                                                        @endif
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <span
-                                                            class="badge {{ $item->status == 'published' ? 'bg-success' : 'bg-danger' }}">
-                                                            {{ ucfirst($item->status) }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="text-center align-middle">
-                                                        <div class="btn-group">
-                                                            <a href="{{ route('admin.kegiatan.edit', $item->id) }}"
-                                                                class="btn btn-sm btn-outline-secondary">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger"
-                                                                onclick="confirmDelete({{ $item->id }})">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                            <form id="delete-form-{{ $item->id }}"
-                                                                action="{{ route('admin.kegiatan.destroy', $item->id) }}"
-                                                                method="POST" style="display:none;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                        </div>
-                                                    </td>
+                                <form id="bulkDeleteForm" action="{{ route('admin.kegiatan.bulkDelete') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm mt-2" id="deleteSelected">
+                                        <i class="fas fa-trash"></i> Hapus Terpilih
+                                    </button>
+                                    <div class="table-responsive table-container">
+                                        <table id="kegiatan-table" class="table table-bordered table-striped mt-3">
+                                            <thead>
+                                                <tr class="text-center align-middle">
+                                                    <th style="width: 5%;">
+                                                        <input type="checkbox" id="selectAll">
+                                                    </th>
+                                                    <th>No</th>
+                                                    <th>Nama</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Tanggal Kegiatan</th>
+                                                    <th>Terakhir Diubah</th>
+                                                    <th>Gambar</th>
+                                                    <th>Status</th>
+                                                    <th style="width: 15%;">Aksi</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($kegiatan as $key => $item)
+                                                    <tr>
+                                                        <td class="align-middle text-center">
+                                                            <input type="checkbox" name="ids[]"
+                                                                value="{{ $item->id }}">
+                                                        </td>
+                                                        <td class="align-middle">{{ $key + 1 }}</td>
+                                                        <td class="align-middle">{{ $item->nama }}</td>
+                                                        <td class="align-middle">
+                                                            {{ Str::limit($item->deskripsi, 50, '...') }}</td>
+                                                        <td class="text-center align-middle">
+                                                            {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d M Y') }}
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            {{ $item->updated_at->diffForHumans() }}</td>
+                                                        <td class="text-center align-middle">
+                                                            @if ($item->gambar)
+                                                                <img src="{{ asset('storage/' . $item->gambar) }}"
+                                                                    alt="{{ $item->nama }}"
+                                                                    class="img-thumbnail img-fluid"
+                                                                    style="max-width: 50px; max-height: 50px; object-fit: cover;">
+                                                            @else
+                                                                <span class="text-muted">Tidak ada gambar</span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <span
+                                                                class="badge {{ $item->status == 'published' ? 'bg-success' : 'bg-danger' }}">
+                                                                {{ ucfirst($item->status) }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="text-center align-middle">
+                                                            <div class="btn-group">
+                                                                <a href="{{ route('admin.kegiatan.edit', $item->id) }}"
+                                                                    class="btn btn-sm btn-outline-secondary">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                    onclick="confirmDelete({{ $item->id }})">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                                <form id="delete-form-{{ $item->id }}"
+                                                                    action="{{ route('admin.kegiatan.destroy', $item->id) }}"
+                                                                    method="POST" style="display:none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="9" class="text-center text-gray-500">Tidak ada data
+                                                            kegiatan</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -148,29 +168,11 @@
         $(function() {
             $("#kegiatan-table").DataTable({
                 "responsive": false,
-                "searching": false,
+                "searching": true,
                 "lengthChange": false,
                 "autoWidth": false,
             }).buttons().container().appendTo('#kegiatan-table_wrapper .col-md-6:eq(0)');
         });
-
-
-        function confirmDelete(id) {
-            Swal.fire({
-                title: "Apakah Anda yakin?",
-                text: "Data ini akan dihapus secara permanen!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Ya, hapus!",
-                cancelButtonText: "Batal",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(`delete-form-${id}`).submit();
-                }
-            });
-        }
 
         // Tampilkan SweetAlert untuk pesan sukses
         @if (session('success'))
