@@ -140,4 +140,34 @@ class PengumumanController extends Controller
         return redirect()->route('admin.pengumuman.index')->with('success', 'Pengumuman berhasil dihapus.');
     }
 
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (!$ids) {
+            return redirect()->back()->with('error', 'Tidak ada pengumuman yang dipilih.');
+        }
+
+        // Ambil semua data yang akan dihapus
+        $pengumumanList = Pengumuman::whereIn('id', $ids)->get();
+
+        foreach ($pengumumanList as $pengumuman) {
+            // Hapus gambar dari storage jika ada
+            if ($pengumuman->gambar && Storage::disk('public')->exists($pengumuman->gambar)) {
+                Storage::disk('public')->delete($pengumuman->gambar);
+            }
+
+            // Hapus file download dari storage jika ada
+            if ($pengumuman->file_download && Storage::disk('public')->exists($pengumuman->file_download)) {
+                Storage::disk('public')->delete($pengumuman->file_download);
+            }
+
+            // Hapus data dari database
+            $pengumuman->delete();
+        }
+
+        return redirect()->back()->with('success', 'Pengumuman berhasil dihapus.');
+    }
+
+
 }
