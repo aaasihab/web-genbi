@@ -68,82 +68,94 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="pengumumanTable" class="table table-bordered table-striped mt-3">
-                                        <thead>
-                                            <tr class="text-center align-middle">
-                                                <th>No</th>
-                                                <th>Judul</th>
-                                                <th>Deskripsi</th>
-                                                <th>Terakhir Diubah</th>
-                                                <th>Gambar</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($pengumuman as $key => $item)
-                                                <tr>
-                                                    <td class="align-middle text-center">{{ $key + 1 }}</td>
-                                                    <td class="align-middle">{{ $item->judul }}</td>
-                                                    <td class="align-middle text-truncate" style="max-width: 150px;">
-                                                        {{ $item->deskripsi }}</td>
-                                                    <td class="align-middle text-center">
-                                                        {{ $item->updated_at->diffForHumans() }}</td>
-                                                    <td class="align-middle text-center">
-                                                        @if ($item->gambar)
-                                                            <img src="{{ asset('storage/' . $item->gambar) }}"
-                                                                class="img-thumbnail img-fluid"
-                                                                style="max-width: 50px; max-height: 50px; object-fit: cover;">
-                                                        @else
-                                                            <span class="text-gray-500 italic">Tidak ada gambar</span>
-                                                        @endif
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <span
-                                                            class="badge {{ $item->status === 'published' ? 'bg-success' : 'bg-danger' }}">
-                                                            {{ ucfirst($item->status) }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="align-middle text-center">
-                                                        <div class="btn-group">
-                                                            <a href="{{ route('home.downloadFile', $item->id) }}"
-                                                                class="btn btn-sm btn-outline-primary">
-                                                                <i class="fas fa-download"></i>
-                                                            </a>
-                                                            <a href="{{ route('admin.pengumuman.edit', $item->id) }}"
-                                                                class="btn btn-sm btn-outline-secondary">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger"
-                                                                onclick="confirmDelete({{ $item->id }})">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                            <form id="delete-form-{{ $item->id }}"
-                                                                action="{{ route('admin.pengumuman.destroy', $item->id) }}"
-                                                                method="POST" style="display:none;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                            </form>
-                                                        </div>
-                                                    </td>
+                                <form id="bulkDeleteForm" action="{{ route('admin.pengumuman.bulkDelete') }}"
+                                    method="POST">
+                                    @csrf
+                                    {{-- Ubah dari DELETE ke POST --}}
+                                    <div class="table-responsive">
+                                        <table id="pengumumanTable" class="table table-bordered table-striped mt-3">
+                                            <thead>
+                                                <tr class="text-center align-middle">
+                                                    <th><input type="checkbox" id="selectAll"></th>
+                                                    <th>No</th>
+                                                    <th>Judul</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Terakhir Diubah</th>
+                                                    <th>Gambar</th>
+                                                    <th>Status</th>
+                                                    <th>Aksi</th>
                                                 </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="9" class="text-center text-gray-500">Tidak ada data
-                                                        pengumuman</td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($pengumuman as $key => $item)
+                                                    <tr>
+                                                        <td class="align-middle text-center">
+                                                            <input type="checkbox" name="ids[]"
+                                                                value="{{ $item->id }}">
+                                                        </td>
+                                                        <td class="align-middle text-center">{{ $key + 1 }}</td>
+                                                        <td class="align-middle">{{ $item->judul }}</td>
+                                                        <td class="align-middle text-truncate" style="max-width: 150px;">
+                                                            {{ $item->deskripsi }}</td>
+                                                        <td class="align-middle text-center">
+                                                            {{ $item->updated_at->diffForHumans() }}</td>
+                                                        <td class="align-middle text-center">
+                                                            @if ($item->gambar)
+                                                                <img src="{{ asset('storage/' . $item->gambar) }}"
+                                                                    class="img-thumbnail img-fluid"
+                                                                    style="max-width: 50px; max-height: 50px; object-fit: cover;">
+                                                            @else
+                                                                <span class="text-gray-500 italic">Tidak ada gambar</span>
+                                                            @endif
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            <span
+                                                                class="badge {{ $item->status === 'published' ? 'bg-success' : 'bg-danger' }}">
+                                                                {{ ucfirst($item->status) }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            <div class="btn-group">
+                                                                <a href="{{ route('home.downloadFile', $item->id) }}"
+                                                                    class="btn btn-sm btn-outline-primary">
+                                                                    <i class="fas fa-download"></i>
+                                                                </a>
+                                                                <a href="{{ route('admin.pengumuman.edit', $item->id) }}"
+                                                                    class="btn btn-sm btn-outline-secondary">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                    onclick="confirmDelete({{ $item->id }})">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                                <form id="delete-form-{{ $item->id }}"
+                                                                    action="{{ route('admin.pengumuman.destroy', $item->id) }}"
+                                                                    method="POST" style="display:none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="9" class="text-center text-gray-500">Tidak ada data
+                                                            pengumuman</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger btn-sm mt-2" id="deleteSelected">
+                                        <i class="fas fa-trash"></i> Hapus Terpilih
+                                    </button>
+                                </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
     </div>
 @endsection
 
@@ -159,6 +171,46 @@
             }).buttons().container().appendTo('#kegiatan-table_wrapper .col-md-6:eq(0)');
         });
 
+        // buld delete
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fungsi untuk memilih semua checkbox
+            document.getElementById('selectAll').addEventListener('change', function() {
+                let checkboxes = document.querySelectorAll('input[name="ids[]"]');
+                checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+            });
+
+            // Fungsi untuk menangani submit bulk delete dengan SweetAlert
+            document.getElementById('bulkDeleteForm').addEventListener('submit', function(e) {
+                e.preventDefault(); // Cegah submit form langsung
+
+                let selectedCheckboxes = document.querySelectorAll('input[name="ids[]"]:checked');
+                let selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
+
+                if (selectedIds.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'Pilih setidaknya satu pengumuman untuk dihapus!',
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    title: "Apakah Anda yakin?",
+                    text: "Data yang dipilih akan dihapus secara permanen!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Ya, hapus!",
+                    cancelButtonText: "Batal",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('bulkDeleteForm').submit();
+                    }
+                });
+            });
+        });
 
         function confirmDelete(id) {
             Swal.fire({
@@ -176,7 +228,7 @@
                 }
             });
         }
-
+        
         // Tampilkan SweetAlert untuk pesan sukses
         @if (session('success'))
             Swal.fire({
