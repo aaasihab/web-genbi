@@ -66,6 +66,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::prefix('/pengumuman')->name('pengumuman.')->group(function () {
         Route::resource('', PengumumanController::class)
             ->parameters(['' => 'pengumuman']);
+
+        // Route Bulk Delete
+        Route::delete('/', [PengumumanController::class, 'bulkDelete'])->name('bulkDelete');
     });
 
     // halaman download
