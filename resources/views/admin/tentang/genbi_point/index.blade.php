@@ -151,24 +151,6 @@
             }).buttons().container().appendTo('#genbiPoint_table_wrapper .col-md-6:eq(0)');
         });
 
-
-        function confirmDelete(id) {
-            Swal.fire({
-                title: "Apakah Anda yakin?",
-                text: "Data ini akan dihapus secara permanen!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Ya, hapus!",
-                cancelButtonText: "Batal",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(`delete-form-${id}`).submit();
-                }
-            });
-        }
-
         // Tampilkan SweetAlert untuk pesan sukses
         @if (session('success'))
             Swal.fire({
